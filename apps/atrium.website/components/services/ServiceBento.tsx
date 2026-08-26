@@ -10,7 +10,6 @@ function BentoCardPhoto({ card }: { card: BentoCard }) {
         {card.coverAlt}
       </div>
       <div className="relative z-1 grid gap-[0.9rem]">
-        <span className="text-[0.7rem] uppercase tracking-[0.14em] opacity-56">{card.size}</span>
         <h3 className="m-0 text-[clamp(1.35rem,2vw,1.8rem)] leading-[1.15]">
           {parseHeadline(card.title)}
         </h3>
@@ -37,8 +36,7 @@ function BentoCardStatement({ card }: { card: BentoCard }) {
 
 function BentoCardPosition({ card }: { card: BentoCard }) {
   return (
-    <Card tone="amber" padding="sm" className="relative flex flex-col justify-between overflow-hidden">
-      <span className="text-[0.7rem] uppercase tracking-[0.14em] opacity-56">{card.size}</span>
+    <Card tone="amber" padding="sm" className="relative flex flex-col justify-between gap-[1rem] overflow-hidden">
       <h3 className="m-0 max-w-[15ch] text-[clamp(1.35rem,2vw,1.8rem)] leading-[1.15]">
         {parseHeadline(card.title)}
       </h3>
@@ -51,8 +49,7 @@ function BentoCardPosition({ card }: { card: BentoCard }) {
 
 function BentoCardMini({ card }: { card: BentoCard }) {
   return (
-    <Card tone="warm" padding="sm" className="relative flex flex-col justify-between overflow-hidden">
-      <span className="text-[0.7rem] uppercase tracking-[0.14em] opacity-56">{card.size}</span>
+    <Card tone="warm" padding="sm" className="relative flex flex-col justify-between gap-[1rem] overflow-hidden">
       <h3 className="m-0 text-[clamp(1.35rem,2vw,1.8rem)] leading-[1.15]">
         {parseHeadline(card.title)}
       </h3>

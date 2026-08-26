@@ -108,8 +108,6 @@ export function filmPoster(src: string): string {
  *  that shows the work — food, a pour, a plate going out. Anything not named
  *  here falls back to the first reel it has. */
 const CASE_CARD_REELS: Record<string, string> = {
-  'taco-naco': "https://cdn.atriumad.com/clients/TNKC/reels/TNKC_%20APR29_Ceviche%20Tostada-.mp4", // TNKC_ APR29_Ceviche Tostada-
-  'taha': "https://cdn.atriumad.com/clients/TAHA/reels/TAHA_%20AUG22%20Grilled%20Salmon%20Prep.mp4", // TAHA_ AUG22 Grilled Salmon Prep
   'don-chuys': "https://cdn.atriumad.com/clients/DCOP/reels/DCOP_%20AUG01%20Taco%20Tuesday%20-%2001.mp4", // DCOP_ AUG01 Taco Tuesday - 01
   'chick-in-waffle': "https://cdn.atriumad.com/clients/CHWF/reels/CHWF_%20JUN18%20THE%20TENDER%20COMBO%C2%A0PREP%20-%2001.mp4", // CHWF_ JUN18 THE TENDER COMBO PREP - 01
   'aahaa': "https://cdn.atriumad.com/clients/AAHA/reels/AAHA_%20JUL15%20New%20chef%20specialty%20Zafrani%20Chicken%C2%A0Tikka%20-%2001.mp4", // AAHA_ JUL15 New chef specialty Zafrani Chicken Tikka - 01
@@ -148,96 +146,6 @@ export function isVideoLed(study: CaseStudy): boolean {
 }
 
 export const caseStudies: CaseStudy[] = [
-  // ─── 1. TACO NACO ───────────────────────────────────────────────────────
-  {
-    slug: 'taco-naco',
-    highlights: ['23K Followers', '1.2M+ Impressions'],
-    client: 'Taco Naco KC',
-    coverImageId: 'https://cdn.atriumad.com/clients/TNKC/photos/TNKC_%20APR05%20Slide%205.jpg',
-    coverLogo: '/logos/clients/tknc.png',
-    category: 'Fast-Casual Mexican · Multi-Location Engagement',
-    serviceTags: [
-      'Professional Content',
-      'Brand Strategy',
-      'Social Media Marketing',
-      'UGC Collabs',
-      'Discoverability Strategy',
-    ],
-    heroHeadline: 'Turning local flavor into a brand people follow.',
-    resultHeadline: '3 locations. 23K followers. Over 1.2 million impressions. One brand.',
-    storyHeadline: 'From local favorite to digital momentum.',
-    challenge:
-      'Taco Naco had the food, personality, and loyal local following. The challenge was translating that energy into a consistent digital presence that could grow with the brand and keep people engaged across every location.',
-    solution:
-      'We built a content-first system around Taco Naco’s personality—combining brand strategy, professional content, social media marketing, and UGC collaborations to create a recognizable presence designed for consistency, community, and growth.',
-    story: [
-      'Taco Naco KC has three locations — Overland Park, Westport, and State Line. Great food, loyal crowd, but online the brand was all over the place. No consistent look. No real strategy. No way to know what was working.',
-      'We came in December 2025 and built the whole thing from scratch. One brand direction. One content system. One team managing every platform, every location, every day. We started shooting monthly, launched platforms they weren’t on, and connected their Google profiles to a real strategy.',
-      'Five months in — 23K followers across every platform, over 713K impressions on social, and 504K impressions on Google alone across all three locations. Over 1,000 pieces of content published. The brand finally looks and sounds like one brand, no matter where you find it.',
-    ],
-    metrics: [
-      {
-        number: '2.47M',
-        label: 'Total impressions',
-        detail: 'Building visibility across Taco Naco’s digital ecosystem.',
-      },
-      {
-        number: '23.58K',
-        label: 'Total followers',
-        detail: 'A growing community across Taco Naco’s social platforms.',
-      },
-      {
-        number: '+19.2%',
-        label: 'Google visibility',
-        detail:
-          'Growth in Google Business Profile impressions, reaching 333.45K impressions.',
-      },
-    ],
-    galleryNote:
-      'Professional content captures the color, texture, people, and personality that make the Taco Naco experience instantly recognizable.',
-    testimonial: {
-      quote:
-        'From day one, we connected with the Atrium team—their energy, creativity, and passion for what they do. They truly work with us as part of our team. More than feeling like we hired an agency, we feel like we found a true partner for our business.',
-      name: 'Fernanda Reyes',
-      role: 'Taco Naco KC',
-    },
-    order: 1,
-  },
-
-  // ─── 2. T'ÄHÄ (worked example, verbatim from brief) ────────────────────
-  {
-    slug: 'taha',
-    highlights: ['5.24M+ Impressions', '30% Open Rate'],
-    client: 'T’ÄHÄ Mexican Kitchen',
-    coverImageId: 'https://cdn.atriumad.com/clients/TAHA/photos/TAHA_%20JUL15%20Lifestyle%20Photo.jpg',
-    coverLogo: '/logos/clients/taha.png',
-    location: 'Kansas City, MO',
-    category: 'Fine Dining · Full-Service Engagement',
-    serviceTags: ['Brand Strategy', 'Content', 'Social', 'PR', 'Email & SMS', 'Google'],
-    resultHeadline: 'Sold-out Michelin dinners. 5.24M+ impressions. Zero paid ads.',
-    intro:
-      'No paid ads. No celebrity backing. No existing audience. Just strategy, content, and a multi-step funnel — and we sold out Michelin-star dinners, built a 30% email open rate, and turned a restaurant into a brand that creators choose to be associated with.',
-    story: [
-      'Every campaign ran a full cycle: awareness content to build anticipation, PR outreach to earned media, email sequences to convert interest into reservations, and CTAs embedded at every touchpoint. The result was consistent, predictable reservation flow — not random spikes.',
-    ],
-    metrics: [
-      { number: '5.24M+', label: 'total impressions (+544% period over period)' },
-      { number: '30%', label: 'email open rate — 2× industry average' },
-      { number: '4+', label: 'sold-out events — organic only, zero paid ads' },
-      { number: '537K', label: 'Google Business reach (+508% YoY)' },
-      { number: '217K+', label: 'cross-platform reach on one offer ($1 Oysters)' },
-      { number: '43.2K', label: 'GBP action clicks (+193%) — calls, maps, website' },
-    ],
-    howWeDidIt: [
-      { title: 'We built a multi-step funnel — not just posts', body: 'Awareness content, PR outreach, email sequences, and CTAs at every touchpoint produced consistent, predictable reservation flow.' },
-      { title: 'PR + email sold out Michelin-star events with no paid spend', body: 'For the Mar & Tierra collaboration with Chef Alberto Ferruz (2 Michelin Stars, BonAmb, Spain) — the first event of its caliber in Kansas City — targeted PR, a carousel campaign, Story countdowns, and a multi-step email sequence sold out both nights. Same for the T’ÄHÄ Takeover series.' },
-      { title: 'One offer. Every platform. Compounding reach.', body: 'The $1 Oysters Wednesday campaign generated 33K+ impressions on Instagram, 33K+ on TikTok, plus Facebook and Stories reach — compounding week over week into the Plaza’s most-anticipated weekly standing.' },
-      { title: 'We built a brand creators want to belong to', body: 'Creators visited specifically to shoot content — drawn by the aesthetic and culinary prestige — generating an estimated 100K+ additional impressions at zero production cost.' },
-      { title: 'We created the tagline — and it stuck', body: '“Crafting Mexican Excellence” was originated by Atrium and now appears across all channels, printed menus, event materials, and in-house signage.' },
-    ],
-    order: 2,
-  },
-
   // ─── 3. AAHAA ───────────────────────────────────────────────────────────
   {
     slug: 'aahaa',
@@ -690,8 +598,6 @@ const HERO_REELS = [
 export const heroGalleryTiles: HeroTile[] = HERO_REELS.map((src) => ({ kind: 'video', src }))
 
 const caseSummaries: Record<string, string> = {
-  'taco-naco': 'A unified content and growth system built to make three locations feel like one unmistakable brand.',
-  taha: 'An organic campaign system that turned culinary prestige into sold-out experiences and sustained demand.',
   aahaa: 'A premium repositioning that moved the conversation from Indian cuisine to a complete fine-dining experience.',
   'don-chuys': 'A content-first system that turned the food, cocktails, and atmosphere into a social presence people follow.',
   'old-shawnee-pizza': 'A growth system that turned decades of local loyalty into visits, orders, and repeat revenue.',

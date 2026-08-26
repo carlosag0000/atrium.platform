@@ -49,7 +49,7 @@ export default function ResourcesPage() {
         ]}
       />
 
-      <section className="px-6 py-20 md:px-12 md:py-28" style={{ background: 'var(--surface-page)' }}>
+      <section className="px-6 py-20 md:px-12 md:py-28" style={{ background: 'var(--color-cream)' }}>
         <div className="mx-auto max-w-6xl">
           <div className="mb-12 max-w-3xl">
             <Eyebrow className="mb-5">Library</Eyebrow>
@@ -60,11 +60,11 @@ export default function ResourcesPage() {
 
           <div className="grid grid-cols-1 gap-5 lg:grid-cols-3">
             {resourceGroups.map((group) => (
-              <div key={group.label} className="rounded-2xl border p-7" style={{ borderColor: 'rgba(7,47,52,0.10)', background: 'var(--surface-card)' }}>
-                <p className="type-eyebrow" style={{ color: 'var(--accent)' }}>
+              <div key={group.label} className="rounded-2xl border p-7" style={{ borderColor: 'rgba(7,47,52,0.10)', background: 'var(--color-card)' }}>
+                <p className="type-eyebrow" style={{ color: 'var(--color-lime)' }}>
                   {group.label}
                 </p>
-                <p className="type-caption mt-4" style={{ color: 'var(--text-muted)' }}>
+                <p className="type-caption mt-4" style={{ color: 'var(--color-muted)' }}>
                   {group.description}
                 </p>
                 <div className="mt-8 space-y-3">
@@ -80,7 +80,7 @@ export default function ResourcesPage() {
         </div>
       </section>
 
-      <section className="px-6 py-20 md:px-12 md:py-24" style={{ background: 'var(--teal-900)', color: 'var(--text-on-dark)' }}>
+      <section className="px-6 py-20 md:px-12 md:py-24" style={{ background: 'var(--color-ink)', color: 'var(--color-off-white)' }}>
         <div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-[0.85fr_1.15fr] md:items-center">
           <div>
             <Eyebrow tone="onDark" className="mb-5">Editorial stance</Eyebrow>

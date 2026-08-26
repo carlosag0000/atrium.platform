@@ -38,7 +38,7 @@ export default function WorkGrid({ projects }: { projects: Project[] }) {
     <section className="bg-cream px-[var(--gutter)] py-20 md:py-28">
       <div className="mx-auto mb-14 max-w-3xl text-center md:mb-20">
         <Eyebrow className="mb-3">Selected Work</Eyebrow>
-        <h2 className="text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em]">
+        <h2 className="text-[clamp(2.6rem,4.5vw,4rem)] leading-[1.08]">
           See what changed. <em className="font-serif italic">Not just what shipped.</em>
         </h2>
         <div className="mt-10 flex justify-center">

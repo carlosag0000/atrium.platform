@@ -56,7 +56,7 @@ export function CaseHero({ study }: { study: CaseStudy }) {
               so DOM order decides, and no negative z-index is needed. */}
           <div className="relative">
             <Eyebrow className="mb-6">{study.client}</Eyebrow>
-            <h1 className="text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-charcoal">
+            <h1 className="text-[clamp(2.6rem,4.5vw,4rem)] leading-[1.08] text-charcoal">
               {study.heroHeadline ?? study.client}
             </h1>
             <div className="mt-8">
@@ -104,7 +104,7 @@ export function ChallengeSolutionSection({ study }: { study: CaseStudy }) {
       <div className="mx-auto max-w-[var(--container-max)]">
         <div className="mx-auto mb-16 max-w-3xl text-center md:mb-20">
           <Eyebrow tone="on-dark" className="mb-6">The story</Eyebrow>
-          <h2 className="text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-cream">
+          <h2 className="text-[clamp(2.6rem,4.5vw,4rem)] leading-[1.08] text-cream">
             {study.storyHeadline ?? <>From challenge to <em>working system.</em></>}
           </h2>
         </div>
@@ -136,7 +136,7 @@ export function InterviewsSection({ study }: { study: CaseStudy }) {
       <div className="mx-auto max-w-[var(--container-max)]">
         <div className="mx-auto mb-14 max-w-3xl text-center md:mb-20">
           <Eyebrow tone="on-dark" className="mb-6">On camera</Eyebrow>
-          <h2 className="text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-cream">
+          <h2 className="text-[clamp(2.6rem,4.5vw,4rem)] leading-[1.08] text-cream">
             In their <em>own words.</em>
           </h2>
         </div>
@@ -177,7 +177,7 @@ export function FilmLibrarySection({ study }: { study: CaseStudy }) {
         <div className="mb-14 grid gap-8 border-t border-line pt-8 lg:grid-cols-12 lg:items-end lg:gap-16 md:mb-20">
           <div className="lg:col-span-7">
             <Eyebrow className="mb-6">The library</Eyebrow>
-            <h2 className="text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-charcoal">
+            <h2 className="text-[clamp(2.6rem,4.5vw,4rem)] leading-[1.08] text-charcoal">
               {study.galleryHeadline ?? <>Shot once, <em>cut many ways.</em></>}
             </h2>
           </div>
@@ -221,7 +221,7 @@ function PhotoGallerySection({ study }: { study: CaseStudy }) {
           <div className="mb-14 grid gap-8 border-t border-line pt-8 lg:grid-cols-12 lg:items-end lg:gap-16 md:mb-20">
             <div className="lg:col-span-7">
               <Eyebrow className="mb-6">Photo gallery</Eyebrow>
-              <h2 className="text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-charcoal">
+              <h2 className="text-[clamp(2.6rem,4.5vw,4rem)] leading-[1.08] text-charcoal">
                 {study.galleryHeadline ?? <>The brand, <em>in frame.</em></>}
               </h2>
             </div>
@@ -251,7 +251,7 @@ export function ApproachSection({ study }: { study: CaseStudy }) {
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-4">
             <Eyebrow className="mb-6">The approach</Eyebrow>
-            <h2 className="max-w-[10ch] text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-charcoal">
+            <h2 className="max-w-[10ch] text-[clamp(2.6rem,4.5vw,4rem)] leading-[1.08] text-charcoal">
               What we <em>changed.</em>
             </h2>
           </div>
@@ -297,7 +297,7 @@ export function ResultsSection({ study, metrics }: { study: CaseStudy; metrics: 
         <div className="grid gap-10 pb-16 lg:grid-cols-12 lg:gap-16 lg:pb-24">
           <div className="lg:col-span-7">
             <Eyebrow tone="on-dark" className="mb-6">Measurable growth</Eyebrow>
-            <h2 className="text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-cream">
+            <h2 className="text-[clamp(2.6rem,4.5vw,4rem)] leading-[1.08] text-cream">
               The work, <em>in numbers.</em>
             </h2>
           </div>
@@ -357,7 +357,7 @@ export function TestimonialSection({ study }: { study: CaseStudy }) {
     <section className="bg-cream px-[var(--gutter)] py-24 md:py-36">
       <div className="mx-auto max-w-3xl text-center">
         <Eyebrow className="mb-6">Client testimonial</Eyebrow>
-        <h2 className="text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-charcoal">
+        <h2 className="text-[clamp(2.6rem,4.5vw,4rem)] leading-[1.08] text-charcoal">
           {study.testimonialHeadline ?? <>More than an agency. <em>A true partner.</em></>}
         </h2>
 
@@ -397,7 +397,7 @@ export function NextCasePreview({ nextStudy }: { nextStudy: CaseStudy }) {
           className="group inline-flex items-baseline gap-4 no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-amber focus-visible:ring-offset-4"
           href={`/work/${nextStudy.slug}`}
         >
-          <h2 className="m-0 text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-charcoal">
+          <h2 className="m-0 text-[clamp(2.6rem,4.5vw,4rem)] leading-[1.08] text-charcoal">
             {nextStudy.client}
           </h2>
           <span

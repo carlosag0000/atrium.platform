@@ -22,10 +22,10 @@ type Props = {
 // the ask. Centred and alone, nothing pulls the eye off the button.
 export default function CTABanner({ eyebrow, headline, body, cta, ctaHref, ctaCalLink, ctaExternal }: Props) {
   return (
-    <section className="px-[var(--gutter)] py-24 md:py-32" style={{ background: 'var(--color-primary)' }}>
+    <section className="px-[var(--gutter)] py-24 md:py-32" style={{ background: 'var(--color-ink)' }}>
       <div className="mx-auto flex max-w-3xl flex-col items-center gap-6 text-center">
         {eyebrow && <Eyebrow tone="on-dark">{eyebrow}</Eyebrow>}
-        <h2 className="text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-cream">
+        <h2 className="text-[clamp(2.6rem,4.5vw,4rem)] leading-[1.08] text-cream">
           {headline}
         </h2>
         {/* `mx-auto` as well as `text-center`: globals.css caps every `main p`

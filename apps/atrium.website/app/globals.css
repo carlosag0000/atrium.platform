@@ -7,8 +7,8 @@
 
 /* ─── Tailwind theme ──────────────────────────────────────────────────────── */
 @theme inline {
-  --color-background: var(--cloud-200);
-  --color-foreground: var(--ink-700);
+  --color-background: var(--color-cream);
+  --color-foreground: var(--color-body);
   --font-sans: var(--font-sans);
   --spacing-4-5: 1.65rem;
   --spacing-3-5: 0.9rem;
@@ -23,8 +23,9 @@
   --font-serif: var(--font-instrument-serif), "Instrument Serif", Georgia, serif;
 }
 
-/* Legacy website aliases retained for sections still authored against the
-   pre-@atrium/ui token names. Remove once those components use semantic tokens. */
+/* Editorial typography and the semantic type scale. The colour aliases that
+   used to live here are gone: every surface now reads the design system's own
+   --color-* tokens from theme.css. */
 :root {
   /* Editorial typography: bind the loaded local faces directly to the system
      so every page uses the same sans/serif contrast as the reference. */
@@ -35,6 +36,7 @@
   /* Editorial type system — semantic roles, shared by every page. */
   --type-page-title: clamp(3.75rem, 6.8vw, 7rem);
   --type-section-title: clamp(3rem, 5vw, 5.5rem);
+  --type-subsection-title: clamp(2rem, 3vw, 2.75rem);
   --type-card-title: clamp(1.75rem, 2.4vw, 2.5rem);
   --type-lead: clamp(1.125rem, 1.5vw, 1.375rem);
   --type-body: 1rem;
@@ -43,19 +45,9 @@
 
   --leading-page-title: 0.9;
   --leading-section-title: 0.92;
+  --leading-subsection-title: 1.06;
   --leading-card-title: 1.02;
   --leading-copy: 1.6;
-
-  --color-primary: var(--teal-800);
-  --color-primary-900: var(--teal-900);
-  --color-surface: var(--surface-page);
-  --color-surface-alt: var(--surface-sunken);
-  --color-accent: var(--accent);
-  --color-text-light: var(--text-on-dark);
-  --color-text-dark: var(--text-strong);
-  --color-border-subtle: rgba(228, 238, 240, 0.1);
-  --color-forest: var(--teal-800);
-  --color-forest-2: var(--teal-700);
 }
 
 /* ─── Base reset ──────────────────────────────────────────────────────────── */
@@ -66,8 +58,8 @@
   * { box-sizing: border-box; }
 
   body {
-    background: var(--surface-page);
-    color: var(--text-body);
+    background: var(--color-cream);
+    color: var(--color-body);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
@@ -124,6 +116,15 @@
   font-weight: 400;
   letter-spacing: -0.028em;
   line-height: var(--leading-section-title);
+  text-wrap: balance;
+}
+
+.type-subsection-title {
+  font-family: var(--font-sans);
+  font-size: var(--type-subsection-title);
+  font-weight: 400;
+  letter-spacing: -0.028em;
+  line-height: var(--leading-subsection-title);
   text-wrap: balance;
 }
 
@@ -314,7 +315,7 @@
   transition: color 0.35s ease;
 }
 .ge-row:hover .ge-name {
-  color: var(--ge-color, var(--text-on-dark));
+  color: var(--ge-color, var(--color-off-white));
 }
 @media (prefers-reduced-motion: reduce) {
   .ge-row::before,

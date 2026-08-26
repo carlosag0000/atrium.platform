@@ -303,12 +303,12 @@ export default function CaseGallery({ client, images = [] }: CaseGalleryProps) {
   )
 
   return (
-    <section className="px-3 md:px-4" style={{ background: 'var(--surface-page)' }} aria-label={`${client} case study image gallery`}>
+    <section className="px-3 md:px-4" style={{ background: 'var(--color-cream)' }} aria-label={`${client} case study image gallery`}>
         <div
           ref={containerRef}
           className="relative min-h-[68vh] overflow-hidden rounded-(--radius-bento) border md:min-h-[68vh]"
           style={{
-            background: 'var(--surface-card)',
+            background: 'var(--color-card)',
             borderColor: 'rgba(7,47,52,0.10)',
             cursor: isDragging ? 'grabbing' : 'grab',
             touchAction: 'pan-y pinch-zoom',
@@ -352,7 +352,7 @@ export default function CaseGallery({ client, images = [] }: CaseGalleryProps) {
                   return (
                     <div
                       key={item.id}
-                      className="absolute overflow-hidden rounded-[var(--radius-float)] border bg-[var(--surface-sunken)] shadow-[0_18px_48px_rgba(7,47,52,0.12)]"
+                      className="absolute overflow-hidden rounded-[var(--radius-float)] border bg-[var(--color-off-white)] shadow-[0_18px_48px_rgba(7,47,52,0.12)]"
                       style={{
                         left: item.x,
                         top: item.y,
@@ -362,7 +362,7 @@ export default function CaseGallery({ client, images = [] }: CaseGalleryProps) {
                       }}
                     >
                       {hasFailed ? (
-                        <div className="flex items-end p-3 h-full text-xs " style={{ color: 'var(--teal-700)' }}>
+                        <div className="flex items-end p-3 h-full text-xs " style={{ color: 'var(--color-dark)' }}>
                           {client}
                         </div>
                       ) : (

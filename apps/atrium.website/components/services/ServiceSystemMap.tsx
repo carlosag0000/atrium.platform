@@ -29,7 +29,7 @@ export default function ServiceSystemMap({ svc }: { svc: Service }) {
         <div className="mb-12 grid gap-7 lg:grid-cols-12 lg:items-end lg:gap-16 md:mb-16">
           <div className="lg:col-span-7">
             <Eyebrow className="mb-5">Inside the Growth Engine</Eyebrow>
-            <h2 className="max-w-[14ch] text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-charcoal">
+            <h2 className="max-w-[14ch] type-subsection-title text-charcoal">
               This service has a job <em className="font-serif italic">before and after launch.</em>
             </h2>
           </div>

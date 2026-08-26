@@ -46,7 +46,7 @@ export default function HeroSection() {
               The hospitality-only growth team
             </Eyebrow>
 
-            <h1 className="mb-6 text-[clamp(2.6rem,6vw,4.6rem)] font-normal leading-[1.02] tracking-[-0.02em] text-cream">
+            <h1 className="mb-6 text-[clamp(2.6rem,6vw,4.6rem)] leading-[1.02] text-cream">
               You handle the experience.
               <br />
               <em className="font-serif italic">We take care of the rest.</em>

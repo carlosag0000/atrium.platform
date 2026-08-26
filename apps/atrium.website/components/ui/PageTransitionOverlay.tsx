@@ -65,7 +65,7 @@ export default function PageTransitionOverlay() {
         position: 'fixed',
         inset: 0,
         zIndex: 9999,
-        background: 'var(--color-primary)',
+        background: 'var(--color-ink)',
         clipPath: 'circle(var(--r, 0px) at var(--x, 50%) var(--y, 50%))',
         pointerEvents: isActive ? 'auto' : 'none',
       }}

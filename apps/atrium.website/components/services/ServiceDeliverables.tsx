@@ -7,7 +7,7 @@ export default function ServiceDeliverables({ svc }: { svc: Service }) {
       <div className="mx-auto grid max-w-[var(--container-max)] gap-14 lg:grid-cols-12 lg:gap-20">
         <div className="self-start lg:sticky lg:top-32 lg:col-span-4">
           <Eyebrow className="mb-6">What you receive</Eyebrow>
-          <h2 className="max-w-[10ch] text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-charcoal">
+          <h2 className="max-w-[10ch] type-subsection-title text-charcoal">
             Outputs with an <em className="font-serif italic">operating job.</em>
           </h2>
           <p className="mt-7 max-w-sm text-base leading-relaxed text-muted">

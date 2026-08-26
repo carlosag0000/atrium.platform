@@ -27,13 +27,26 @@ export default function ServiceStatsEditorial({
     const container = containerRef.current
     if (!container) return
     const ctx = gsap.context(() => {
+      // The heading fades up. The metrics only translate: they carry a
+      // NumberReel that starts rolling the moment it intersects, and a digit
+      // rolling behind opacity 0 is an animation nobody sees.
       gsap.fromTo(
-        container.querySelectorAll('.metric-reveal'),
+        container.querySelectorAll('.metric-intro'),
         { y: 32, opacity: 0 },
         {
           y: 0,
           opacity: 1,
           duration: 0.85,
+          ease: 'power3.out',
+          scrollTrigger: { trigger: container, start: 'top 78%', once: true },
+        }
+      )
+      gsap.fromTo(
+        container.querySelectorAll('.metric-reveal'),
+        { y: 24 },
+        {
+          y: 0,
+          duration: 0.7,
           stagger: 0.1,
           ease: 'power3.out',
           scrollTrigger: { trigger: container, start: 'top 78%', once: true },
@@ -46,9 +59,9 @@ export default function ServiceStatsEditorial({
   return (
     <section ref={containerRef} className="relative bg-dark px-[var(--gutter)] py-24 md:py-36">
       <div className="relative mx-auto max-w-[var(--container-max)]">
-        <div className="metric-reveal max-w-4xl pb-14 md:pb-20">
+        <div className="metric-intro max-w-4xl pb-14 md:pb-20">
           <Eyebrow tone="on-dark">{eyebrow}</Eyebrow>
-          <h2 className="m-0 mt-5 text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-cream">
+          <h2 className="m-0 mt-5 text-[clamp(2.6rem,4.5vw,4rem)] leading-[1.08] text-cream">
             {headline}
           </h2>
         </div>

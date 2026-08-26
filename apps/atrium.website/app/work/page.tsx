@@ -68,10 +68,10 @@ export default function WorkPage() {
     <>
       {/* The agency opens the page, not a client. No hero band — the extra top
           padding is what the fixed header used to sit over. */}
-      <section className="bg-cream px-[var(--gutter)] pt-32 pb-20 md:pt-40 md:pb-24">
+      <section className="bg-cream px-[var(--gutter)] pt-32 pb-2 md:pt-40 md:pb-4">
         <div className="mx-auto max-w-[var(--container-max)]">
           <Eyebrow className="mb-5">Our work</Eyebrow>
-          <h1 className="max-w-[16ch] text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-charcoal">
+          <h1 className="max-w-[16ch] text-[clamp(2.6rem,4.5vw,4rem)] leading-[1.08] text-charcoal">
             Hospitality only. <em className="font-serif italic">Results first.</em>
           </h1>
           {/* Our own reel, not a client's. The file is shot 9:16, so a wide
@@ -109,19 +109,6 @@ export default function WorkPage() {
         </div>
       </section>
 
-      <section className="bg-cream px-[var(--gutter)] pt-24 md:pt-32">
-        <div className="mx-auto max-w-[var(--container-max)] border-line border-t pt-10">
-          <Eyebrow className="mb-5">How the work runs</Eyebrow>
-          <h2 className="max-w-[18ch] text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-charcoal">
-            Different challenges. <em className="font-serif italic">Evidence in every story.</em>
-          </h2>
-          <p className="mt-6 max-w-2xl text-[clamp(1.05rem,1.4vw,1.25rem)] leading-relaxed text-body">
-            Two engagements, told the short way: what the room looked like when we arrived, how the
-            work was actually run, and the pieces that came out of it.
-          </p>
-        </div>
-      </section>
-
       {stories.map((entry, index) => (
         <WorkStoryBlock
           index={index}
@@ -137,7 +124,7 @@ export default function WorkPage() {
         <div className="mx-auto max-w-[var(--container-max)]">
           <div className="mb-12 md:mb-16">
             <Eyebrow className="mb-5">Full archive</Eyebrow>
-            <h2 className="max-w-[18ch] text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-charcoal">
+            <h2 className="type-subsection-title max-w-[18ch] text-charcoal">
               Every case, <em className="font-serif italic">start to finish.</em>
             </h2>
           </div>

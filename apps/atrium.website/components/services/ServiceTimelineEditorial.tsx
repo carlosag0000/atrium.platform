@@ -41,19 +41,19 @@ export default function ServiceTimelineEditorial({ steps }: { steps: TimelineSte
   return (
     <section
       className="px-[var(--gutter)] pt-[6rem] pb-[8rem] max-sm:px-[var(--gutter)]"
-      style={{ background: 'var(--cloud-100)' }}
+      style={{ background: 'var(--color-card)' }}
     >
       <div className="grid md:grid-cols-[minmax(0,0.68fr)_minmax(25rem,1fr)] gap-[5rem] max-w-[var(--container-max)] mx-auto max-md:grid-cols-1 max-md:gap-[2.5rem]">
         <div className="md:sticky md:top-[50vh] md:self-start">
           <h2
             className="type-section-title m-0 mb-[1.2rem]"
-            style={{ color: 'var(--text-strong)' }}
+            style={{ color: 'var(--color-ink)' }}
           >
             Your plug-in brand team, <em>from kickoff to rollout.</em>
           </h2>
           <p
             className="type-body m-0 max-w-[22rem]"
-            style={{ color: 'var(--text-muted)' }}
+            style={{ color: 'var(--color-muted)' }}
           >
             We work side-by-side with your team to shape, evolve, and scale your brand
             without the slowdowns of traditional agencies.
@@ -67,7 +67,7 @@ export default function ServiceTimelineEditorial({ steps }: { steps: TimelineSte
         >
           <div
             className="absolute top-[0.8rem] bottom-[0.8rem] w-[1px] max-sm:left-[1.6rem]"
-            style={{ left: '2.8rem', background: 'var(--mint-400)' }}
+            style={{ left: '2.8rem', background: 'var(--color-lime)' }}
             aria-hidden
           />
           {steps.map((step, index) => (
@@ -80,9 +80,9 @@ export default function ServiceTimelineEditorial({ steps }: { steps: TimelineSte
                 <span
                   className="tl-num relative z-1 grid place-items-center w-[5.6rem] h-[5.6rem] rounded-full border-2 text-[2.2rem] italic leading-[1] max-sm:w-[3.6rem] max-sm:h-[3.6rem] max-sm:text-[1.5rem]"
                   style={{
-                    borderColor: 'var(--mint-400)',
-                    background: 'var(--cloud-100)',
-                    color: 'var(--teal-800)',
+                    borderColor: 'var(--color-lime)',
+                    background: 'var(--color-card)',
+                    color: 'var(--color-ink)',
                     fontFamily: 'var(--font-serif)',
                   }}
                 >
@@ -92,13 +92,13 @@ export default function ServiceTimelineEditorial({ steps }: { steps: TimelineSte
               <div className="tl-content">
                 <h3
                   className="type-card-title m-0 mb-[0.55rem]"
-                  style={{ color: 'var(--text-strong)' }}
+                  style={{ color: 'var(--color-ink)' }}
                 >
                   {step.title}
                 </h3>
                 <p
                   className="type-body m-0 max-w-[32rem]"
-                  style={{ color: 'var(--text-muted)' }}
+                  style={{ color: 'var(--color-muted)' }}
                 >
                   {step.body}
                 </p>

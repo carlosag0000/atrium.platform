@@ -59,7 +59,7 @@ export default function DarkProcess({ eyebrow, headline, body, cta, ctaHref, ste
                 {eyebrow}
               </Eyebrow>
             )}
-            <h2 className="max-w-[16ch] text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-cream">
+            <h2 className="max-w-[16ch] text-[clamp(2.6rem,4.5vw,4rem)] leading-[1.08] text-cream">
               {headline}
             </h2>
           </div>
@@ -85,14 +85,14 @@ export default function DarkProcess({ eyebrow, headline, body, cta, ctaHref, ste
               <div aria-hidden="true" className="flex items-center gap-4">
                 <span
                   className="h-2.5 w-2.5 shrink-0 rounded-full"
-                  style={{ background: 'var(--color-accent)' }}
+                  style={{ background: 'var(--color-lime)' }}
                 />
                 <span className="h-px flex-1 bg-cream/20" />
               </div>
 
               <p
                 className="m-0 mt-6 font-serif text-[clamp(2.4rem,4vw,3.2rem)] leading-none tracking-[-0.03em]"
-                style={{ color: 'var(--color-accent)' }}
+                style={{ color: 'var(--color-lime)' }}
               >
                 {String(i + 1).padStart(2, '0')}
               </p>
@@ -100,7 +100,7 @@ export default function DarkProcess({ eyebrow, headline, body, cta, ctaHref, ste
               <Eyebrow as="p" className="mt-6" tone="on-dark">
                 {step.eyebrow}
               </Eyebrow>
-              <h3 className="mt-4 max-w-[16ch] text-[clamp(1.35rem,2vw,1.8rem)] font-normal leading-[1.15] text-cream">
+              <h3 className="mt-4 max-w-[16ch] text-[clamp(1.35rem,2vw,1.8rem)] leading-[1.15] text-cream">
                 {step.title}
               </h3>
               <p className="m-0 mt-4 max-w-sm text-base leading-relaxed text-cream/[0.7]">{step.body}</p>

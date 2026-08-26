@@ -30,38 +30,38 @@ const teamCards = [
     label: 'Creative Director & Founder',
     title: 'Carlos',
     body: 'Inside the kitchens, on the shoots, and behind the dashboards for 15+ hospitality brands across Houston and beyond.',
-    background: 'var(--mint-400)',
-    text: 'var(--teal-900)',
+    background: 'var(--color-lime)',
+    text: 'var(--color-ink)',
   },
   {
     label: 'Marketing Coordination',
     title: 'Litzabel',
     body: 'Keeps campaigns moving across calendars, approvals, content delivery, and the details that make the system feel calm.',
-    background: 'var(--amber-500)',
-    text: 'var(--teal-900)',
+    background: 'var(--color-amber)',
+    text: 'var(--color-ink)',
   },
   {
     label: 'Production Hub',
     title: 'Houston production team',
     body: 'A dedicated creative crew built for on-location shoots, edits, campaign assets, and monthly execution rhythm.',
-    background: 'var(--teal-700)',
-    text: 'var(--mint-300)',
+    background: 'var(--color-dark)',
+    text: 'var(--color-lime)',
   },
 ]
 
 function AboutHero() {
   return (
-    <section className="px-[var(--gutter)] pb-24 pt-36 md:pb-32 md:pt-48" style={{ background: 'var(--surface-page)' }}>
+    <section className="px-[var(--gutter)] pb-24 pt-36 md:pb-32 md:pt-48" style={{ background: 'var(--color-cream)' }}>
       <div className="mx-auto max-w-[var(--container-max)]">
         <Eyebrow className="mb-8">About Atrium</Eyebrow>
 
         <div className="grid gap-12 lg:grid-cols-12 lg:items-end lg:gap-16">
-          <h1 className="type-page-title max-w-[11ch] lg:col-span-8" style={{ color: 'var(--text-strong)' }}>
+          <h1 className="type-page-title max-w-[11ch] lg:col-span-8" style={{ color: 'var(--color-ink)' }}>
             Hospitality is not our vertical. <em>It is the work.</em>
           </h1>
 
           <div className="border-t pt-7 lg:col-span-4" style={{ borderColor: 'rgba(7,47,52,0.18)' }}>
-            <p className="type-lead" style={{ color: 'var(--text-body)' }}>
+            <p className="type-lead" style={{ color: 'var(--color-body)' }}>
               Atrium works inside the industry, connecting strategy, creative production, and performance reporting under one roof.
             </p>
             <Link
@@ -69,7 +69,7 @@ function AboutHero() {
               target="_blank"
               rel="noopener noreferrer"
               className="type-caption group mt-9 inline-flex items-center gap-3 no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
-              style={{ color: 'var(--teal-800)' }}
+              style={{ color: 'var(--color-ink)' }}
             >
               Start a project
               <span className="transition-transform duration-300 group-hover:translate-x-2" aria-hidden="true">
@@ -81,7 +81,7 @@ function AboutHero() {
 
         <div className="mt-16 flex flex-wrap gap-x-3 gap-y-2 border-t pt-6 md:mt-24" style={{ borderColor: 'rgba(7,47,52,0.18)' }}>
           {['Hospitality strategy', 'Creative production', 'Growth systems'].map((discipline, index) => (
-            <p key={discipline} className="type-caption m-0 flex items-center gap-3" style={{ color: 'var(--text-muted)' }}>
+            <p key={discipline} className="type-caption m-0 flex items-center gap-3" style={{ color: 'var(--color-muted)' }}>
               {index > 0 && <span aria-hidden="true">/</span>}
               {discipline}
             </p>
@@ -94,11 +94,11 @@ function AboutHero() {
 
 function StudioStory() {
   return (
-    <section className="px-[var(--gutter)] py-24 md:py-36" style={{ background: 'var(--surface-page)' }}>
+    <section className="px-[var(--gutter)] py-24 md:py-36" style={{ background: 'var(--color-cream)' }}>
       <div className="mx-auto grid max-w-[var(--container-max)] grid-cols-1 gap-10 lg:grid-cols-12 lg:items-stretch lg:gap-16">
         <div
           className="aspect-[4/3] min-h-[25rem] rounded-[var(--radius-bento)] lg:col-span-7 lg:aspect-auto lg:min-h-[38rem]"
-          style={{ background: 'var(--teal-800)' }}
+          style={{ background: 'var(--color-ink)' }}
           role="img"
           aria-label="Atrium team working inside a hospitality business"
         />
@@ -112,15 +112,15 @@ function StudioStory() {
           </div>
 
           <div>
-            <p className="type-lead" style={{ color: 'var(--text-body)' }}>
+            <p className="type-lead" style={{ color: 'var(--color-body)' }}>
               We work close enough to service, production, and performance data to understand what hospitality teams actually need.
             </p>
-            <p className="type-body mt-6" style={{ color: 'var(--text-muted)' }}>
+            <p className="type-body mt-6" style={{ color: 'var(--color-muted)' }}>
               Atrium connects strategy and production under one roof in Houston, Texas. The same people who shape the campaign stay close to the work after it goes live.
             </p>
             <ul className="m-0 mt-8 flex list-none flex-wrap gap-x-3 gap-y-1 border-t p-0 pt-6" style={{ borderColor: 'rgba(7,47,52,0.14)' }}>
               {['Houston', 'United States'].map((location, index) => (
-                <li key={location} className="type-caption flex items-center gap-3" style={{ color: 'var(--text-muted)' }}>
+                <li key={location} className="type-caption flex items-center gap-3" style={{ color: 'var(--color-muted)' }}>
                   {index > 0 && <span aria-hidden="true">/</span>}
                   {location}
                 </li>
@@ -135,7 +135,7 @@ function StudioStory() {
 
 function PrinciplesSection() {
   return (
-    <section className="px-[var(--gutter)] py-24 md:py-36" style={{ background: 'var(--cloud-100)' }}>
+    <section className="px-[var(--gutter)] py-24 md:py-36" style={{ background: 'var(--color-card)' }}>
       <div className="mx-auto grid max-w-[var(--container-max)] gap-12 lg:grid-cols-12 lg:gap-16">
         <div className="lg:col-span-4">
           <Eyebrow className="mb-6">Operating principles</Eyebrow>
@@ -151,14 +151,14 @@ function PrinciplesSection() {
               className="grid gap-6 border-b py-10 md:grid-cols-[4rem_minmax(0,1fr)] md:gap-8 md:py-12"
               style={{ borderColor: 'rgba(7,47,52,0.18)' }}
             >
-              <p className="type-eyebrow m-0" style={{ color: 'var(--teal-500)' }}>
+              <p className="type-eyebrow m-0" style={{ color: 'var(--color-muted)' }}>
                 {String(index + 1).padStart(2, '0')}
               </p>
               <div className="grid gap-5 md:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] md:gap-10">
-                <h3 className="type-card-title" style={{ color: 'var(--text-strong)' }}>
+                <h3 className="type-card-title" style={{ color: 'var(--color-ink)' }}>
                   {item.title}
                 </h3>
-                <p className="type-body max-w-xl" style={{ color: 'var(--text-muted)' }}>
+                <p className="type-body max-w-xl" style={{ color: 'var(--color-muted)' }}>
                   {item.body}
                 </p>
               </div>
@@ -175,7 +175,7 @@ function TeamSection() {
   if (!founder || !coordinator || !production) return null
 
   return (
-    <section className="px-[var(--gutter)] py-24 md:py-36" style={{ background: 'var(--teal-900)', color: 'var(--text-on-dark)' }}>
+    <section className="px-[var(--gutter)] py-24 md:py-36" style={{ background: 'var(--color-ink)', color: 'var(--color-off-white)' }}>
       <div className="mx-auto max-w-[var(--container-max)]">
         <div className="mb-16 grid gap-10 border-t pt-8 lg:grid-cols-12 lg:items-end lg:gap-16 md:mb-24" style={{ borderColor: 'rgba(181,242,219,0.22)' }}>
           <div className="lg:col-span-7">
@@ -200,14 +200,14 @@ function TeamSection() {
               />
               <div className="mt-7 grid gap-5 border-t pt-6 md:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]" style={{ borderColor: 'rgba(181,242,219,0.22)' }}>
                 <div>
-                  <p className="type-eyebrow m-0" style={{ color: 'var(--mint-400)' }}>
+                  <p className="type-eyebrow m-0" style={{ color: 'var(--color-lime)' }}>
                     {member.label}
                   </p>
-                  <h3 className="type-card-title mt-4" style={{ color: 'var(--text-on-dark)' }}>
+                  <h3 className="type-card-title mt-4" style={{ color: 'var(--color-off-white)' }}>
                     {member.title}
                   </h3>
                 </div>
-                <p className="type-body m-0" style={{ color: 'var(--text-on-dark)', opacity: 0.68 }}>
+                <p className="type-body m-0" style={{ color: 'var(--color-off-white)', opacity: 0.68 }}>
                   {member.body}
                 </p>
               </div>
@@ -223,14 +223,14 @@ function TeamSection() {
             />
             <div className="flex flex-col justify-between gap-12 lg:col-span-7">
               <div>
-                <p className="type-eyebrow m-0" style={{ color: 'var(--mint-400)' }}>
+                <p className="type-eyebrow m-0" style={{ color: 'var(--color-lime)' }}>
                   {production.label}
                 </p>
-                <h3 className="type-section-title mt-5" style={{ color: 'var(--text-on-dark)' }}>
+                <h3 className="type-section-title mt-5" style={{ color: 'var(--color-off-white)' }}>
                   {production.title}
                 </h3>
               </div>
-              <p className="type-lead m-0 max-w-2xl" style={{ color: 'var(--text-on-dark)', opacity: 0.72 }}>
+              <p className="type-lead m-0 max-w-2xl" style={{ color: 'var(--color-off-white)', opacity: 0.72 }}>
                 {production.body}
               </p>
             </div>

@@ -4,7 +4,7 @@ export default function ServicePerksRail({ svc }: { svc: Service }) {
   return (
     <section
       className="px-[var(--gutter)] pt-[3rem] pb-[5.5rem] max-sm:px-[var(--gutter)]"
-      style={{ background: 'var(--cloud-100)' }}
+      style={{ background: 'var(--color-card)' }}
     >
       <div
         className="grid grid-cols-1 md:grid-cols-3 gap-[1px] max-w-[var(--container-max)] mx-auto overflow-hidden max-md:grid-cols-1"
@@ -18,12 +18,12 @@ export default function ServicePerksRail({ svc }: { svc: Service }) {
           <article
             key={perk.title}
             className="flex gap-[1.25rem] min-h-[13rem] p-[1.4rem] max-sm:min-h-auto"
-            style={{ background: 'var(--cloud-100)' }}
+            style={{ background: 'var(--color-card)' }}
           >
             <span
               className="text-[1.7rem] italic leading-[1] flex-shrink-0"
               style={{
-                color: 'var(--teal-300)',
+                color: 'var(--color-muted-soft)',
                 fontFamily: 'var(--font-serif)',
               }}
             >
@@ -32,13 +32,13 @@ export default function ServicePerksRail({ svc }: { svc: Service }) {
             <div>
               <h3
                 className="type-card-title m-0 mb-[0.55rem]"
-                style={{ color: 'var(--text-strong)' }}
+                style={{ color: 'var(--color-ink)' }}
               >
                 {perk.title}
               </h3>
               <p
                 className="type-caption m-0"
-                style={{ color: 'var(--text-muted)' }}
+                style={{ color: 'var(--color-muted)' }}
               >
                 {perk.description}
               </p>

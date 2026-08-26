@@ -50,7 +50,7 @@ export default function VideoShowcaseSection({ study }: { study: CaseStudy }) {
         <div className="grid gap-8 border-t border-line pt-8 lg:grid-cols-12 lg:items-end lg:gap-16">
           <div className="lg:col-span-7">
             <Eyebrow className="mb-6">Reels and short-form video</Eyebrow>
-            <h2 className="text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-charcoal">
+            <h2 className="type-subsection-title text-charcoal">
               Built to move. <em>Made to repeat.</em>
             </h2>
           </div>

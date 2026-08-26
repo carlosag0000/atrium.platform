@@ -32,7 +32,7 @@ export default function ServiceEditorialHero({ svc }: { svc: Service }) {
           <div className="relative flex flex-col items-center">
             <CategoryBadge category={svc.category} />
 
-            <h1 className="m-0 mt-6 text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-charcoal">
+            <h1 className="m-0 mt-6 text-[clamp(2.6rem,4.5vw,4rem)] leading-[1.08] text-charcoal">
               {parseHeadline(svc.hero.headline, 'font-serif italic')}
             </h1>
 

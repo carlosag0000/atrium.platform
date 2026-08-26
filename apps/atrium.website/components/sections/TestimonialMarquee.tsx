@@ -44,7 +44,7 @@ export default function TestimonialMarquee({ items, eyebrow, headline, body }: P
           </Eyebrow>
         )}
         {headline && (
-          <h2 className="m-0 text-[clamp(2.6rem,4.5vw,4rem)] leading-[1.08] tracking-[-0.02em] text-cream">
+          <h2 className="m-0 type-subsection-title text-cream">
             {headline}
           </h2>
         )}

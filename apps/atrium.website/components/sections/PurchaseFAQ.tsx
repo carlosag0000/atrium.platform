@@ -79,7 +79,7 @@ export default function PurchaseFAQ({
       <div className="mx-auto grid max-w-[var(--container-max)] gap-14 lg:grid-cols-12 lg:gap-20">
         <div className="self-start lg:sticky lg:top-32 lg:col-span-4">
           <Eyebrow tone={dark ? 'on-dark' : 'default'} className="mb-6">Before we start</Eyebrow>
-          <h2 className={`m-0 max-w-[12ch] text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] ${dark ? 'text-cream' : 'text-charcoal'}`}>
+          <h2 className={`m-0 max-w-[12ch] type-subsection-title ${dark ? 'text-cream' : 'text-charcoal'}`}>
             {heading}
           </h2>
           <p className={`mt-7 max-w-sm text-base leading-relaxed ${dark ? 'text-cream/70' : 'text-muted'}`}>

@@ -26,7 +26,7 @@ export default function ServicesPage() {
         <div className="mx-auto w-full max-w-[var(--container-max)]">
           <div className="max-w-3xl">
             <Eyebrow tone="on-dark" className="mb-6">HOSPITALITY MARKETING</Eyebrow>
-            <h1 className="mb-6 text-[clamp(2.6rem,6vw,4.6rem)] font-normal leading-[1.02] tracking-[-0.02em] text-cream">
+            <h1 className="mb-6 text-[clamp(2.6rem,6vw,4.6rem)] leading-[1.02] text-cream">
               One team. <em className="font-serif italic">Every stage of growth.</em>
             </h1>
             <p className="max-w-xl text-[clamp(1.05rem,1.4vw,1.25rem)] leading-relaxed text-cream/[0.78]">
@@ -43,7 +43,7 @@ export default function ServicesPage() {
             <div className="grid gap-7 lg:grid-cols-12 lg:items-end lg:gap-16">
               <div className="lg:col-span-7">
                 <Eyebrow className="mb-6">The Atrium Growth Engine</Eyebrow>
-                <h2 className="max-w-[14ch] text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em]">
+                <h2 className="max-w-[14ch] text-[clamp(2.6rem,4.5vw,4rem)] leading-[1.08]">
                   Not eleven services. <em className="font-serif italic">One system.</em>
                 </h2>
               </div>
@@ -121,11 +121,11 @@ export default function ServicesPage() {
       </section>
 
       {/* ── Stats — quick proof before CTA, 3 columns matching the engine split ── */}
-      <section className="bg-cream px-6 py-20 md:px-16 md:py-28">
+      <section className="bg-cream px-[var(--gutter)] py-24 md:py-36">
         <div className="mx-auto max-w-[var(--container-max)]">
           <div className="max-w-2xl pb-14 md:pb-20">
             <Eyebrow>The full picture</Eyebrow>
-            <h2 className="m-0 mt-5 text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em]">
+            <h2 className="m-0 mt-5 text-[clamp(2.6rem,4.5vw,4rem)] leading-[1.08]">
               Eleven disciplines. <em className="font-serif italic">One engine.</em>
             </h2>
           </div>

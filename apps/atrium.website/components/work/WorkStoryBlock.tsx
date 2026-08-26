@@ -31,7 +31,7 @@ export default function WorkStoryBlock({
           </Eyebrow>
 
           <h3
-            className={`m-0 max-w-[18ch] text-[clamp(1.9rem,3vw,2.6rem)] font-normal leading-[1.12] tracking-[-0.02em] ${dark ? 'text-cream' : 'text-charcoal'}`}
+            className={`m-0 max-w-[18ch] text-[clamp(1.9rem,3vw,2.6rem)] leading-[1.12] ${dark ? 'text-cream' : 'text-charcoal'}`}
           >
             {story.headline}
           </h3>

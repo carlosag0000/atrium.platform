@@ -37,7 +37,7 @@ export default function PageHero({ eyebrow, title, body, actions, stats }: PageH
           <Eyebrow className="mb-6" tone="on-dark">
             {eyebrow}
           </Eyebrow>
-          <h1 className="m-0 max-w-[18ch] text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-cream">
+          <h1 className="m-0 max-w-[18ch] text-[clamp(2.6rem,4.5vw,4rem)] leading-[1.08] text-cream">
             {title}
           </h1>
           <p className="mt-6 max-w-2xl text-[clamp(1.05rem,1.4vw,1.25rem)] leading-relaxed text-cream/[0.78]">

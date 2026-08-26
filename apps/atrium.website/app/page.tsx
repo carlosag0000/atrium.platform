@@ -42,8 +42,6 @@ const bentoItems: BentoItem[] = [
 ]
 
 const selectedWorkDetails = [
-  { slug: 'taco-naco', result: '3 locations. One brand. Full system activation.' },
-  { slug: 'taha', result: 'Single campaign. Measurable revenue lift.' },
   { slug: 'don-chuys', result: '7,200+ followers across social.' },
   { slug: 'hotel-kc', result: 'Two-part campaign storytelling.' },
   { slug: 'chick-in-waffle', result: '$74K+ in email-attributed sales.' },

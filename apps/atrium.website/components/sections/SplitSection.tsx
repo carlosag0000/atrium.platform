@@ -42,7 +42,7 @@ export default function SplitSection({ eyebrow, headline, body, cta, ctaHref, co
   const isDark = bg === 'dark'
   // A caller may still pass an arbitrary CSS colour, so the ground stays a
   // style; everything drawn on top of it now comes from the design system.
-  const bg_ = isDark ? 'var(--color-primary)' : (bg ?? 'var(--color-surface)')
+  const bg_ = isDark ? 'var(--color-ink)' : (bg ?? 'var(--color-cream)')
 
   return (
     <section className="overflow-hidden px-[var(--gutter)] py-20 md:py-28" style={{ background: bg_ }}>
@@ -55,7 +55,7 @@ export default function SplitSection({ eyebrow, headline, body, cta, ctaHref, co
               of the site had moved to, which is why this section read as a
               different size from its neighbours. */}
           <h2
-            className={`text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] ${isDark ? 'text-cream' : 'text-charcoal'}`}
+            className={`text-[clamp(2.6rem,4.5vw,4rem)] leading-[1.08] ${isDark ? 'text-cream' : 'text-charcoal'}`}
           >
             {headline}
           </h2>

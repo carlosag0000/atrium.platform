@@ -60,7 +60,7 @@ function TierServices({ services, index, highlighted = false }: { services: stri
           className="type-caption border-t py-3"
           style={{
             borderColor: highlighted ? 'rgba(181,242,219,0.22)' : 'rgba(7,47,52,0.14)',
-            color: highlighted ? 'var(--text-on-dark)' : 'var(--text-muted)',
+            color: highlighted ? 'var(--color-off-white)' : 'var(--color-muted)',
             opacity: highlighted ? 0.76 : 1,
           }}
         >
@@ -73,7 +73,7 @@ function TierServices({ services, index, highlighted = false }: { services: stri
 
 function PricingOffers() {
   return (
-    <section className="px-[var(--gutter)] pb-24 pt-36 md:pb-36 md:pt-44" style={{ background: 'var(--surface-page)' }}>
+    <section className="px-[var(--gutter)] pb-24 pt-36 md:pb-36 md:pt-44" style={{ background: 'var(--color-cream)' }}>
       <div className="mx-auto max-w-[var(--container-max)]">
         <div className="mb-14 grid gap-8 lg:grid-cols-12 lg:items-end lg:gap-16 md:mb-20">
           <div className="lg:col-span-7">
@@ -83,7 +83,7 @@ function PricingOffers() {
             </h1>
           </div>
           <div className="border-t pt-7 lg:col-span-5" style={{ borderColor: 'rgba(7,47,52,0.18)' }}>
-            <p className="type-body m-0 max-w-md" style={{ color: 'var(--text-muted)' }}>
+            <p className="type-body m-0 max-w-md" style={{ color: 'var(--color-muted)' }}>
               Compare the operating level first. We adapt the final scope to your locations, production volume, active channels, and internal team.
             </p>
           </div>
@@ -96,36 +96,36 @@ function PricingOffers() {
               id={tier.name.toLowerCase().replaceAll(' ', '-')}
               className={`flex min-h-[42rem] flex-col border-t px-0 py-10 first:border-t-0 lg:border-t-0 lg:px-8 lg:py-12 first:lg:pl-0 last:lg:pr-0 ${index > 0 ? 'lg:border-l' : ''}`}
               style={{
-                background: index === 1 ? 'var(--teal-800)' : 'transparent',
-                color: index === 1 ? 'var(--text-on-dark)' : 'var(--text-strong)',
+                background: index === 1 ? 'var(--color-ink)' : 'transparent',
+                color: index === 1 ? 'var(--color-off-white)' : 'var(--color-ink)',
                 borderColor: 'rgba(7,47,52,0.18)',
                 scrollMarginTop: '8rem',
               }}
             >
               <div className={index === 1 ? 'px-6 lg:px-0' : ''}>
-                <p className="type-eyebrow m-0 mb-6" style={{ color: index === 1 ? 'var(--mint-400)' : 'var(--teal-500)' }}>
+                <p className="type-eyebrow m-0 mb-6" style={{ color: index === 1 ? 'var(--color-lime)' : 'var(--color-muted)' }}>
                   Model {String(index + 1).padStart(2, '0')}
                 </p>
-                <h2 className="type-card-title" style={{ color: index === 1 ? 'var(--text-on-dark)' : 'var(--text-strong)' }}>
+                <h2 className="type-card-title" style={{ color: index === 1 ? 'var(--color-off-white)' : 'var(--color-ink)' }}>
                   {tier.name}
                 </h2>
-                <p className="type-lead mt-6" style={{ color: index === 1 ? 'var(--text-on-dark)' : 'var(--text-body)' }}>
+                <p className="type-lead mt-6" style={{ color: index === 1 ? 'var(--color-off-white)' : 'var(--color-body)' }}>
                   {tier.tagline}
                 </p>
-                <p className="type-body mt-5" style={{ color: index === 1 ? 'var(--text-on-dark)' : 'var(--text-muted)', opacity: index === 1 ? 0.68 : 1 }}>
+                <p className="type-body mt-5" style={{ color: index === 1 ? 'var(--color-off-white)' : 'var(--color-muted)', opacity: index === 1 ? 0.68 : 1 }}>
                   {tier.fit}
                 </p>
               </div>
 
               <div className={`mt-12 ${index === 1 ? 'px-6 lg:px-0' : ''}`}>
-                <p className="type-eyebrow m-0 mb-5" style={{ color: index === 1 ? 'var(--mint-400)' : 'var(--teal-500)' }}>
+                <p className="type-eyebrow m-0 mb-5" style={{ color: index === 1 ? 'var(--color-lime)' : 'var(--color-muted)' }}>
                   Included
                 </p>
                 <TierServices services={tier.includes} index={index} highlighted={index === 1} />
               </div>
 
               <div className={`mt-auto pt-10 ${index === 1 ? 'px-6 lg:px-0' : ''}`}>
-                <p className="type-caption m-0 " style={{ color: index === 1 ? 'var(--mint-400)' : 'var(--teal-800)' }}>
+                <p className="type-caption m-0 " style={{ color: index === 1 ? 'var(--color-lime)' : 'var(--color-ink)' }}>
                   Custom pricing after discovery
                 </p>
                 <Link
@@ -133,7 +133,7 @@ function PricingOffers() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="type-caption group mt-6 inline-flex items-center gap-3 no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
-                  style={{ color: index === 1 ? 'var(--text-on-dark)' : 'var(--teal-800)' }}
+                  style={{ color: index === 1 ? 'var(--color-off-white)' : 'var(--color-ink)' }}
                 >
                   Request this scope
                   <span className="transition-transform duration-300 group-hover:translate-x-2" aria-hidden="true">
@@ -151,7 +151,7 @@ function PricingOffers() {
 
 function ScopeSection() {
   return (
-    <section className="px-[var(--gutter)] py-24 md:py-36" style={{ background: 'var(--teal-900)', color: 'var(--text-on-dark)' }}>
+    <section className="px-[var(--gutter)] py-24 md:py-36" style={{ background: 'var(--color-ink)', color: 'var(--color-off-white)' }}>
       <div className="mx-auto grid max-w-[var(--container-max)] gap-12 lg:grid-cols-12 lg:gap-16">
         <div className="lg:col-span-5">
           <Eyebrow tone="onDark" className="mb-6">How scope works</Eyebrow>
@@ -170,14 +170,14 @@ function ScopeSection() {
               className="grid gap-6 border-b py-10 md:grid-cols-[4rem_minmax(0,1fr)] md:gap-8 md:py-12"
               style={{ borderColor: 'rgba(181,242,219,0.22)' }}
             >
-              <p className="type-eyebrow m-0" style={{ color: 'var(--mint-400)' }}>
+              <p className="type-eyebrow m-0" style={{ color: 'var(--color-lime)' }}>
                 {String(index + 1).padStart(2, '0')}
               </p>
               <div>
-                <h3 className="type-card-title" style={{ color: 'var(--text-on-dark)' }}>
+                <h3 className="type-card-title" style={{ color: 'var(--color-off-white)' }}>
                   {principle.title}
                 </h3>
-                <p className="type-body mt-5 max-w-2xl" style={{ color: 'var(--text-on-dark)', opacity: 0.68 }}>
+                <p className="type-body mt-5 max-w-2xl" style={{ color: 'var(--color-off-white)', opacity: 0.68 }}>
                   {principle.body}
                 </p>
               </div>

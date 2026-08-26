@@ -34,7 +34,7 @@ export default function StatsStrip({ stats }: Props) {
       <div className="mx-auto max-w-[var(--container-max)]">
         <div className="metric-reveal max-w-4xl pb-14 md:pb-20">
           <Eyebrow tone="on-dark">Why the system matters</Eyebrow>
-          <h2 className="m-0 mt-5 text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-cream">
+          <h2 className="m-0 mt-5 text-[clamp(2.6rem,4.5vw,4rem)] leading-[1.08] text-cream">
             The first visit is expensive.<br />
             <em className="font-serif italic">The next one should not be.</em>
           </h2>

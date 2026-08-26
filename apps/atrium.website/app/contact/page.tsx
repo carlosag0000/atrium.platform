@@ -42,40 +42,40 @@ export default async function ContactPage({ searchParams }: { searchParams: Prom
         ]}
       />
 
-      <section className="px-6 py-20 md:px-12 md:py-28" style={{ background: 'var(--surface-page)' }}>
+      <section className="px-6 py-20 md:px-12 md:py-28" style={{ background: 'var(--color-cream)' }}>
         <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[0.85fr_1.15fr]">
           <div>
             <Eyebrow className="mb-5">Direct line</Eyebrow>
             {selectedService && (
-              <p className="type-eyebrow mb-5 inline-flex rounded-full px-4 py-2" style={{ color: 'var(--teal-800)', background: 'var(--mint-300)' }}>
+              <p className="type-eyebrow mb-5 inline-flex rounded-full px-4 py-2" style={{ color: 'var(--color-ink)', background: 'var(--color-lime)' }}>
                 Interest selected: {selectedService.name}
               </p>
             )}
             <h2 className="type-section-title">
               Start with the messy version.
             </h2>
-            <p className="type-body mt-6 max-w-md" style={{ color: 'var(--text-muted)' }}>
+            <p className="type-body mt-6 max-w-md" style={{ color: 'var(--color-muted)' }}>
               You do not need a perfect brief. Send the business context, the current pressure, and the outcome you want to make visible.
             </p>
-            <a href={emailHref} className="type-card-title mt-8 inline-flex" style={{ color: 'var(--teal-800)' }}>
+            <a href={emailHref} className="type-card-title mt-8 inline-flex" style={{ color: 'var(--color-ink)' }}>
               {email}
             </a>
           </div>
 
           <div className="grid gap-5 md:grid-cols-2">
-            <div className="rounded-2xl border p-7" style={{ borderColor: 'rgba(7,47,52,0.10)', background: 'var(--surface-card)' }}>
+            <div className="rounded-2xl border p-7" style={{ borderColor: 'rgba(7,47,52,0.10)', background: 'var(--color-card)' }}>
               <h3 className="type-card-title">Include this</h3>
               <ul className="mt-6 space-y-4">
                 {briefItems.map((item) => (
-                  <li key={item} className="type-caption" style={{ color: 'var(--text-muted)' }}>
+                  <li key={item} className="type-caption" style={{ color: 'var(--color-muted)' }}>
                     {item}
                   </li>
                 ))}
               </ul>
             </div>
-            <div className="rounded-2xl border p-7" style={{ borderColor: 'rgba(7,47,52,0.10)', background: 'var(--surface-card)' }}>
+            <div className="rounded-2xl border p-7" style={{ borderColor: 'rgba(7,47,52,0.10)', background: 'var(--color-card)' }}>
               <h3 className="type-card-title">Good reasons to reach out</h3>
-              <div className="type-caption mt-6 space-y-4" style={{ color: 'var(--text-muted)' }}>
+              <div className="type-caption mt-6 space-y-4" style={{ color: 'var(--color-muted)' }}>
                 <p>Your content has activity but no clear system.</p>
                 <p>Your restaurant has more locations than your current process can support.</p>
                 <p>Your reporting does not explain what marketing actually changed.</p>

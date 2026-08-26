@@ -65,7 +65,7 @@ export default function AudiencePaths() {
         <div className="mb-14 grid gap-8 border-t border-line pt-8 lg:grid-cols-12 lg:items-end lg:gap-16 md:mb-20">
           <div className="lg:col-span-7">
             <Eyebrow className="mb-6">Where you are now</Eyebrow>
-            <h2 className="max-w-[13ch] text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em]">
+            <h2 className="max-w-[13ch] text-[clamp(2.6rem,4.5vw,4rem)] leading-[1.08]">
               Different footprint. <em className="font-serif italic">Different first move.</em>
             </h2>
           </div>

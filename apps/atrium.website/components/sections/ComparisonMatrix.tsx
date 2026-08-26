@@ -25,7 +25,7 @@ export default function ComparisonMatrix() {
       <div className="mx-auto max-w-[var(--container-max)]">
         <div className="mb-12 max-w-2xl md:mb-16">
           <Eyebrow className="mb-4" tone="on-dark">Why Atrium</Eyebrow>
-          <h2 className="text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-cream">
+          <h2 className="type-subsection-title text-cream">
             One accountable team, <em className="font-serif italic">not five vendors.</em>
           </h2>
           <p className="mt-5 max-w-md text-base leading-relaxed text-cream/70">

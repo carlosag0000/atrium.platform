@@ -144,15 +144,15 @@ function ServiceItem({
       href={svc.href}
       onClick={onClose}
       className={`flex gap-3 items-start px-2 py-2 -mx-2 rounded-lg transition-colors group ${light ? 'hover:bg-black/[0.04]' : 'hover:bg-white/5'}`}
-      style={{ color: light ? 'var(--text-strong)' : 'var(--color-surface)' }}
+      style={{ color: light ? 'var(--color-ink)' : 'var(--color-cream)' }}
     >
       <span
-        className="mt-0.5 w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors group-hover:bg-[color-mix(in_srgb,var(--mint-400)_18%,transparent)]"
+        className="mt-0.5 w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors group-hover:bg-[color-mix(in_srgb,var(--color-lime)_18%,transparent)]"
         style={{
           background: light
             ? 'color-mix(in srgb, var(--stage-generate) 14%, transparent)'
-            : 'color-mix(in srgb, var(--mint-400) 9%, transparent)',
-          color: light ? 'var(--stage-retain)' : 'var(--color-accent)',
+            : 'color-mix(in srgb, var(--color-lime) 9%, transparent)',
+          color: light ? 'var(--stage-retain)' : 'var(--color-lime)',
         }}
       >
         {icons[svc.icon]}
@@ -163,7 +163,7 @@ function ServiceItem({
         </span>
         <span
           className="text-xs leading-tight"
-          style={light ? { color: 'var(--text-muted)' } : { color: 'var(--color-surface)', opacity: 0.4 }}
+          style={light ? { color: 'var(--color-muted)' } : { color: 'var(--color-cream)', opacity: 0.4 }}
         >
           {svc.desc}
         </span>
@@ -214,7 +214,7 @@ export default function Navbar() {
   // scrolls under it further down, and a translucent cream bar over that ground
   // leaves the nav text unreadable.
   const caseBarAlpha = effOpacity * 0.95
-  const navTextColor = isLightHero ? 'var(--text-strong)' : 'var(--color-surface)'
+  const navTextColor = isLightHero ? 'var(--color-ink)' : 'var(--color-cream)'
   const headerBorder = isLightHero
     ? effOpacity > 0.3
       ? `1px solid rgba(7,47,52,${effOpacity * 0.08})`
@@ -272,7 +272,7 @@ export default function Navbar() {
           <TransitionLink
             key={link.href}
             href={link.href}
-            className="relative text-sm transition-opacity hover:opacity-70 after:absolute after:bottom-[-2px] after:left-0 after:w-0 after:h-px after:bg-[var(--color-accent)] after:transition-all after:duration-300 hover:after:w-full"
+            className="relative text-sm transition-opacity hover:opacity-70 after:absolute after:bottom-[-2px] after:left-0 after:w-0 after:h-px after:bg-[var(--color-lime)] after:transition-all after:duration-300 hover:after:w-full"
             style={{ color: navTextColor }}
           >
             {link.label}
@@ -298,7 +298,7 @@ export default function Navbar() {
         >
           <span
             className="relative flex-shrink-0 w-4 h-4"
-            style={{ color: isLightHero ? 'var(--text-strong)' : 'var(--color-accent)' }}
+            style={{ color: isLightHero ? 'var(--color-ink)' : 'var(--color-lime)' }}
           >
             <span
               className={`absolute left-0 top-1/2 w-full h-px transition-transform duration-200 ${mobileOpen ? 'rotate-45' : '-translate-y-[3px]'}`}
@@ -318,13 +318,13 @@ export default function Navbar() {
         className={`md:hidden fixed inset-0 top-14 overflow-y-auto transition-opacity duration-200 ease-out ${
           mobileOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
-        style={{ background: 'var(--color-primary)' }}
+        style={{ background: 'var(--color-ink)' }}
         role="menu"
       >
         <div className="flex flex-col gap-8 px-6 pt-8 pb-10">
           <div
             className="flex flex-col gap-4 pb-6 border-b"
-            style={{ borderColor: 'var(--color-border-subtle)' }}
+            style={{ borderColor: 'var(--color-line-inverse)' }}
           >
             {otherLinks.map((link) => (
               <TransitionLink
@@ -332,7 +332,7 @@ export default function Navbar() {
                 href={link.href}
                 onClick={closeMobile}
                 className="text-lg "
-                style={{ color: 'var(--color-surface)' }}
+                style={{ color: 'var(--color-cream)' }}
               >
                 {link.label}
               </TransitionLink>
@@ -342,7 +342,7 @@ export default function Navbar() {
           <div className="flex flex-col gap-1">
             <p
               className="type-eyebrow mb-3"
-              style={{ color: 'var(--color-accent)', opacity: 0.55 }}
+              style={{ color: 'var(--color-lime)', opacity: 0.55 }}
             >
               {leftGroup.label}
             </p>
@@ -355,7 +355,7 @@ export default function Navbar() {
             <div key={group.label} className="flex flex-col gap-1">
               <p
                 className="type-eyebrow mb-3"
-                style={{ color: 'var(--color-accent)', opacity: 0.55 }}
+                style={{ color: 'var(--color-lime)', opacity: 0.55 }}
               >
                 {group.label}
               </p>

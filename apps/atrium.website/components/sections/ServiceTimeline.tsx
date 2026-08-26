@@ -23,10 +23,13 @@ export default function ServiceTimeline({ steps }: Props) {
   }, [])
 
   return (
-    <section className="bg-dark px-6 md:px-12 py-20 md:py-28">
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-16 md:gap-24">
-        <div className="md:w-80 flex-shrink-0 md:sticky md:top-[8rem] md:self-start">
-          <h2 className="text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-cream">
+    // Same gutter and container as every other section on the page — this one
+    // used to run in a narrower max-w-6xl, so its left edge fell out of line
+    // with the sections above and below it.
+    <section className="bg-dark px-[var(--gutter)] py-24 md:py-36">
+      <div className="mx-auto grid max-w-[var(--container-max)] grid-cols-1 gap-12 md:grid-cols-[minmax(0,0.68fr)_minmax(25rem,1fr)] md:gap-x-16 lg:gap-x-24">
+        <div className="md:sticky md:top-[8rem] md:self-start">
+          <h2 className="m-0 type-subsection-title text-cream">
             Your plug-in brand team, <em className="font-serif italic">from kickoff to rollout.</em>
           </h2>
           <p className="mt-5 max-w-[22rem] text-base leading-relaxed text-cream/[0.66]">
@@ -34,17 +37,20 @@ export default function ServiceTimeline({ steps }: Props) {
             without the slowdowns of traditional agencies.
           </p>
         </div>
-        <ol ref={listRef} className="flex-1 flex flex-col divide-y divide-cream/10">
+        {/* The step copy keeps its own measure: the container is wide, and a
+            line that runs its full width is unreadable. */}
+        <ol ref={listRef} className="flex flex-col divide-y divide-cream/10">
           {steps.map((step, i) => (
             <li
               key={step.title}
-              className="timeline-item flex gap-6 py-8 first:pt-0 last:pb-0"
-              style={{ opacity: 0 }}
+              // No inline opacity: GSAP's fromTo sets the hidden state itself,
+              // so the steps stay readable if the animation never runs.
+              className="timeline-item flex gap-6 py-9 first:pt-0 last:pb-0 md:py-10"
             >
               <span className="flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center border border-cream/20 bg-cream/[0.12] text-xs text-lime">
                 {String(i + 1).padStart(2, '0')}
               </span>
-              <div className="flex flex-col gap-1.5">
+              <div className="flex max-w-[46rem] flex-col gap-1.5">
                 <p className="m-0 text-[clamp(1.35rem,2vw,1.8rem)] leading-[1.15] text-cream">
                   {step.title}
                 </p>

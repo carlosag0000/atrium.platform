@@ -77,7 +77,7 @@ export default function GrowthEngineDiagram() {
           <Eyebrow className="mb-6" tone="on-dark">
             Growth Foundation
           </Eyebrow>
-          <h2 className="text-[clamp(2.6rem,4.5vw,4rem)] leading-[1.08] tracking-[-0.02em] text-cream">
+          <h2 className="text-[clamp(2.6rem,4.5vw,4rem)] leading-[1.08] text-cream">
             Positioning, identity, and systems built to{' '}
             <em className="font-serif italic">convert strangers into regulars.</em>
           </h2>

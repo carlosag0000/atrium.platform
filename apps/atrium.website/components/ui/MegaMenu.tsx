@@ -15,6 +15,7 @@ import {
   Users,
 } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
+import { STAGES } from '@/components/services/utils'
 import { services } from '@/lib/services'
 import TransitionLink from './TransitionLink'
 
@@ -32,19 +33,13 @@ const MENU_ICONS: Record<string, typeof Compass> = {
   Users,
 }
 
-// Each stage heading is a filled pill in its own colour, so the ink is paired
-// per stage rather than assumed — the two light fills carry charcoal, the dark
-// one carries cream. Contrast against the fill is computed, not eyeballed:
-// lime 11.5:1, amber 10.4:1, green 5.3:1. Recheck these if the palette moves.
-const MENU_CATEGORIES = [
-  { category: 'Generate Demand', pillClass: 'bg-lime text-charcoal' },
-  { category: 'Convert Demand', pillClass: 'bg-amber text-charcoal' },
-  { category: 'Retain Demand', pillClass: 'bg-green text-cream' },
-] as const
-
-const menuColumns = MENU_CATEGORIES.map(({ category, pillClass }) => ({
+// Each stage heading is a filled pill in the stage's own fill, paired with the
+// ink that clears contrast against it. Both come from the single stage table in
+// components/services/utils.tsx — see the note there on why the pill fill is
+// not the stage accent.
+const menuColumns = Object.entries(STAGES).map(([category, stage]) => ({
   category,
-  pillClass,
+  pillClass: stage.pillFill,
   services: services.filter((svc) => svc.category === category),
 }))
 
@@ -137,7 +132,7 @@ export default function MegaMenu({
         }`}
         onMouseEnter={close}
         style={{
-          background: 'color-mix(in srgb, var(--teal-900) 32%, transparent)',
+          background: 'color-mix(in srgb, var(--color-ink) 32%, transparent)',
           backdropFilter: 'blur(var(--blur-md))',
           WebkitBackdropFilter: 'blur(var(--blur-md))',
         }}
