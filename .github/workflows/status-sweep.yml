@@ -12,11 +12,19 @@ name: status sweep
 # Delete this workflow if the project moves to a Vercel plan with real crons —
 # vercel.json already carries the schedule.
 
+# PAUSED 2026-08-26. The schedule is off because this workflow had never once
+# succeeded: 360 scheduled runs, 360 failures, every one dying in ~3s at the
+# STATUS_URL guard below. The two repository secrets it needs were never set
+# (Settings → Secrets and variables → Actions), so every run exited before it
+# could call anything.
+#
+# Nothing depends on it: vercel.json still runs the daily cron and the dashboard
+# still sweeps on staleness. To bring it back, set STATUS_URL and CRON_SECRET,
+# then uncomment the two schedule lines. `workflow_dispatch` is left on so the
+# sweep can be triggered by hand to test those secrets before re-enabling it.
 on:
-  schedule:
-    # Every 10 minutes. GitHub queues scheduled runs and can be several minutes
-    # late under load; for a status board that is fine.
-    - cron: "*/10 * * * *"
+  # schedule:
+  #   - cron: "*/10 * * * *"
   workflow_dispatch:
 
 # A late run must never pile up on a still-running one.
