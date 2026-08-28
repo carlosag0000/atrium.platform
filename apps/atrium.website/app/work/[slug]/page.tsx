@@ -72,6 +72,7 @@ export function CaseHero({ study }: { study: CaseStudy }) {
         <div className="relative mt-16 px-[var(--gutter)] md:mt-20">
           <div className="mx-auto max-w-[var(--container-max)]">
             <FeatureFilm
+              autoplay
               poster={filmPoster(study.films.feature)}
               src={study.films.feature}
               title={`${study.client} — brand film`}

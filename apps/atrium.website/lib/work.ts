@@ -482,12 +482,12 @@ export const caseStudies: CaseStudy[] = [
       'A premium content ecosystem that strengthened brand perception, increased content versatility, and showcased the unique character of Hotel Kansas City.',
     coverImageId: 'https://cdn.atriumad.com/clients/HOKC/films/web/hotel-spaces-highlight.jpg',
     films: {
-      // The ballroom piece opens the page: it is the property, and the reason
-      // the campaign existed was to sell the property as a destination.
-      feature: 'https://cdn.atriumad.com/clients/HOKC/films/web/hotel-spaces-highlight.mp4',
+      // The guest films lead: the campaign sold the stay as an experience, so
+      // the city-view piece opens and the room piece follows it.
+      feature: 'https://cdn.atriumad.com/clients/HOKC/films/web/guest-hotel-city.mp4',
       films: [
         'https://cdn.atriumad.com/clients/HOKC/films/web/guest-hotel-room.mp4',
-        'https://cdn.atriumad.com/clients/HOKC/films/web/guest-hotel-city.mp4',
+        'https://cdn.atriumad.com/clients/HOKC/films/web/hotel-spaces-highlight.mp4',
       ],
       interviews: [
         { src: 'https://cdn.atriumad.com/clients/HOKC/films/web/hotel-christopher-speach.mp4', name: 'Christopher' },

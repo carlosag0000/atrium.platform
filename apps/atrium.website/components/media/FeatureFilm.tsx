@@ -19,6 +19,10 @@ type Props = {
    *  or restyled, so this stays open for them. */
   captionsSrc?: string | undefined
   captionsLabel?: string | undefined
+  /** The hero piece of a film-led study starts on its own, muted and looping,
+   *  so the page opens on moving picture instead of a still. Sound stays the
+   *  viewer's call: the controls are there from the first frame. */
+  autoplay?: boolean
 }
 
 // A reel is decoration and plays itself, muted, the moment it scrolls into
@@ -27,6 +31,11 @@ type Props = {
 // to be asked. Nothing is fetched until the viewer presses play — the poster
 // carries the frame — and when it starts it starts with sound, with controls,
 // because someone who pressed play wants to watch it, not glance at it.
+//
+// `autoplay` is the one exception: the film that opens a study runs on load,
+// muted and looping, because a page that opens on a frozen frame reads as a
+// page that failed to load. Muted is not a preference there, it is what every
+// autoplay policy allows.
 export default function FeatureFilm({
   src,
   poster,
@@ -35,9 +44,10 @@ export default function FeatureFilm({
   className,
   captionsSrc,
   captionsLabel,
+  autoplay = false,
 }: Props) {
   const ref = useRef<HTMLVideoElement>(null)
-  const [started, setStarted] = useState(false)
+  const [started, setStarted] = useState(autoplay)
 
   const start = () => {
     setStarted(true)
@@ -61,15 +71,18 @@ export default function FeatureFilm({
       className={`relative isolate overflow-hidden rounded-card bg-dark ${className ?? ''}`}
       style={{ aspectRatio: ratio }}
     >
-      {/* biome-ignore lint/a11y/useMediaCaption: the interviews carry subtitles
-          burned into the picture and the ambience films have no dialogue to
-          caption; `captionsSrc` renders a real track for any film that gets one. */}
+      {/* No caption track by default: the interviews carry subtitles burned into
+          the picture and the ambience films have no dialogue to caption.
+          `captionsSrc` renders a real track for any film that gets one. */}
       <video
+        autoPlay={autoplay}
         className="h-full w-full object-cover"
         controls={started}
+        loop={autoplay}
+        muted={autoplay}
         playsInline
         poster={poster}
-        preload="none"
+        preload={autoplay ? 'metadata' : 'none'}
         ref={ref}
         src={started ? src : undefined}
       >
