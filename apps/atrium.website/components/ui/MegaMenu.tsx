@@ -107,19 +107,30 @@ export default function MegaMenu({
       <button
         aria-controls="mega-menu-test"
         aria-expanded={open}
-        className="flex items-center gap-1 rounded-md text-sm transition-opacity hover:opacity-70 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[color:var(--color-green-fill)]"
+        className="flex items-center gap-2 rounded-md text-sm transition-opacity hover:opacity-70 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[color:var(--color-green-fill)]"
         onClick={() => setOpen((value) => !value)}
         ref={triggerRef}
         style={textColor ? { color: textColor } : undefined}
         type="button"
       >
         {label}
-        <span
+        {/* Drawn rather than typed. The ▾ glyph this replaces rendered at
+            whatever weight the loaded face happened to give it — hairline in
+            Inter Tight, and small enough that it read as a smudge next to the
+            label. A stroked path holds its weight at 12px and rotates about
+            its own centre when the panel opens. */}
+        <svg
           aria-hidden="true"
-          className={`text-[0.7rem] transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
+          className={`h-3 w-3 shrink-0 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
+          fill="none"
+          stroke="currentColor"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1.75"
+          viewBox="0 0 12 12"
         >
-          ▾
-        </span>
+          <path d="M2.5 4.5 6 8l3.5-3.5" />
+        </svg>
       </button>
 
       {/* Scrim. Same treatment as the Navbar's own menu: it sits behind the
