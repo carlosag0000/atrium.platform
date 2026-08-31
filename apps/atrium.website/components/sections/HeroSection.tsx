@@ -71,7 +71,13 @@ export default function HeroSection() {
           </div>
         </div>
 
-        <div className="hidden lg:block lg:w-1/2">
+        {/* The mirror of the copy column's left padding: the same
+            (100cqw - container-max) / 2 the page container leaves on its
+            right, so the reels stop on the line every section below them
+            stops on. Below the container width the term is negative and the
+            max() floors it at zero, leaving the gallery bleeding to the
+            viewport edge exactly as it does today. */}
+        <div className="hidden lg:block lg:w-1/2 lg:pr-[max(0px,calc((100cqw-var(--container-max))/2))]">
           <HeroPerspectiveGallery tiles={heroGalleryTiles} />
         </div>
       </div>
