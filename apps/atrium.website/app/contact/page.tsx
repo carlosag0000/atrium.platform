@@ -20,9 +20,10 @@ const briefItems = [
   'What you need to improve in the next 90 days',
 ]
 
-export default async function ContactPage({ searchParams }: { searchParams: Promise<{ service?: string }> }) {
-  const { service: serviceSlug } = await searchParams
-  const selectedService = serviceSlug ? getService(serviceSlug) : undefined
+// Static export: there is no server to read ?service=, so the page renders the
+// general version for every visitor.
+export default function ContactPage() {
+  const selectedService = undefined as ReturnType<typeof getService>
   const subject = encodeURIComponent(selectedService ? `Atrium diagnostic — ${selectedService.name}` : 'New Atrium project')
   const emailHref = `mailto:${email}?subject=${subject}`
 

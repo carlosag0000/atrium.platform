@@ -34,3 +34,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [...staticEntries, ...serviceEntries, ...caseStudyEntries]
 }
+
+export const dynamic = "force-static"

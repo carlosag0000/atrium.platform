@@ -25,3 +25,5 @@ export default function Icon() {
     { ...size }
   )
 }
+
+export const dynamic = "force-static"

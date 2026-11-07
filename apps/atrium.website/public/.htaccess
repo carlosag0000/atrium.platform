@@ -1,0 +1,48 @@
+# Hostinger (Apache / LiteSpeed) rules for the static export of www.atriumad.com.
+# Pages are exported as about.html, work/taha.html, ... and served at /about, /work/taha
+# (no trailing slash), matching the URLs the site had on Vercel.
+Options -Indexes -MultiViews
+DirectoryIndex index.html
+DirectorySlash Off
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Force HTTPS and the www host (the canonical address, as on Vercel).
+  RewriteCond %{HTTPS} off [OR]
+  RewriteCond %{HTTP_HOST} ^atriumad\.com$ [NC]
+  RewriteRule ^ https://www.atriumad.com%{REQUEST_URI} [L,R=301]
+
+  # /process was a public URL before the page was removed.
+  RewriteRule ^process/?$ /services [L,R=301]
+
+  # Drop a trailing slash: /about/ -> /about (not the home page).
+  RewriteCond %{REQUEST_URI} ^/(.+)/$
+  RewriteRule ^ /%1 [L,R=301]
+
+  # Serve /about from about.html.
+  RewriteCond %{DOCUMENT_ROOT}/$1.html -f
+  RewriteRule ^(.+)$ /$1.html [L]
+</IfModule>
+
+ErrorDocument 404 /404.html
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/html "access plus 0 seconds"
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType image/png "access plus 1 month"
+  ExpiresByType image/jpeg "access plus 1 month"
+  ExpiresByType image/webp "access plus 1 month"
+  ExpiresByType image/svg+xml "access plus 1 month"
+  ExpiresByType font/woff2 "access plus 1 year"
+</IfModule>
+
+# Extensionless generated images (app/icon, app/opengraph-image)
+<Files "icon">
+  ForceType image/png
+</Files>
+<Files "opengraph-image">
+  ForceType image/png
+</Files>
