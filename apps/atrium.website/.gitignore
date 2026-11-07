@@ -42,3 +42,6 @@ yarn-error.log*
 next-env.d.ts
 .superpowers/
 docs/superpowers
+
+# Careers API secrets live on the server only
+public/careers-api/config.php

@@ -1,0 +1,2 @@
+# CVs are private: only admin.php?action=cv (behind the password) may read them.
+Require all denied

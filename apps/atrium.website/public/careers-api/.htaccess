@@ -1,0 +1,7 @@
+# Careers API: only apply.php and admin.php are reachable.
+Options -Indexes
+Header always set X-Robots-Tag "noindex, nofollow"
+
+<FilesMatch "^(config|config\.example|lib)\.php$">
+  Require all denied
+</FilesMatch>
