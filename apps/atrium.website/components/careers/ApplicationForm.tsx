@@ -238,7 +238,8 @@ export default function ApplicationForm({ job }: { job: string }) {
         <p className="type-eyebrow mb-4" style={{ color: 'var(--mint-400)' }}>
           Aplicación enviada
         </p>
-        <h3 className="type-card-title m-0">¡Gracias{v.preferred || v.name ? `, ${(v.preferred || v.name || '').split(' ')[0]}` : ''}!</h3>
+        <h3 className="type-card-title m-0" style={{ color: 'var(--cloud-300)' }}>
+          ¡Gracias{v.preferred || v.name ? `, ${(v.preferred || v.name || '').split(' ')[0]}` : ''}!</h3>
         <p className="type-body mt-4 max-w-xl opacity-80">
           Recibimos tu aplicación. La revisamos con calma y, si tu perfil encaja, te escribimos por email o WhatsApp para coordinar una entrevista.
         </p>
