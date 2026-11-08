@@ -1,4 +1,4 @@
-# Careers API: only apply.php and admin.php are reachable.
+# Old careers endpoint: apply.php forwards to /api/apply.php. CVs are stored in uploads/ (denied).
 Options -Indexes
 Header always set X-Robots-Tag "noindex, nofollow"
 

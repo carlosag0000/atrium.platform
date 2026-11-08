@@ -1,0 +1,7 @@
+# Website backend. Only the endpoint scripts are reachable.
+Options -Indexes
+Header always set X-Robots-Tag "noindex, nofollow"
+
+<FilesMatch "^(config|config\.example|lib|stats)\.php$">
+  Require all denied
+</FilesMatch>

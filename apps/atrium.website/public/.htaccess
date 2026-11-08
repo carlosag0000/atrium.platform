@@ -16,6 +16,9 @@ DirectorySlash Off
   # /process was a public URL before the page was removed.
   RewriteRule ^process/?$ /services [L,R=301]
 
+  # The careers admin moved into the website dashboard.
+  RewriteRule ^careers/admin/?$ /admin#careers [L,R=301,NE]
+
   # Drop a trailing slash: /about/ -> /about (not the home page).
   RewriteCond %{REQUEST_URI} ^/(.+)/$
   RewriteRule ^ /%1 [L,R=301]

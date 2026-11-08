@@ -1,11 +1,12 @@
 'use client'
 
 import { type FormEvent, type ReactNode, useRef, useState } from 'react'
+import { ids } from '@/lib/analytics'
 
-// Multi-step application for the Account Manager listing. Posts to /careers-api/apply.php
+// Multi-step application for the Account Manager listing. Posts to /api/apply.php
 // (PHP on Hostinger). Each answer is sent with its question so the admin view can show it as-is.
 
-const API = '/careers-api/apply.php'
+const API = '/api/apply.php'
 
 const TOOLS = [
   'Notion',
@@ -217,6 +218,9 @@ export default function ApplicationForm({ job }: { job: string }) {
     body.set('website', v.website ?? '')
     body.set('answers', JSON.stringify(answers))
     if (cv) body.set('cv', cv)
+    const tracking = ids()
+    body.set('v', tracking.v)
+    body.set('s', tracking.s)
     setSending(true)
     setError('')
     try {

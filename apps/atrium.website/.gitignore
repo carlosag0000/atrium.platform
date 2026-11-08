@@ -45,3 +45,4 @@ docs/superpowers
 
 # Careers API secrets live on the server only
 public/careers-api/config.php
+public/api/config.php

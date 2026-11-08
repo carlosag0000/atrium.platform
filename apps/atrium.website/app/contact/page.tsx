@@ -1,9 +1,10 @@
 import type { Metadata } from 'next'
+import ContactForm from '@/components/contact/ContactForm'
 import PageHero from '@/components/pages/PageHero'
 import CTABanner from '@/components/sections/CTABanner'
 import Eyebrow from '@/components/ui/Eyebrow'
 import { CAL_LINKS } from '@/lib/cal'
-import { getService } from '@/lib/services'
+import { type getService, services } from '@/lib/services'
 
 export const metadata: Metadata = {
   title: 'Contact Atrium — Book a Hospitality Marketing Diagnostic',
@@ -84,6 +85,19 @@ export default function ContactPage() {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section id="message" className="px-6 pb-20 md:px-12 md:pb-28" style={{ background: 'var(--surface-page)' }}>
+        <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[0.85fr_1.15fr]">
+          <div>
+            <Eyebrow className="mb-5">Send a message</Eyebrow>
+            <h2 className="type-section-title">Prefer to write it down?</h2>
+            <p className="type-body mt-6 max-w-md" style={{ color: 'var(--text-muted)' }}>
+              Share the basics here and we&apos;ll reply within one business day with next steps, or a time to talk.
+            </p>
+          </div>
+          <ContactForm interests={services.map((s) => s.name)} />
         </div>
       </section>
 
