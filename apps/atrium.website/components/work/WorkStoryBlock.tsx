@@ -3,6 +3,7 @@ import CldImage from '@/components/media/CldImage'
 import TransitionLink from '@/components/ui/TransitionLink'
 import type { CaseStudy } from '@/lib/work'
 import type { WorkStory } from '@/lib/work-stories'
+import E from '@/components/cms/Editable'
 
 /** How the engagement ran, told beside four of the pieces it produced.
  *  Alternating grounds and sides keep consecutive stories from reading as one
@@ -27,13 +28,13 @@ export default function WorkStoryBlock({
       <div className="mx-auto grid max-w-[var(--container-max)] gap-12 lg:grid-cols-12 lg:gap-16">
         <div className={`lg:col-span-5 ${dark ? 'lg:order-2' : ''}`}>
           <Eyebrow className="mb-5" tone={dark ? 'on-dark' : 'default'}>
-            {story.eyebrow}
+            <E>{story.eyebrow}</E>
           </Eyebrow>
 
           <h3
             className={`m-0 max-w-[18ch] text-[clamp(1.9rem,3vw,2.6rem)] font-normal leading-[1.12] tracking-[-0.02em] ${dark ? 'text-cream' : 'text-charcoal'}`}
           >
-            {story.headline}
+            <E>{story.headline}</E>
           </h3>
 
           {story.body.map((paragraph) => (
@@ -58,7 +59,7 @@ export default function WorkStoryBlock({
                 <p
                   className={`mt-3 text-[0.8125rem] leading-relaxed ${dark ? 'text-cream/[0.7]' : 'text-muted'}`}
                 >
-                  {metric.label}
+                  <E>{metric.label}</E>
                 </p>
               </div>
             ))}

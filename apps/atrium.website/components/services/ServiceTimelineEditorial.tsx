@@ -2,6 +2,7 @@
 import { useEffect, useRef } from 'react'
 import { gsap } from '@/lib/gsap'
 import type { TimelineStep } from '@/lib/services'
+import E from '@/components/cms/Editable'
 
 export default function ServiceTimelineEditorial({ steps }: { steps: TimelineStep[] }) {
   const listRef = useRef<HTMLOListElement>(null)
@@ -94,13 +95,13 @@ export default function ServiceTimelineEditorial({ steps }: { steps: TimelineSte
                   className="type-card-title m-0 mb-[0.55rem]"
                   style={{ color: 'var(--text-strong)' }}
                 >
-                  {step.title}
+                  <E>{step.title}</E>
                 </h3>
                 <p
                   className="type-body m-0 max-w-[32rem]"
                   style={{ color: 'var(--text-muted)' }}
                 >
-                  {step.body}
+                  <E>{step.body}</E>
                 </p>
               </div>
             </li>

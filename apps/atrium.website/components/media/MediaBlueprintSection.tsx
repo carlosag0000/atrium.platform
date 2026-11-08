@@ -5,6 +5,7 @@ import type { MediaBlueprint as MediaBlueprintItem } from '@/lib/media-blueprint
 
 import MediaBlueprint from './MediaBlueprint'
 import styles from './MediaBlueprint.module.css'
+import E from '@/components/cms/Editable'
 
 type Props = {
   eyebrow?: string
@@ -33,9 +34,9 @@ export default function MediaBlueprintSection({
       <div className={styles.sectionInner}>
         {(eyebrow || headline || body) && (
           <header className={styles.sectionHeader}>
-            {eyebrow && <Eyebrow tone={tone === 'dark' ? 'onDark' : 'default'}>{eyebrow}</Eyebrow>}
-            {headline && <h2 id={headingId} className={styles.sectionTitle}>{headline}</h2>}
-            {body && <p className={styles.sectionBody}>{body}</p>}
+            {eyebrow && <Eyebrow tone={tone === 'dark' ? 'onDark' : 'default'}><E>{eyebrow}</E></Eyebrow>}
+            {headline && <h2 id={headingId} className={styles.sectionTitle}><E>{headline}</E></h2>}
+            {body && <p className={styles.sectionBody}><E>{body}</E></p>}
           </header>
         )}
 

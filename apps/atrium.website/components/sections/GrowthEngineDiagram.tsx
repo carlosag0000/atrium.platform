@@ -1,5 +1,6 @@
 import { Eyebrow } from '@atrium/ui'
 import Image from 'next/image'
+import E from '@/components/cms/Editable'
 
 // ─── Atrium Growth Engine (doc vs.md §2.1 / §5 / §7.5) ──────────────────────
 // Generate → Convert → Retain, read as three cards rather than a rail. Each
@@ -132,7 +133,7 @@ export default function GrowthEngineDiagram() {
                       <p
                         className={`mt-3 text-[0.9375rem] leading-relaxed ${stage.onFillSoft}`}
                       >
-                        {stage.body}
+                        <E>{stage.body}</E>
                       </p>
                     </div>
                   </div>

@@ -4,6 +4,7 @@ import type { ReactNode } from 'react'
 import { useEffect, useRef } from 'react'
 import TransitionButton from '@/components/ui/TransitionButton'
 import { gsap } from '@/lib/gsap'
+import E from '@/components/cms/Editable'
 
 export type ProcessStep = { eyebrow: string; title: string; body: string }
 
@@ -56,15 +57,15 @@ export default function DarkProcess({ eyebrow, headline, body, cta, ctaHref, ste
           <div className="lg:col-span-7">
             {eyebrow && (
               <Eyebrow className="mb-6" tone="on-dark">
-                {eyebrow}
+                <E>{eyebrow}</E>
               </Eyebrow>
             )}
             <h2 className="max-w-[16ch] text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-cream">
-              {headline}
+              <E>{headline}</E>
             </h2>
           </div>
           <div className="lg:col-span-5">
-            <p className="m-0 max-w-md text-base leading-relaxed text-cream/[0.72]">{body}</p>
+            <p className="m-0 max-w-md text-base leading-relaxed text-cream/[0.72]"><E>{body}</E></p>
             {cta && ctaHref && (
               <div className="mt-6">
                 <TransitionButton href={ctaHref} variant="outline">
@@ -98,12 +99,12 @@ export default function DarkProcess({ eyebrow, headline, body, cta, ctaHref, ste
               </p>
 
               <Eyebrow as="p" className="mt-6" tone="on-dark">
-                {step.eyebrow}
+                <E>{step.eyebrow}</E>
               </Eyebrow>
               <h3 className="mt-4 max-w-[16ch] text-[clamp(1.35rem,2vw,1.8rem)] font-normal leading-[1.15] text-cream">
-                {step.title}
+                <E>{step.title}</E>
               </h3>
-              <p className="m-0 mt-4 max-w-sm text-base leading-relaxed text-cream/[0.7]">{step.body}</p>
+              <p className="m-0 mt-4 max-w-sm text-base leading-relaxed text-cream/[0.7]"><E>{step.body}</E></p>
             </article>
           ))}
         </div>

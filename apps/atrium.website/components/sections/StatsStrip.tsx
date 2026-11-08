@@ -2,6 +2,7 @@
 import { Eyebrow, NumberReel } from '@atrium/ui'
 import { useEffect, useRef } from 'react'
 import { gsap } from '@/lib/gsap'
+import E from '@/components/cms/Editable'
 
 export type Stat = { number: string; label: string }
 
@@ -53,7 +54,7 @@ export default function StatsStrip({ stats }: Props) {
                 <NumberReel value={stat.number} />
               </p>
               <p className="stat-label m-0 max-w-sm text-base leading-relaxed text-cream/70">
-                {stat.label}
+                <E>{stat.label}</E>
               </p>
             </article>
           ))}

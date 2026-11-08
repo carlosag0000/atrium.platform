@@ -1,5 +1,6 @@
 import { Eyebrow } from '@atrium/ui'
 import type { Service } from '@/lib/services'
+import E from '@/components/cms/Editable'
 
 export default function ServiceDeliverables({ svc }: { svc: Service }) {
   return (
@@ -22,8 +23,8 @@ export default function ServiceDeliverables({ svc }: { svc: Service }) {
               className="grid gap-5 border-b border-line py-8 sm:grid-cols-[4rem_minmax(0,0.7fr)_minmax(0,1.3fr)] sm:gap-8 md:py-10"
             >
               <p className="m-0 text-[0.7rem] uppercase tracking-[0.14em] text-muted">{String(index + 1).padStart(2, '0')}</p>
-              <h3 className="text-[clamp(1.35rem,2vw,1.8rem)] leading-[1.15] text-charcoal">{perk.title}</h3>
-              <p className="m-0 max-w-xl text-base leading-relaxed text-muted">{perk.description}</p>
+              <h3 className="text-[clamp(1.35rem,2vw,1.8rem)] leading-[1.15] text-charcoal"><E>{perk.title}</E></h3>
+              <p className="m-0 max-w-xl text-base leading-relaxed text-muted"><E>{perk.description}</E></p>
             </article>
           ))}
         </div>

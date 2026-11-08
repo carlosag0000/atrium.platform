@@ -1,6 +1,7 @@
 import { Eyebrow } from '@atrium/ui'
 import TransitionLink from '@/components/ui/TransitionLink'
 import type { Service } from '@/lib/services'
+import E from '@/components/cms/Editable'
 
 const modelByCategory = {
   'Generate Demand': {
@@ -29,7 +30,7 @@ export default function ServiceEngagementModel({ svc }: { svc: Service }) {
         <div className="min-w-0">
           <Eyebrow className="mb-6">Related engagement model</Eyebrow>
           <p className="m-0 max-w-full font-serif font-normal italic leading-[0.86] tracking-[-0.055em] text-charcoal text-[clamp(3.5rem,5.5vw,6.75rem)]">
-            {model.name}
+            <E>{model.name}</E>
           </p>
         </div>
         <div className="min-w-0">

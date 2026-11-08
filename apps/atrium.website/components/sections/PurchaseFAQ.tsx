@@ -1,4 +1,5 @@
 import { Eyebrow } from '@atrium/ui'
+import E from '@/components/cms/Editable'
 
 type FAQItem = {
   question: string
@@ -78,12 +79,12 @@ export default function PurchaseFAQ({
     <section className={`px-[var(--gutter)] py-24 md:py-36 ${dark ? 'bg-dark' : 'bg-cream'}`}>
       <div className="mx-auto grid max-w-[var(--container-max)] gap-14 lg:grid-cols-12 lg:gap-20">
         <div className="self-start lg:sticky lg:top-32 lg:col-span-4">
-          <Eyebrow tone={dark ? 'on-dark' : 'default'} className="mb-6">Before we start</Eyebrow>
+          <Eyebrow tone={dark ? 'on-dark' : 'default'} className="mb-6"><E>Before we start</E></Eyebrow>
           <h2 className={`m-0 max-w-[12ch] text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] ${dark ? 'text-cream' : 'text-charcoal'}`}>
-            {heading}
+            <E>{heading}</E>
           </h2>
           <p className={`mt-7 max-w-sm text-base leading-relaxed ${dark ? 'text-cream/70' : 'text-muted'}`}>
-            {intro}
+            <E>{intro}</E>
           </p>
         </div>
 
@@ -98,15 +99,15 @@ export default function PurchaseFAQ({
                   {String(index + 1).padStart(2, '0')}
                 </p>
                 <p className={`m-0 sm:mt-3 text-[0.7rem] uppercase tracking-[0.14em] ${dark ? 'text-cream/70' : 'text-muted'}`}>
-                  {item.signal}
+                  <E>{item.signal}</E>
                 </p>
               </div>
               <div>
                 <h3 className={`max-w-[24ch] text-[clamp(1.35rem,2vw,1.8rem)] leading-[1.15] ${dark ? 'text-cream' : 'text-charcoal'}`}>
-                  {item.question}
+                  <E>{item.question}</E>
                 </h3>
                 <p className={`mt-4 max-w-2xl text-base leading-relaxed ${dark ? 'text-cream/70' : 'text-muted'}`}>
-                  {item.answer}
+                  <E>{item.answer}</E>
                 </p>
               </div>
             </article>

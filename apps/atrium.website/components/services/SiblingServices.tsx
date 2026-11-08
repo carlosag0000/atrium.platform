@@ -2,6 +2,7 @@ import Eyebrow from '@/components/ui/Eyebrow'
 import TransitionLink from '@/components/ui/TransitionLink'
 import { getSiblingServices } from '@/lib/services'
 import { CATEGORY_COLOR } from './utils'
+import E from '@/components/cms/Editable'
 
 export default function SiblingServices({ current }: { current: string }) {
   const siblings = getSiblingServices(current, 3)
@@ -21,10 +22,10 @@ export default function SiblingServices({ current }: { current: string }) {
                 {svc.category}
               </span>
               <h3 className="type-card-title" style={{ color: 'var(--text-strong)' }}>
-                {svc.name}
+                <E>{svc.name}</E>
               </h3>
               <p className="type-caption flex-1" style={{ color: 'var(--text-strong)', opacity: 0.7 }}>
-                {svc.hero.body}
+                <E>{svc.hero.body}</E>
               </p>
               <span className="type-caption " style={{ color: 'var(--teal-700)' }}>
                 Learn more &rarr;

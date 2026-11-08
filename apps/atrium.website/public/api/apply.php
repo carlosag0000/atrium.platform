@@ -62,7 +62,7 @@ notify('application', 'New job application: ' . $name, implode("\n", [
     'Phone: ' . ($phone ?: '-'),
     'CV attached: ' . ($cvFile ? 'yes' : 'no'),
     '',
-    'Open in the dashboard: https://www.atriumad.com/admin#careers/' . $id,
+    'Open in the dashboard: https://www.atriumad.com/admin#forms/careers/' . $id,
 ]));
 
 json_out(200, ['ok' => true]);

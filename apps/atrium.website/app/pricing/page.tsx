@@ -5,6 +5,7 @@ import PurchaseFAQ from '@/components/sections/PurchaseFAQ'
 import Eyebrow from '@/components/ui/Eyebrow'
 import { CAL_LINKS } from '@/lib/cal'
 import { CTA } from '@/lib/cta'
+import E from '@/components/cms/Editable'
 
 export const metadata: Metadata = {
   title: 'Atrium Pricing — Hospitality Marketing Engagement Models',
@@ -107,10 +108,10 @@ function PricingOffers() {
                   Model {String(index + 1).padStart(2, '0')}
                 </p>
                 <h2 className="type-card-title" style={{ color: index === 1 ? 'var(--text-on-dark)' : 'var(--text-strong)' }}>
-                  {tier.name}
+                  <E>{tier.name}</E>
                 </h2>
                 <p className="type-lead mt-6" style={{ color: index === 1 ? 'var(--text-on-dark)' : 'var(--text-body)' }}>
-                  {tier.tagline}
+                  <E>{tier.tagline}</E>
                 </p>
                 <p className="type-body mt-5" style={{ color: index === 1 ? 'var(--text-on-dark)' : 'var(--text-muted)', opacity: index === 1 ? 0.68 : 1 }}>
                   {tier.fit}
@@ -175,10 +176,10 @@ function ScopeSection() {
               </p>
               <div>
                 <h3 className="type-card-title" style={{ color: 'var(--text-on-dark)' }}>
-                  {principle.title}
+                  <E>{principle.title}</E>
                 </h3>
                 <p className="type-body mt-5 max-w-2xl" style={{ color: 'var(--text-on-dark)', opacity: 0.68 }}>
-                  {principle.body}
+                  <E>{principle.body}</E>
                 </p>
               </div>
             </article>

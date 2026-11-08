@@ -7,7 +7,7 @@ import { Button, C, Card, Empty, field, fieldStyle, Pill, Spinner } from './ui'
 
 // Contact-form messages (leads) and job applications share this list/detail layout.
 
-type ListRow = { id: number; created_at: string; name: string; email: string; status: string; sub: string; preview?: string | undefined; flag?: string | undefined }
+export type ListRow = { id: number; created_at: string; name: string; email: string; status: string; sub: string; preview?: string | undefined; flag?: string | undefined }
 
 export const INBOX_COLORS: Record<string, string> = {
   new: '#b8e89a',
@@ -27,14 +27,14 @@ export const CAREER_COLORS: Record<string, string> = {
   contratado: '#8fe6c2',
 }
 
-function Layout({
+export function Layout({
   title,
   statuses,
   colors,
   rows,
   selected,
   onSelect,
-  exportAction,
+  exportHref,
   extra,
   detail,
 }: {
@@ -44,7 +44,7 @@ function Layout({
   rows: ListRow[] | null
   selected: number | null
   onSelect: (id: number) => void
-  exportAction: string
+  exportHref: string
   extra?: ReactNode | undefined
   detail: ReactNode
 }) {
@@ -80,7 +80,7 @@ function Layout({
         <span className="flex-1" />
         <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search…" aria-label={`Search ${title}`} className={`${field} !w-44 !py-1.5`} style={fieldStyle} />
         {extra}
-        <Button variant="ghost" href={downloadUrl(exportAction)}>
+        <Button variant="ghost" href={exportHref}>
           Export CSV
         </Button>
       </div>
@@ -128,7 +128,7 @@ function Layout({
   )
 }
 
-function DetailShell({
+export function DetailShell({
   name,
   when,
   status,
@@ -247,7 +247,7 @@ function DetailShell({
   )
 }
 
-function Row({ label, value }: { label: string; value?: string | undefined | null }) {
+export function Row({ label, value }: { label: string; value?: string | undefined | null }) {
   if (!value) return null
   const link = /^https?:\/\//i.test(value)
   return (
@@ -268,7 +268,7 @@ function Row({ label, value }: { label: string; value?: string | undefined | nul
   )
 }
 
-function contactLinks(email: string, phone: string, subject: string) {
+export function contactLinks(email: string, phone: string, subject: string) {
   const digits = phone.replace(/[^\d]/g, '')
   return (
     <>
@@ -287,7 +287,7 @@ function contactLinks(email: string, phone: string, subject: string) {
   )
 }
 
-function useHashId(prefix: string, initial: number | null) {
+export function useHashId(prefix: string, initial: number | null) {
   const [id, setId] = useState<number | null>(initial)
   const select = useCallback(
     (n: number | null) => {
@@ -321,7 +321,7 @@ type Contact = {
 export function Inbox({ user, initialId, onChange, tz }: { user: User; initialId: number | null; onChange: () => void; tz?: string | undefined }) {
   const [rows, setRows] = useState<(ListRow & { business: string })[] | null>(null)
   const [statuses, setStatuses] = useState<string[]>([])
-  const [id, select] = useHashId('inbox', initialId)
+  const [id, select] = useHashId('forms/contact', initialId)
   const [item, setItem] = useState<Contact | null>(null)
   const [journey, setJourney] = useState<Journey | null>(null)
   const canEdit = user.role !== 'viewer'
@@ -362,7 +362,7 @@ export function Inbox({ user, initialId, onChange, tz }: { user: User; initialId
       rows={rows}
       selected={id}
       onSelect={select}
-      exportAction="inbox_export"
+      exportHref={downloadUrl('inbox_export')}
       detail={
         !id ? (
           <Card>
@@ -437,7 +437,7 @@ export const LISTINGS: [{ job: string; title: string; path: string }, ...{ job: 
 export function Careers({ user, initialId, onChange, tz }: { user: User; initialId: number | null; onChange: () => void; tz?: string | undefined }) {
   const [rows, setRows] = useState<ListRow[] | null>(null)
   const [statuses, setStatuses] = useState<string[]>([])
-  const [id, select] = useHashId('careers', initialId)
+  const [id, select] = useHashId('forms/careers', initialId)
   const [item, setItem] = useState<Application | null>(null)
   const [journey, setJourney] = useState<Journey | null>(null)
   const canEdit = user.role !== 'viewer'
@@ -486,7 +486,7 @@ export function Careers({ user, initialId, onChange, tz }: { user: User; initial
       rows={rows}
       selected={id}
       onSelect={select}
-      exportAction="apps_export"
+      exportHref={downloadUrl('apps_export')}
       extra={LISTINGS.map((l) => (
         <Button key={l.job} variant="ghost" href={l.path} target="_blank">
           Job listing ↗

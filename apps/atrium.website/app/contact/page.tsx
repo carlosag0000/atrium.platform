@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import E from '@/components/cms/Editable'
 import ContactForm from '@/components/contact/ContactForm'
 import PageHero from '@/components/pages/PageHero'
 import CTABanner from '@/components/sections/CTABanner'
@@ -47,17 +48,17 @@ export default function ContactPage() {
       <section className="px-6 py-20 md:px-12 md:py-28" style={{ background: 'var(--surface-page)' }}>
         <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[0.85fr_1.15fr]">
           <div>
-            <Eyebrow className="mb-5">Direct line</Eyebrow>
+            <Eyebrow className="mb-5"><E>Direct line</E></Eyebrow>
             {selectedService && (
               <p className="type-eyebrow mb-5 inline-flex rounded-full px-4 py-2" style={{ color: 'var(--teal-800)', background: 'var(--mint-300)' }}>
                 Interest selected: {selectedService.name}
               </p>
             )}
             <h2 className="type-section-title">
-              Start with the messy version.
+              <E>Start with the messy version.</E>
             </h2>
             <p className="type-body mt-6 max-w-md" style={{ color: 'var(--text-muted)' }}>
-              You do not need a perfect brief. Send the business context, the current pressure, and the outcome you want to make visible.
+              <E>You do not need a perfect brief. Send the business context, the current pressure, and the outcome you want to make visible.</E>
             </p>
             <a href={emailHref} className="type-card-title mt-8 inline-flex" style={{ color: 'var(--teal-800)' }}>
               {email}
@@ -66,22 +67,22 @@ export default function ContactPage() {
 
           <div className="grid gap-5 md:grid-cols-2">
             <div className="rounded-2xl border p-7" style={{ borderColor: 'rgba(7,47,52,0.10)', background: 'var(--surface-card)' }}>
-              <h3 className="type-card-title">Include this</h3>
+              <h3 className="type-card-title"><E>Include this</E></h3>
               <ul className="mt-6 space-y-4">
                 {briefItems.map((item) => (
                   <li key={item} className="type-caption" style={{ color: 'var(--text-muted)' }}>
-                    {item}
+                    <E>{item}</E>
                   </li>
                 ))}
               </ul>
             </div>
             <div className="rounded-2xl border p-7" style={{ borderColor: 'rgba(7,47,52,0.10)', background: 'var(--surface-card)' }}>
-              <h3 className="type-card-title">Good reasons to reach out</h3>
+              <h3 className="type-card-title"><E>Good reasons to reach out</E></h3>
               <div className="type-caption mt-6 space-y-4" style={{ color: 'var(--text-muted)' }}>
-                <p>Your content has activity but no clear system.</p>
-                <p>Your restaurant has more locations than your current process can support.</p>
-                <p>Your reporting does not explain what marketing actually changed.</p>
-                <p>Your team needs a partner that understands hospitality before the first meeting.</p>
+                <p><E>Your content has activity but no clear system.</E></p>
+                <p><E>Your restaurant has more locations than your current process can support.</E></p>
+                <p><E>Your reporting does not explain what marketing actually changed.</E></p>
+                <p><E>Your team needs a partner that understands hospitality before the first meeting.</E></p>
               </div>
             </div>
           </div>
@@ -91,10 +92,10 @@ export default function ContactPage() {
       <section id="message" className="px-6 pb-20 md:px-12 md:pb-28" style={{ background: 'var(--surface-page)' }}>
         <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[0.85fr_1.15fr]">
           <div>
-            <Eyebrow className="mb-5">Send a message</Eyebrow>
-            <h2 className="type-section-title">Prefer to write it down?</h2>
+            <Eyebrow className="mb-5"><E>Send a message</E></Eyebrow>
+            <h2 className="type-section-title"><E>Prefer to write it down?</E></h2>
             <p className="type-body mt-6 max-w-md" style={{ color: 'var(--text-muted)' }}>
-              Share the basics here and we&apos;ll reply within one business day with next steps, or a time to talk.
+              <E>Share the basics here and we&apos;ll reply within one business day with next steps, or a time to talk.</E>
             </p>
           </div>
           <ContactForm interests={services.map((s) => s.name)} />

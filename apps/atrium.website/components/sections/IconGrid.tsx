@@ -2,6 +2,7 @@
 import { useEffect, useRef } from 'react'
 import { gsap } from '@/lib/gsap'
 import type { IconItem } from '@/lib/services'
+import E from '@/components/cms/Editable'
 
 type Props = { items: IconItem[]; bg?: string }
 
@@ -48,10 +49,10 @@ export default function IconGrid({ items, bg }: Props) {
                 {String(i + 1).padStart(2, '0')}
               </div>
               <p className="type-card-title" style={{ color: 'var(--text-strong)' }}>
-                {item.title}
+                <E>{item.title}</E>
               </p>
               <p className="type-caption" style={{ color: 'var(--text-strong)', opacity: 0.72 }}>
-                {item.description}
+                <E>{item.description}</E>
               </p>
             </div>
           ))}

@@ -2,6 +2,7 @@
 
 import { Eyebrow } from '@atrium/ui'
 import TransitionLink from '@/components/ui/TransitionLink'
+import E from '@/components/cms/Editable'
 
 // Each path carries a `filled` count out of the twelve cells in the footprint
 // diagram below. The diagram is the section's whole visual idea: one room, a
@@ -95,7 +96,7 @@ export default function AudiencePaths() {
               <div className="mt-9 border-t border-line pt-6">
                 <Eyebrow>Path {String(index + 1).padStart(2, '0')}</Eyebrow>
                 <h3 className="mt-3 text-[clamp(1.35rem,2vw,1.8rem)] leading-[1.15] text-charcoal">
-                  {path.label}
+                  <E>{path.label}</E>
                 </h3>
                 <p className="mt-4 text-base leading-relaxed text-body">{path.tension}</p>
               </div>
@@ -106,7 +107,7 @@ export default function AudiencePaths() {
                   the turn in a sentence: it is the answer to the paragraph
                   above it, and at the same weight the two read as one block. */}
               <p className="mt-7 mb-8 font-serif text-[1.2rem] leading-[1.35] text-charcoal italic">
-                {path.outcome}
+                <E>{path.outcome}</E>
               </p>
 
               <span className="mt-auto flex items-center justify-between gap-3 border-t border-line pt-6 text-[0.875rem] text-charcoal">

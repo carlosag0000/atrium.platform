@@ -128,11 +128,11 @@ export default function Overview({ range, onNavigate }: { range: Range; onNaviga
           value={`${t.leads} · ${t.applications}`}
           sub={
             <span>
-              <button type="button" className="underline" onClick={() => onNavigate('inbox')}>
-                Inbox
+              <button type="button" className="underline" onClick={() => onNavigate('forms/contact')}>
+                Messages
               </button>{' '}
               ·{' '}
-              <button type="button" className="underline" onClick={() => onNavigate('careers')}>
+              <button type="button" className="underline" onClick={() => onNavigate('forms/careers')}>
                 Careers
               </button>
             </span>

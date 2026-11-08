@@ -3,6 +3,7 @@ import Link from 'next/link'
 import CTABanner from '@/components/sections/CTABanner'
 import Eyebrow from '@/components/ui/Eyebrow'
 import { CTA } from '@/lib/cta'
+import E from '@/components/cms/Editable'
 
 export const metadata: Metadata = {
   title: 'About Atrium — Hospitality Marketing Studio, Houston TX',
@@ -156,10 +157,10 @@ function PrinciplesSection() {
               </p>
               <div className="grid gap-5 md:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] md:gap-10">
                 <h3 className="type-card-title" style={{ color: 'var(--text-strong)' }}>
-                  {item.title}
+                  <E>{item.title}</E>
                 </h3>
                 <p className="type-body max-w-xl" style={{ color: 'var(--text-muted)' }}>
-                  {item.body}
+                  <E>{item.body}</E>
                 </p>
               </div>
             </article>
@@ -201,14 +202,14 @@ function TeamSection() {
               <div className="mt-7 grid gap-5 border-t pt-6 md:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]" style={{ borderColor: 'rgba(181,242,219,0.22)' }}>
                 <div>
                   <p className="type-eyebrow m-0" style={{ color: 'var(--mint-400)' }}>
-                    {member.label}
+                    <E>{member.label}</E>
                   </p>
                   <h3 className="type-card-title mt-4" style={{ color: 'var(--text-on-dark)' }}>
-                    {member.title}
+                    <E>{member.title}</E>
                   </h3>
                 </div>
                 <p className="type-body m-0" style={{ color: 'var(--text-on-dark)', opacity: 0.68 }}>
-                  {member.body}
+                  <E>{member.body}</E>
                 </p>
               </div>
             </article>
@@ -224,14 +225,14 @@ function TeamSection() {
             <div className="flex flex-col justify-between gap-12 lg:col-span-7">
               <div>
                 <p className="type-eyebrow m-0" style={{ color: 'var(--mint-400)' }}>
-                  {production.label}
+                  <E>{production.label}</E>
                 </p>
                 <h3 className="type-section-title mt-5" style={{ color: 'var(--text-on-dark)' }}>
-                  {production.title}
+                  <E>{production.title}</E>
                 </h3>
               </div>
               <p className="type-lead m-0 max-w-2xl" style={{ color: 'var(--text-on-dark)', opacity: 0.72 }}>
-                {production.body}
+                <E>{production.body}</E>
               </p>
             </div>
           </article>

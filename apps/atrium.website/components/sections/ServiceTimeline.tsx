@@ -2,6 +2,7 @@
 import { useEffect, useRef } from 'react'
 import { gsap } from '@/lib/gsap'
 import type { TimelineStep } from '@/lib/services'
+import E from '@/components/cms/Editable'
 
 type Props = { steps: TimelineStep[] }
 
@@ -46,10 +47,10 @@ export default function ServiceTimeline({ steps }: Props) {
               </span>
               <div className="flex flex-col gap-1.5">
                 <p className="m-0 text-[clamp(1.35rem,2vw,1.8rem)] leading-[1.15] text-cream">
-                  {step.title}
+                  <E>{step.title}</E>
                 </p>
                 <p className="m-0 text-[0.875rem] leading-relaxed text-cream/72">
-                  {step.body}
+                  <E>{step.body}</E>
                 </p>
               </div>
             </li>

@@ -3,6 +3,7 @@ import { ArrowUpRight } from 'lucide-react'
 import { CAL_URL, CONTACT_EMAIL } from '@/lib/cta'
 import { services } from '@/lib/services'
 import TransitionLink from './TransitionLink'
+import E from '@/components/cms/Editable'
 
 // ─── Footer ─────────────────────────────────────────────────────────────────
 // The long form of the mega menu: every service, grouped by the same three
@@ -47,7 +48,7 @@ export default function Footer() {
               <p className="m-0 text-[1.15rem] leading-none">Atrium</p>
             </div>
             <p className="m-0 max-w-none text-cream/70 text-sm leading-relaxed">
-              Smart creative for restaurants, hotels, and food brands. Hospitality is all we do.
+              <E global>Smart creative for restaurants, hotels, and food brands. Hospitality is all we do.</E>
             </p>
           </div>
 
@@ -59,14 +60,14 @@ export default function Footer() {
               target="_blank"
             >
               <span className="transition-transform duration-200 group-hover:translate-x-1">
-                Book a growth diagnostic
+                <E global>Book a growth diagnostic</E>
               </span>
               <ArrowUpRight aria-hidden="true" className="h-5 w-5 text-lime" strokeWidth={1.75} />
             </a>
             <a className={linkClass} href={`mailto:${CONTACT_EMAIL}`}>
               {CONTACT_EMAIL}
             </a>
-            <p className="m-0 text-lime text-sm leading-snug">Houston, TX</p>
+            <p className="m-0 text-lime text-sm leading-snug"><E global>Houston, TX</E></p>
           </div>
         </div>
 
@@ -115,7 +116,7 @@ export default function Footer() {
 
         <div className="flex flex-col items-start justify-between gap-3 border-cream/12 border-t pt-8 text-cream/45 text-xs md:flex-row md:items-center">
           <p className="m-0">© 2026 Atrium. All rights reserved.</p>
-          <p className="m-0">Built for the people who feed people.</p>
+          <p className="m-0"><E global>Built for the people who feed people.</E></p>
         </div>
       </div>
     </footer>

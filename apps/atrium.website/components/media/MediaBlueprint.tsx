@@ -8,6 +8,7 @@ import {
 } from '@/lib/media-blueprints'
 
 import styles from './MediaBlueprint.module.css'
+import E from '@/components/cms/Editable'
 
 type Props = {
   item: MediaBlueprintItem
@@ -28,7 +29,7 @@ function ProductionBrief({ item, hidden = false }: { item: MediaBlueprintItem; h
   return (
     <figcaption className={hidden ? styles.visuallyHidden : styles.brief}>
       <span>{blueprintLabel(item)}</span>
-      <strong>{item.title}</strong>
+      <strong><E>{item.title}</E></strong>
       <span>{item.direction}</span>
     </figcaption>
   )

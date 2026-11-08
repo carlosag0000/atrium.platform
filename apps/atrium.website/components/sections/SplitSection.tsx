@@ -4,6 +4,7 @@ import type { ReactNode } from 'react'
 import { useEffect, useRef } from 'react'
 import { OutlineCTA } from '@/components/ui/PillCTA'
 import { gsap } from '@/lib/gsap'
+import E from '@/components/cms/Editable'
 
 type Props = {
   eyebrow?: string
@@ -50,21 +51,21 @@ export default function SplitSection({ eyebrow, headline, body, cta, ctaHref, co
         className={`mx-auto flex max-w-[var(--container-max)] flex-col ${flip ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-16 md:gap-24`}
       >
         <div className="flex max-w-lg flex-1 flex-col gap-6" ref={textRef} style={{ opacity: 0 }}>
-          {eyebrow && <Eyebrow tone={isDark ? 'on-dark' : 'default'}>{eyebrow}</Eyebrow>}
+          {eyebrow && <Eyebrow tone={isDark ? 'on-dark' : 'default'}><E>{eyebrow}</E></Eyebrow>}
           {/* Was .type-section-title, an older and larger scale than the rest
               of the site had moved to, which is why this section read as a
               different size from its neighbours. */}
           <h2
             className={`text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] ${isDark ? 'text-cream' : 'text-charcoal'}`}
           >
-            {headline}
+            <E>{headline}</E>
           </h2>
           <p className={`text-base leading-relaxed ${isDark ? 'text-cream/[0.78]' : 'text-body'}`}>
-            {body}
+            <E>{body}</E>
           </p>
           <div className="mt-2">
             <OutlineCTA href={ctaHref} tone={isDark ? 'on-dark' : 'on-light'}>
-              {cta}
+              <E>{cta}</E>
             </OutlineCTA>
           </div>
         </div>

@@ -2,6 +2,7 @@ import { Button, Eyebrow } from '@atrium/ui'
 import type { ReactNode } from 'react'
 import TransitionButton from '@/components/ui/TransitionButton'
 import { CAL_CONFIG } from '@/lib/cal'
+import E from '@/components/cms/Editable'
 
 type HeroAction = {
   label: string
@@ -35,13 +36,13 @@ export default function PageHero({ eyebrow, title, body, actions, stats }: PageH
       <div className="mx-auto grid max-w-[var(--container-max)] gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(300px,0.6fr)] lg:items-end">
         <div>
           <Eyebrow className="mb-6" tone="on-dark">
-            {eyebrow}
+            <E>{eyebrow}</E>
           </Eyebrow>
           <h1 className="m-0 max-w-[18ch] text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-cream">
-            {title}
+            <E>{title}</E>
           </h1>
           <p className="mt-6 max-w-2xl text-[clamp(1.05rem,1.4vw,1.25rem)] leading-relaxed text-cream/[0.78]">
-            {body}
+            <E>{body}</E>
           </p>
           {actions && actions.length > 0 && (
             <div className="mt-8 flex flex-wrap gap-4">
@@ -54,7 +55,7 @@ export default function PageHero({ eyebrow, title, body, actions, stats }: PageH
                     key={action.href}
                     variant={action.variant ?? (index === 0 ? 'mint' : 'outlineLight')}
                   >
-                    {action.label}
+                    <E>{action.label}</E>
                   </Button>
                 ) : (
                   <TransitionButton
@@ -63,7 +64,7 @@ export default function PageHero({ eyebrow, title, body, actions, stats }: PageH
                     variant={action.variant ?? (index === 0 ? 'mint' : 'outlineLight')}
                     {...(action.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                   >
-                    {action.label}
+                    <E>{action.label}</E>
                   </TransitionButton>
                 ),
               )}
@@ -79,9 +80,9 @@ export default function PageHero({ eyebrow, title, body, actions, stats }: PageH
                 key={`${stat.value}-${stat.label}`}
               >
                 <p className="m-0 font-serif text-[clamp(2.75rem,4vw,4.5rem)] font-normal italic leading-none tracking-[-0.04em] text-lime">
-                  {stat.value}
+                  <E>{stat.value}</E>
                 </p>
-                <p className="m-0 text-[0.875rem] text-cream/[0.72] md:mt-4 lg:mt-0">{stat.label}</p>
+                <p className="m-0 text-[0.875rem] text-cream/[0.72] md:mt-4 lg:mt-0"><E>{stat.label}</E></p>
               </div>
             ))}
           </div>

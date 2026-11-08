@@ -4,6 +4,7 @@
 declare(strict_types=1);
 require __DIR__ . '/lib.php';
 require __DIR__ . '/stats.php';
+require __DIR__ . '/cms.php';
 
 const INBOX_STATUSES = ['new', 'contacted', 'qualified', 'won', 'lost', 'spam', 'archived'];
 const CAREER_STATUSES = ['nuevo', 'revisar', 'entrevista', 'finalista', 'descartado', 'contratado'];
@@ -99,7 +100,10 @@ switch ($action) {
     case 'me':
         $inboxNew = (int) db()->query("SELECT COUNT(*) FROM contacts WHERE status = 'new'")->fetchColumn();
         $careersNew = (int) db()->query("SELECT COUNT(*) FROM applications WHERE status = 'nuevo'")->fetchColumn();
-        json_out(200, ['user' => $me, 'badges' => ['inbox' => $inboxNew, 'careers' => $careersNew], 'timezone' => settings()['timezone']]);
+        $formsNew = (int) db()->query("SELECT COUNT(*) FROM form_submissions WHERE status = 'new'")->fetchColumn();
+        $drafts = (int) db()->query('SELECT COUNT(*) FROM cms_entries WHERE draft IS NOT NULL')->fetchColumn();
+        $broken = (int) db()->query('SELECT COUNT(*) FROM not_found')->fetchColumn();
+        json_out(200, ['user' => $me, 'badges' => ['inbox' => $inboxNew, 'careers' => $careersNew, 'forms' => $inboxNew + $careersNew + $formsNew, 'drafts' => $drafts, 'broken' => $broken], 'timezone' => settings()['timezone']]);
 
     case 'password':
         post_only($isPost);
@@ -172,6 +176,7 @@ switch ($action) {
         post_only($isPost);
         need('editor', $me);
         db()->prepare('DELETE FROM contacts WHERE id = ?')->execute([$id]);
+        log_activity($me, 'inbox.delete', "#$id");
         json_out(200, ['ok' => true]);
 
     case 'inbox_export':
@@ -217,6 +222,7 @@ switch ($action) {
             @unlink(CV_DIR . '/' . basename((string) $file));
         }
         db()->prepare('DELETE FROM applications WHERE id = ?')->execute([$id]);
+        log_activity($me, 'careers.delete', "#$id");
         json_out(200, ['ok' => true]);
 
     case 'cv':
@@ -270,6 +276,7 @@ switch ($action) {
         $temp = temp_password();
         db()->prepare('INSERT INTO users (email, name, role, pass_hash) VALUES (?, ?, ?, ?)')
             ->execute([$email, clean((string) ($b['name'] ?? ''), 120), $role, password_hash($temp, PASSWORD_DEFAULT)]);
+        log_activity($me, 'team.add', "$email ($role)");
         json_out(200, ['ok' => true, 'temp_password' => $temp]);
 
     case 'user_update':
@@ -288,6 +295,7 @@ switch ($action) {
                 json_out(409, ['error' => 'last_owner']);
             }
             db()->prepare('UPDATE users SET role = ? WHERE id = ?')->execute([$b['role'], $id]);
+            log_activity($me, 'team.role', "#$id → {$b['role']}");
         }
         if (!empty($b['reset'])) {
             $temp = temp_password();
@@ -302,7 +310,9 @@ switch ($action) {
         if ($id === (int) $me['id']) {
             json_out(409, ['error' => 'self']);
         }
+        $gone = one('SELECT email FROM users WHERE id = ?', [$id]);
         db()->prepare('DELETE FROM users WHERE id = ?')->execute([$id]);
+        log_activity($me, 'team.remove', (string) ($gone['email'] ?? $id));
         json_out(200, ['ok' => true]);
 
     // ── Settings ────────────────────────────────────────────────────────────
@@ -334,6 +344,7 @@ switch ($action) {
             }
             db()->prepare('REPLACE INTO settings (k, v) VALUES (?, ?)')->execute([$k, $v]);
         }
+        log_activity($me, 'settings.save');
         json_out(200, ['ok' => true]);
 
     case 'test_email':
@@ -342,6 +353,8 @@ switch ($action) {
         $sent = notify('test', 'Test notification from your website dashboard', "This is a test from https://www.atriumad.com/admin.\nNew contact messages and job applications will arrive like this.");
         json_out($sent ? 200 : 400, ['ok' => $sent]);
 }
+
+require __DIR__ . '/admin_cms.php';
 
 json_out(400, ['error' => 'action']);
 

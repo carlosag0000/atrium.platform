@@ -3,27 +3,33 @@
 import { type FormEvent, useCallback, useEffect, useMemo, useState } from 'react'
 import { setIgnored } from '@/lib/analytics'
 import { AuthError, get, post, type Range, type User } from './api'
-import { Careers, Inbox } from './Inbox'
+import Content from './Content'
+import Forms from './Forms'
 import { VisitorDrawer } from './Journey'
 import Overview from './Overview'
 import Realtime from './Realtime'
 import { EventsReport, PagesReport } from './Reports'
 import SettingsView from './SettingsView'
+import { ActivityView, AnnouncementView, MediaView, RedirectsView } from './Website'
 import { C, field, fieldStyle } from './ui'
 
 // The website dashboard at /admin: traffic, live visitors, pages, conversions, contact messages,
 // job applications, team and settings. Data comes from /api/admin.php (PHP + MySQL on Hostinger).
 
-type Section = 'overview' | 'realtime' | 'pages' | 'events' | 'inbox' | 'careers' | 'settings'
-type Me = { user: User; badges: { inbox: number; careers: number }; timezone: string }
+type Section = 'overview' | 'realtime' | 'pages' | 'events' | 'content' | 'announcement' | 'redirects' | 'media' | 'forms' | 'activity' | 'settings'
+type Me = { user: User; badges: { inbox: number; careers: number; forms: number; drafts: number; broken: number }; timezone: string }
 
-const NAV: { id: Section; label: string; icon: string; group: 'Analytics' | 'Forms' | 'Admin' }[] = [
+const NAV: { id: Section; label: string; icon: string; group: 'Analytics' | 'Website' | 'Admin' }[] = [
   { id: 'overview', label: 'Overview', icon: 'M3 13h4v8H3zM10 8h4v13h-4zM17 3h4v18h-4z', group: 'Analytics' },
   { id: 'realtime', label: 'Live', icon: 'M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0-6 0M5.6 5.6a9 9 0 0 0 0 12.8M18.4 5.6a9 9 0 0 1 0 12.8', group: 'Analytics' },
   { id: 'pages', label: 'Pages', icon: 'M6 3h9l4 4v14H6zM14 3v5h5', group: 'Analytics' },
   { id: 'events', label: 'Clicks & goals', icon: 'M12 3l2.7 5.6 6.3.9-4.5 4.4 1 6.1-5.5-2.9L6.5 20l1-6.1L3 9.5l6.3-.9z', group: 'Analytics' },
-  { id: 'inbox', label: 'Inbox', icon: 'M3 13l3-8h12l3 8v6H3zM3 13h5l1 2h6l1-2h5', group: 'Forms' },
-  { id: 'careers', label: 'Careers', icon: 'M4 8h16v12H4zM9 8V5h6v3', group: 'Forms' },
+  { id: 'content', label: 'Content', icon: 'M4 20h4L19 9l-4-4L4 16zM13.5 6.5l4 4', group: 'Website' },
+  { id: 'forms', label: 'Forms', icon: 'M5 3h14v18H5zM9 8h6M9 12h6M9 16h4', group: 'Website' },
+  { id: 'announcement', label: 'Announcement', icon: 'M3 11v2a1 1 0 0 0 1 1h2l5 4V6L6 10H4a1 1 0 0 0-1 1zM16 8a5 5 0 0 1 0 8', group: 'Website' },
+  { id: 'redirects', label: 'Redirects & 404s', icon: 'M4 7h11l-3-3M20 17H9l3 3', group: 'Website' },
+  { id: 'media', label: 'Media', icon: 'M4 5h16v14H4zM4 15l4-4 5 5 3-3 4 4M15 9.5a1.5 1.5 0 1 0 0-.01', group: 'Website' },
+  { id: 'activity', label: 'Activity log', icon: 'M12 7v5l3 2M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z', group: 'Admin' },
   { id: 'settings', label: 'Settings & team', icon: 'M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z', group: 'Admin' },
 ]
 
@@ -32,8 +38,12 @@ const TITLES: Record<Section, string> = {
   realtime: 'Live visitors',
   pages: 'Pages',
   events: 'Clicks & goals',
-  inbox: 'Inbox',
-  careers: 'Careers',
+  content: 'Content',
+  announcement: 'Announcement',
+  redirects: 'Redirects & broken links',
+  media: 'Media library',
+  forms: 'Forms',
+  activity: 'Activity log',
   settings: 'Settings & team',
 }
 
@@ -56,16 +66,26 @@ function presetRange(days: number, tz: string): Range {
   return { from, to }
 }
 
-function parseHash(): { section: Section; id: number | null } {
-  const [s, id] = window.location.hash.replace(/^#/, '').split('/')
+type Route = { section: Section; rest: string }
+
+function parseHash(): Route {
+  const raw = window.location.hash.replace(/^#/, '')
+  const i = raw.indexOf('/')
+  let s = i === -1 ? raw : raw.slice(0, i)
+  let rest = i === -1 ? '' : raw.slice(i + 1)
+  // Old links (emails sent before Forms existed).
+  if (s === 'inbox' || s === 'careers') {
+    rest = s === 'inbox' ? `contact${rest ? `/${rest}` : ''}` : `careers${rest ? `/${rest}` : ''}`
+    s = 'forms'
+  }
   const section = (NAV.some((n) => n.id === s) ? s : 'overview') as Section
-  return { section, id: id && /^\d+$/.test(id) ? Number(id) : null }
+  return { section, rest }
 }
 
 export default function Dashboard() {
   const [me, setMe] = useState<Me | null>(null)
   const [state, setState] = useState<'checking' | 'login' | 'in'>('checking')
-  const [route, setRoute] = useState<{ section: Section; id: number | null }>({ section: 'overview', id: null })
+  const [route, setRoute] = useState<Route>({ section: 'overview', rest: '' })
   const [preset, setPreset] = useState<string>('30d')
   const [custom, setCustom] = useState<Range | null>(null)
   const [visitor, setVisitor] = useState<string | null>(null)
@@ -129,7 +149,7 @@ export default function Dashboard() {
   if (state === 'login' || !me) return <Login onDone={loadMe} />
 
   const showRange = ['overview', 'pages', 'events'].includes(route.section)
-  const badge = (s: Section) => (s === 'inbox' ? me.badges.inbox : s === 'careers' ? me.badges.careers : 0)
+  const badge = (s: Section) => (s === 'forms' ? me.badges.forms : s === 'content' ? me.badges.drafts : s === 'redirects' ? me.badges.broken : 0)
 
   return (
     <div className="min-h-screen lg:grid lg:grid-cols-[240px_minmax(0,1fr)]" style={{ background: C.page }}>
@@ -148,7 +168,7 @@ export default function Dashboard() {
           </button>
         </div>
         <nav className="grid gap-5" aria-label="Dashboard">
-          {(['Analytics', 'Forms', 'Admin'] as const).map((g) => (
+          {(['Analytics', 'Website', 'Admin'] as const).map((g) => (
             <div key={g}>
               <div className="mb-1 px-3 text-[0.7rem] font-semibold tracking-[0.12em] uppercase opacity-50">{g}</div>
               <ul className="m-0 grid list-none gap-0.5 p-0">
@@ -249,8 +269,21 @@ export default function Dashboard() {
           {route.section === 'realtime' && <Realtime onVisitor={setVisitor} />}
           {route.section === 'pages' && <PagesReport range={range} />}
           {route.section === 'events' && <EventsReport range={range} onVisitor={setVisitor} tz={tz} />}
-          {route.section === 'inbox' && <Inbox key={`inbox-${route.id}`} user={me.user} initialId={route.id} onChange={loadMe} tz={tz} />}
-          {route.section === 'careers' && <Careers key={`careers-${route.id}`} user={me.user} initialId={route.id} onChange={loadMe} tz={tz} />}
+          {route.section === 'content' && (
+            <Content
+              user={me.user}
+              path={route.rest ? decodeURIComponent(route.rest) : null}
+              onOpen={(p) => {
+                window.location.hash = p ? `content/${encodeURIComponent(p)}` : 'content'
+              }}
+              onChange={loadMe}
+            />
+          )}
+          {route.section === 'announcement' && <AnnouncementView user={me.user} />}
+          {route.section === 'redirects' && <RedirectsView user={me.user} tz={tz} />}
+          {route.section === 'media' && <MediaView user={me.user} />}
+          {route.section === 'forms' && <Forms user={me.user} rest={route.rest} onChange={loadMe} tz={tz} />}
+          {route.section === 'activity' && <ActivityView tz={tz} />}
           {route.section === 'settings' && <SettingsView user={me.user} onSaved={loadMe} />}
         </main>
       </div>

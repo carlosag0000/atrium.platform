@@ -1,4 +1,5 @@
 import type { Service } from '@/lib/services'
+import E from '@/components/cms/Editable'
 
 export default function ServicePerksRail({ svc }: { svc: Service }) {
   return (
@@ -34,13 +35,13 @@ export default function ServicePerksRail({ svc }: { svc: Service }) {
                 className="type-card-title m-0 mb-[0.55rem]"
                 style={{ color: 'var(--text-strong)' }}
               >
-                {perk.title}
+                <E>{perk.title}</E>
               </h3>
               <p
                 className="type-caption m-0"
                 style={{ color: 'var(--text-muted)' }}
               >
-                {perk.description}
+                <E>{perk.description}</E>
               </p>
             </div>
           </article>

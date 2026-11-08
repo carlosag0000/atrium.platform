@@ -5,6 +5,7 @@ import Image from 'next/image'
 import type { ReactNode } from 'react'
 import { useEffect, useRef } from 'react'
 import { gsap } from '@/lib/gsap'
+import E from '@/components/cms/Editable'
 
 export type BentoItem = {
   size: 'large' | 'medium' | 'small'
@@ -88,10 +89,10 @@ export default function BentoGrid({ items, eyebrow, headline }: Props) {
       <div className="mx-auto max-w-[var(--container-max)]">
         {(eyebrow || headline) && (
           <div className="mb-16 max-w-3xl">
-            {eyebrow && <Eyebrow className="mb-4">{eyebrow}</Eyebrow>}
+            {eyebrow && <Eyebrow className="mb-4"><E>{eyebrow}</E></Eyebrow>}
             {headline && (
               <h2 className="text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em]">
-                {headline}
+                <E>{headline}</E>
               </h2>
             )}
           </div>
@@ -123,7 +124,7 @@ export default function BentoGrid({ items, eyebrow, headline }: Props) {
                     photo ? 'text-cream' : isDark ? 'text-lime' : ''
                   }`}
                 >
-                  {item.title}
+                  <E>{item.title}</E>
                 </h3>
                 {!item.image && (
                   <Asterisk
@@ -149,7 +150,7 @@ export default function BentoGrid({ items, eyebrow, headline }: Props) {
                   } as React.CSSProperties
                 }
               >
-                {item.body}
+                <E>{item.body}</E>
               </p>
             ) : null
 

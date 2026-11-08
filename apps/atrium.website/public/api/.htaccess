@@ -1,7 +1,7 @@
 # Website backend. Only the endpoint scripts are reachable.
+# (No blanket noindex header here: render.php serves the public pages. lib.php marks API responses noindex.)
 Options -Indexes
-Header always set X-Robots-Tag "noindex, nofollow"
 
-<FilesMatch "^(config|config\.example|lib|stats)\.php$">
+<FilesMatch "^(config|config\.example|lib|stats|cms|admin_cms)\.php$">
   Require all denied
 </FilesMatch>

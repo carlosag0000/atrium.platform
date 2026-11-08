@@ -2,6 +2,7 @@ import { Eyebrow } from '@atrium/ui'
 import Image from 'next/image'
 import type { ReactNode } from 'react'
 import type { TestimonialCard } from '@/lib/testimonials'
+import E from '@/components/cms/Editable'
 
 type Props = { items: TestimonialCard[]; eyebrow?: string; headline?: ReactNode; body?: string }
 
@@ -40,17 +41,17 @@ export default function TestimonialMarquee({ items, eyebrow, headline, body }: P
       <div className="mx-auto mb-14 max-w-3xl px-[var(--gutter)] text-center md:mb-16">
         {eyebrow && (
           <Eyebrow className="mb-6" tone="on-dark">
-            {eyebrow}
+            <E>{eyebrow}</E>
           </Eyebrow>
         )}
         {headline && (
           <h2 className="m-0 text-[clamp(2.6rem,4.5vw,4rem)] leading-[1.08] tracking-[-0.02em] text-cream">
-            {headline}
+            <E>{headline}</E>
           </h2>
         )}
         {body && (
           <p className="m-0 mx-auto mt-6 max-w-[38rem] text-[clamp(1rem,1.3vw,1.15rem)] leading-relaxed text-cream/70">
-            {body}
+            <E>{body}</E>
           </p>
         )}
       </div>
@@ -89,7 +90,7 @@ export default function TestimonialMarquee({ items, eyebrow, headline, body }: P
                         reading job. The serif stays on the name, where it is
                         one line and earns its character. */}
                     <p className="m-0 mt-6 text-[1.0625rem] leading-[1.6] tracking-[-0.006em] text-charcoal">
-                      {item.quote}
+                      <E>{item.quote}</E>
                     </p>
                   </blockquote>
 

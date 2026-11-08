@@ -11,12 +11,15 @@ if (basename($_SERVER['SCRIPT_FILENAME'] ?? '') === 'lib.php') {
 
 $config = require __DIR__ . '/config.php';
 
-header('X-Robots-Tag: noindex, nofollow');
-header('Cache-Control: no-store');
+// Public pages rendered by render.php must stay indexable; every API response is private.
+if (!defined('PUBLIC_PAGE')) {
+    header('X-Robots-Tag: noindex, nofollow');
+    header('Cache-Control: no-store');
+    header('Referrer-Policy: same-origin');
+}
 header('X-Content-Type-Options: nosniff');
-header('Referrer-Policy: same-origin');
 
-const SCHEMA_VERSION = '3';
+const SCHEMA_VERSION = '4';
 // CVs from the careers form live next to the original careers endpoint, behind "Require all denied".
 define('CV_DIR', dirname(__DIR__) . '/careers-api/uploads');
 const MAX_CV_BYTES = 5 * 1024 * 1024;
@@ -142,6 +145,86 @@ function migrate(PDO $pdo): void
         at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
         INDEX (ip_hash, kind, at)
     ) CHARACTER SET utf8mb4");
+    // CMS, forms, media, redirects, activity (schema 4).
+    $pdo->exec("CREATE TABLE IF NOT EXISTS cms_entries (
+        k VARCHAR(191) PRIMARY KEY,
+        path VARCHAR(191) NOT NULL,
+        kind VARCHAR(10) NOT NULL DEFAULT 'text',
+        published MEDIUMTEXT NULL,
+        draft MEDIUMTEXT NULL,
+        updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        updated_by VARCHAR(200) NOT NULL DEFAULT '',
+        INDEX (path)
+    ) $t");
+    $pdo->exec("CREATE TABLE IF NOT EXISTS cms_revisions (
+        id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+        ts DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        user_email VARCHAR(200) NOT NULL DEFAULT '',
+        path VARCHAR(191) NOT NULL,
+        note VARCHAR(255) NOT NULL DEFAULT '',
+        data MEDIUMTEXT NOT NULL,
+        INDEX (path)
+    ) $t");
+    $pdo->exec("CREATE TABLE IF NOT EXISTS redirects (
+        id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+        from_path VARCHAR(191) NOT NULL UNIQUE,
+        to_url VARCHAR(500) NOT NULL,
+        code SMALLINT UNSIGNED NOT NULL DEFAULT 301,
+        hits INT UNSIGNED NOT NULL DEFAULT 0,
+        last_hit DATETIME NULL,
+        created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+    ) $t");
+    $pdo->exec("CREATE TABLE IF NOT EXISTS not_found (
+        path VARCHAR(191) PRIMARY KEY,
+        hits INT UNSIGNED NOT NULL DEFAULT 1,
+        first_seen DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        last_seen DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        referrer VARCHAR(500) NOT NULL DEFAULT ''
+    ) $t");
+    $pdo->exec("CREATE TABLE IF NOT EXISTS media (
+        id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+        created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        file VARCHAR(120) NOT NULL,
+        original VARCHAR(255) NOT NULL DEFAULT '',
+        mime VARCHAR(60) NOT NULL,
+        size INT UNSIGNED NOT NULL,
+        width INT UNSIGNED NOT NULL DEFAULT 0,
+        height INT UNSIGNED NOT NULL DEFAULT 0,
+        alt VARCHAR(255) NOT NULL DEFAULT '',
+        uploaded_by VARCHAR(200) NOT NULL DEFAULT ''
+    ) $t");
+    $pdo->exec("CREATE TABLE IF NOT EXISTS forms (
+        id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+        slug VARCHAR(80) NOT NULL UNIQUE,
+        title VARCHAR(200) NOT NULL,
+        description TEXT NULL,
+        fields MEDIUMTEXT NOT NULL,
+        settings TEXT NOT NULL,
+        status VARCHAR(10) NOT NULL DEFAULT 'draft',
+        created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+    ) $t");
+    $pdo->exec("CREATE TABLE IF NOT EXISTS form_submissions (
+        id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+        form_id INT UNSIGNED NOT NULL,
+        created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        name VARCHAR(200) NOT NULL DEFAULT '',
+        email VARCHAR(200) NOT NULL DEFAULT '',
+        data MEDIUMTEXT NOT NULL,
+        status VARCHAR(20) NOT NULL DEFAULT 'new',
+        notes TEXT NULL,
+        visitor CHAR(16) NOT NULL DEFAULT '',
+        ip_hash CHAR(64) NOT NULL DEFAULT '',
+        INDEX (form_id), INDEX (created_at)
+    ) $t");
+    $pdo->exec("CREATE TABLE IF NOT EXISTS activity (
+        id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+        ts DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        user_email VARCHAR(200) NOT NULL DEFAULT '',
+        action VARCHAR(60) NOT NULL,
+        detail VARCHAR(500) NOT NULL DEFAULT '',
+        INDEX (ts)
+    ) $t");
     $cols = $pdo->query("SHOW COLUMNS FROM applications LIKE 'visitor'")->fetchAll();
     if (!$cols) {
         $pdo->exec("ALTER TABLE applications ADD COLUMN visitor CHAR(16) NOT NULL DEFAULT ''");
@@ -267,6 +350,34 @@ function record_event(string $name, string $label, string $visitor = '', string 
         ->execute([$day, $visitor, $session, mb_substr($path, 0, 255), $name, mb_substr($label, 0, 255)]);
 }
 
+function log_activity(array $user, string $action, string $detail = ''): void
+{
+    try {
+        db()->prepare('INSERT INTO activity (user_email, action, detail) VALUES (?, ?, ?)')
+            ->execute([(string) ($user['email'] ?? ''), mb_substr($action, 0, 60), mb_substr($detail, 0, 500)]);
+    } catch (Throwable $e) {
+        // The log must never break the action it records.
+    }
+}
+
+/** The signed-in user, or null (no output, no exit). Used by render.php for draft previews. */
+function current_user(): ?array
+{
+    if (empty($_COOKIE['atr_session'])) {
+        return null;
+    }
+    start_admin_session();
+    $uid = (int) ($_SESSION['uid'] ?? 0);
+    $ok = $uid !== 0 && ($_SESSION['expires'] ?? 0) >= time();
+    session_write_close();
+    if (!$ok) {
+        return null;
+    }
+    $q = db()->prepare('SELECT id, email, name, role FROM users WHERE id = ?');
+    $q->execute([$uid]);
+    return $q->fetch() ?: null;
+}
+
 // ── Notifications ────────────────────────────────────────────────────────────
 
 function notify(string $kind, string $subject, string $text): bool
@@ -297,10 +408,10 @@ const ROLES = ['owner', 'editor', 'viewer'];
 
 function start_admin_session(): void
 {
-    session_name('atrium_admin');
+    session_name('atr_session');
     session_set_cookie_params([
         'lifetime' => 0,
-        'path' => '/api/',
+        'path' => '/',
         'secure' => true,
         'httponly' => true,
         'samesite' => 'Strict',

@@ -6,6 +6,7 @@ import { OutlineCTA, PillCTA } from '@/components/ui/PillCTA'
 import { CTA } from '@/lib/cta'
 import { gsap } from '@/lib/gsap'
 import { heroGalleryTiles } from '@/lib/work'
+import E from '@/components/cms/Editable'
 
 export default function HeroSection() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -43,21 +44,24 @@ export default function HeroSection() {
             ref={textRef}
           >
             <Eyebrow className="mb-6" tone="on-dark">
-              The hospitality-only growth team
+              <E>The hospitality-only growth team</E>
             </Eyebrow>
 
             <h1 className="mb-6 text-[clamp(2.6rem,6vw,4.6rem)] font-normal leading-[1.02] tracking-[-0.02em] text-cream">
-              You handle the experience.
-              <br />
-              <em className="font-serif italic">We take care of the rest.</em>
+              <E>
+                You handle the experience.
+                <br />
+                <em className="font-serif italic">We take care of the rest.</em>
+              </E>
             </h1>
 
             {/* Kept as a paragraph rather than an h2: it reads as a heading but
                 it is a description, and an h2 here would put a sentence into
                 the document outline. */}
             <p className="mb-10 max-w-xl text-[clamp(1.05rem,1.4vw,1.25rem)] leading-relaxed text-cream/[0.78]">
-              A full marketing agency for restaurants and hospitality.
-              Discoverability, acquisition, retention, growth.
+              <E>
+                A full marketing agency for restaurants and hospitality. Discoverability, acquisition, retention, growth.
+              </E>
             </p>
 
             <div className="flex flex-wrap items-center gap-4">

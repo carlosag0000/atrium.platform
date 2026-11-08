@@ -2,18 +2,19 @@ import { Eyebrow } from '@atrium/ui'
 import Image from 'next/image'
 import type { Service } from '@/lib/services'
 import { parseHeadline } from './utils'
+import E from '@/components/cms/Editable'
 
 export default function ServiceThesis({ svc }: { svc: Service }) {
   return (
     <section className="bg-cream px-[var(--gutter)] pt-20 pb-26">
       <div className="grid md:grid-cols-[minmax(0,1fr)_minmax(0,0.85fr)] items-center gap-16 max-w-[var(--container-max)] mx-auto max-md:grid-cols-1 max-md:gap-10">
         <div className="flex flex-col gap-[1.2rem]">
-          <Eyebrow>{svc.thesis.eyebrow}</Eyebrow>
+          <Eyebrow><E>{svc.thesis.eyebrow}</E></Eyebrow>
           <h2 className="m-0 max-w-[17ch] text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-charcoal">
             {parseHeadline(svc.thesis.headline, 'font-serif italic')}
           </h2>
           <p className="m-0 max-w-120 text-base leading-relaxed text-muted">
-            {svc.thesis.body}
+            <E>{svc.thesis.body}</E>
           </p>
         </div>
 

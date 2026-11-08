@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Tracker from '@/components/analytics/Tracker'
+import CmsRuntime from '@/components/cms/CmsRuntime'
 import CalEmbedProvider from '@/components/ui/CalEmbedProvider'
 import Footer from '@/components/ui/Footer'
 import GSAPProvider from '@/components/ui/GSAPProvider'
@@ -56,6 +57,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }} />
         <TabTitleSwitcher />
         <Tracker />
+        <CmsRuntime />
         <CalEmbedProvider>
           <PageTransitionProvider>
             <GSAPProvider>

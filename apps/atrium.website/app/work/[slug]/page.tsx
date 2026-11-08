@@ -16,6 +16,7 @@ import {
   getCaseSummary,
   isVideoLed,
 } from '@/lib/work'
+import E from '@/components/cms/Editable'
 
 export async function generateStaticParams() {
   return caseStudies.map(study => ({ slug: study.slug }))
@@ -112,9 +113,9 @@ export function ChallengeSolutionSection({ study }: { study: CaseStudy }) {
         <div className="grid gap-10 md:grid-cols-2 md:gap-16">
           {columns.map(({ label, body }) => (
             <div className="border-t border-cream/20 pt-8" key={label}>
-              <Eyebrow tone="on-dark" className="mb-6">{label}</Eyebrow>
+              <Eyebrow tone="on-dark" className="mb-6"><E>{label}</E></Eyebrow>
               <p className="m-0 text-[clamp(1.05rem,1.4vw,1.25rem)] leading-relaxed text-cream/80">
-                {body}
+                <E>{body}</E>
               </p>
             </div>
           ))}
@@ -150,9 +151,9 @@ export function InterviewsSection({ study }: { study: CaseStudy }) {
                 title={`${interview.name} on ${study.client}`}
               />
               <figcaption className="mt-6 border-cream/20 border-t pt-6">
-                <p className="m-0 text-cream">{interview.name}</p>
+                <p className="m-0 text-cream"><E>{interview.name}</E></p>
                 {interview.role ? (
-                  <p className="m-0 mt-1 font-serif text-cream/70 italic">{interview.role}</p>
+                  <p className="m-0 mt-1 font-serif text-cream/70 italic"><E>{interview.role}</E></p>
                 ) : null}
               </figcaption>
             </figure>
@@ -267,10 +268,10 @@ export function ApproachSection({ study }: { study: CaseStudy }) {
                 </p>
                 <div>
                   <h3 className="max-w-[22ch] text-[clamp(1.35rem,2vw,1.8rem)] leading-[1.15] text-charcoal">
-                    {step.title}
+                    <E>{step.title}</E>
                   </h3>
                   <p className="mt-5 max-w-3xl text-base leading-relaxed text-muted">
-                    {step.body}
+                    <E>{step.body}</E>
                   </p>
                 </div>
               </article>
@@ -327,11 +328,11 @@ export function ResultsSection({ study, metrics }: { study: CaseStudy; metrics: 
               </p>
               <div>
                 <p className="m-0 text-[0.8125rem] uppercase tracking-[0.12em] text-cream">
-                  {metric.label}
+                  <E>{metric.label}</E>
                 </p>
                 {metric.detail && (
                   <p className="m-0 mt-3 max-w-sm text-base leading-relaxed text-cream/70">
-                    {metric.detail}
+                    <E>{metric.detail}</E>
                   </p>
                 )}
               </div>
@@ -374,8 +375,8 @@ export function TestimonialSection({ study }: { study: CaseStudy }) {
               left edge — text-align only centres the text inside that narrower
               box. The serif line measures its own 72ch, so it drifted furthest. */}
           <footer className="mt-8 text-center">
-            <p className="m-0 mx-auto text-charcoal">{testimonial.name}</p>
-            <p className="m-0 mx-auto mt-1 font-serif text-muted italic">{testimonial.role}</p>
+            <p className="m-0 mx-auto text-charcoal"><E>{testimonial.name}</E></p>
+            <p className="m-0 mx-auto mt-1 font-serif text-muted italic"><E>{testimonial.role}</E></p>
           </footer>
         </blockquote>
       </div>

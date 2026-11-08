@@ -3,6 +3,7 @@ import PageHero from '@/components/pages/PageHero'
 import CTABanner from '@/components/sections/CTABanner'
 import Eyebrow from '@/components/ui/Eyebrow'
 import { CTA } from '@/lib/cta'
+import E from '@/components/cms/Editable'
 
 export const metadata: Metadata = {
   title: 'Atrium Resources — Hospitality Marketing Guides & Stories',
@@ -62,10 +63,10 @@ export default function ResourcesPage() {
             {resourceGroups.map((group) => (
               <div key={group.label} className="rounded-2xl border p-7" style={{ borderColor: 'rgba(7,47,52,0.10)', background: 'var(--surface-card)' }}>
                 <p className="type-eyebrow" style={{ color: 'var(--accent)' }}>
-                  {group.label}
+                  <E>{group.label}</E>
                 </p>
                 <p className="type-caption mt-4" style={{ color: 'var(--text-muted)' }}>
-                  {group.description}
+                  <E>{group.description}</E>
                 </p>
                 <div className="mt-8 space-y-3">
                   {group.items.map((item) => (

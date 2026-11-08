@@ -51,7 +51,7 @@ $lines = [
     '',
     $f['message'],
     '',
-    'Open in the dashboard: https://www.atriumad.com/admin#inbox/' . $id,
+    'Open in the dashboard: https://www.atriumad.com/admin#forms/contact/' . $id,
 ];
 notify('contact', 'New website message: ' . $f['name'] . ($f['business'] ? ' (' . $f['business'] . ')' : ''), implode("\n", $lines));
 

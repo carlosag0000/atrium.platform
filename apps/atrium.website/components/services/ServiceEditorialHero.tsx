@@ -2,6 +2,7 @@ import { PillTags } from '@atrium/ui'
 import type { Service } from '@/lib/services'
 import CategoryBadge from './CategoryBadge'
 import { parseHeadline } from './utils'
+import E from '@/components/cms/Editable'
 
 /** The header of a service page. It takes the case study hero's shape — the
  *  same cream ground with the glint cluster behind the type, everything
@@ -40,7 +41,7 @@ export default function ServiceEditorialHero({ svc }: { svc: Service }) {
                 72ch, and a capped block with default margins hugs the left edge —
                 text-align only centres the text inside that narrower box. */}
             <p className="m-0 mx-auto mt-6 max-w-[38rem] text-[clamp(1.05rem,1.4vw,1.25rem)] leading-relaxed text-body">
-              {svc.hero.body}
+              <E>{svc.hero.body}</E>
             </p>
 
             <div className="mt-8">

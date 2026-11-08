@@ -1,3 +1,4 @@
+import E from '@/components/cms/Editable'
 export type ClientLogo = {
   name: string
   logo: string
@@ -100,7 +101,7 @@ export default function LogoTicker({ clients, bg, label, size = 'default' }: Pro
     >
       {label && (
         <p className="m-0 mx-auto mb-10 text-center text-[clamp(1.05rem,1.4vw,1.25rem)] leading-relaxed text-charcoal md:mb-12">
-          {label}
+          <E>{label}</E>
         </p>
       )}
 

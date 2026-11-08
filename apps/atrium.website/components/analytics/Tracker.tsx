@@ -30,7 +30,8 @@ export default function Tracker() {
 
   // Page views: one per route change.
   useEffect(() => {
-    if (!pathname || PRIVATE.test(pathname)) return
+    // Skip private pages and the dashboard's page editor preview (?cms=…).
+    if (!pathname || PRIVATE.test(pathname) || /[?&]cms=/.test(window.location.search)) return
 
     const id = rid()
     const { v, s, isNew, isEntry } = ids()

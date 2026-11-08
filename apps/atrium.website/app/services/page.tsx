@@ -5,6 +5,7 @@ import { stages } from '@/components/sections/GrowthEngineDiagram'
 import TransitionLink from '@/components/ui/TransitionLink'
 import { CTA } from '@/lib/cta'
 import { services } from '@/lib/services'
+import E from '@/components/cms/Editable'
 
 export const metadata: Metadata = {
   title: 'Services — Atrium',
@@ -90,7 +91,7 @@ export default function ServicesPage() {
                     {category}
                   </span>
                   <p className="mt-4 text-[clamp(1.05rem,1.4vw,1.25rem)] leading-relaxed">
-                    {stage.tagline}
+                    <E>{stage.tagline}</E>
                   </p>
                 </div>
 
@@ -102,7 +103,7 @@ export default function ServicesPage() {
                         className="group flex items-center justify-between gap-3 py-4 no-underline"
                       >
                         <span className="m-0 text-[clamp(1.35rem,2vw,1.8rem)] leading-[1.15]">
-                          {svc.name}
+                          <E>{svc.name}</E>
                         </span>
                         <span
                           aria-hidden="true"
@@ -140,7 +141,7 @@ export default function ServicesPage() {
                   <NumberReel value={stat.number} />
                 </p>
                 <p className="m-0 max-w-xs text-base leading-relaxed text-muted">
-                  {stat.label}
+                  <E>{stat.label}</E>
                 </p>
               </div>
             ))}

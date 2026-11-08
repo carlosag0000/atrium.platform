@@ -4,6 +4,7 @@ import type { ReactNode } from 'react'
 import { useEffect, useRef } from 'react'
 import { gsap } from '@/lib/gsap'
 import type { StatItem } from '@/lib/services'
+import E from '@/components/cms/Editable'
 
 type Props = {
   stats: StatItem[]
@@ -47,9 +48,9 @@ export default function ServiceStatsEditorial({
     <section ref={containerRef} className="relative bg-dark px-[var(--gutter)] py-24 md:py-36">
       <div className="relative mx-auto max-w-[var(--container-max)]">
         <div className="metric-reveal max-w-4xl pb-14 md:pb-20">
-          <Eyebrow tone="on-dark">{eyebrow}</Eyebrow>
+          <Eyebrow tone="on-dark"><E>{eyebrow}</E></Eyebrow>
           <h2 className="m-0 mt-5 text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-cream">
-            {headline}
+            <E>{headline}</E>
           </h2>
         </div>
 
@@ -64,7 +65,7 @@ export default function ServiceStatsEditorial({
               </p>
               <div className="md:order-1">
                 <p className="stat-label m-0 max-w-sm text-base leading-relaxed text-cream/70">
-                  {stat.label}
+                  <E>{stat.label}</E>
                 </p>
               </div>
             </article>

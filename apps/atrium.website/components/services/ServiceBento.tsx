@@ -1,6 +1,7 @@
 import { Card } from '@atrium/ui'
 import type { BentoCard } from '@/lib/services'
 import { parseHeadline } from './utils'
+import E from '@/components/cms/Editable'
 
 function BentoCardPhoto({ card }: { card: BentoCard }) {
   return (
@@ -15,7 +16,7 @@ function BentoCardPhoto({ card }: { card: BentoCard }) {
           {parseHeadline(card.title)}
         </h3>
         <p className="m-0 text-[0.875rem] leading-relaxed opacity-76">
-          {card.copy}
+          <E>{card.copy}</E>
         </p>
       </div>
     </article>
@@ -29,7 +30,7 @@ function BentoCardStatement({ card }: { card: BentoCard }) {
         {parseHeadline(card.title)}
       </h3>
       <p className="m-0 max-w-[31rem] text-[0.875rem] leading-relaxed text-charcoal/72">
-        {card.copy}
+        <E>{card.copy}</E>
       </p>
     </Card>
   )
@@ -43,7 +44,7 @@ function BentoCardPosition({ card }: { card: BentoCard }) {
         {parseHeadline(card.title)}
       </h3>
       <p className="m-0 text-[0.875rem] leading-relaxed opacity-76">
-        {card.copy}
+        <E>{card.copy}</E>
       </p>
     </Card>
   )
@@ -57,7 +58,7 @@ function BentoCardMini({ card }: { card: BentoCard }) {
         {parseHeadline(card.title)}
       </h3>
       <p className="m-0 text-[0.875rem] leading-relaxed opacity-76">
-        {card.copy}
+        <E>{card.copy}</E>
       </p>
     </Card>
   )
@@ -70,7 +71,7 @@ function BentoCardNeutral({ card }: { card: BentoCard }) {
         {parseHeadline(card.title)}
       </h3>
       <p className="m-0 text-[0.875rem] leading-relaxed opacity-76">
-        {card.copy}
+        <E>{card.copy}</E>
       </p>
     </Card>
   )
