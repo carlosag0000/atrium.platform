@@ -53,9 +53,9 @@ export default function ResourcesPage() {
       <section className="px-6 py-20 md:px-12 md:py-28" style={{ background: 'var(--surface-page)' }}>
         <div className="mx-auto max-w-6xl">
           <div className="mb-12 max-w-3xl">
-            <Eyebrow className="mb-5">Library</Eyebrow>
+            <Eyebrow className="mb-5"><E>Library</E></Eyebrow>
             <h2 className="type-section-title">
-              Organized by the decisions restaurant teams keep making.
+              <E>Organized by the decisions restaurant teams keep making.</E>
             </h2>
           </div>
 
@@ -84,13 +84,13 @@ export default function ResourcesPage() {
       <section className="px-6 py-20 md:px-12 md:py-24" style={{ background: 'var(--teal-900)', color: 'var(--text-on-dark)' }}>
         <div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-[0.85fr_1.15fr] md:items-center">
           <div>
-            <Eyebrow tone="onDark" className="mb-5">Editorial stance</Eyebrow>
+            <Eyebrow tone="onDark" className="mb-5"><E>Editorial stance</E></Eyebrow>
             <h2 className="type-section-title">
-              No generic marketing advice.
+              <E>No generic marketing advice.</E>
             </h2>
           </div>
           <p className="type-body" style={{ opacity: 0.74 }}>
-            Every resource should help an operator make one sharper decision: what to shoot, what to fix, what to measure, what to send, or what to stop doing.
+            <E>Every resource should help an operator make one sharper decision: what to shoot, what to fix, what to measure, what to send, or what to stop doing.</E>
           </p>
         </div>
       </section>

@@ -9,7 +9,7 @@ export default function SiblingServices({ current }: { current: string }) {
   return (
     <section className="px-6 md:px-12 py-20 md:py-28" style={{ background: 'var(--surface-page)' }}>
       <div className="max-w-6xl mx-auto">
-        <Eyebrow className="mb-10">OTHER SERVICES</Eyebrow>
+        <Eyebrow className="mb-10"><E>OTHER SERVICES</E></Eyebrow>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {siblings.map(svc => (
             <TransitionLink

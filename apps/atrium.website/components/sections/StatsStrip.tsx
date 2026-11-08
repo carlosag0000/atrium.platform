@@ -34,10 +34,10 @@ export default function StatsStrip({ stats }: Props) {
     <section ref={containerRef} className="bg-dark px-[var(--gutter)] py-24 md:py-36">
       <div className="mx-auto max-w-[var(--container-max)]">
         <div className="metric-reveal max-w-4xl pb-14 md:pb-20">
-          <Eyebrow tone="on-dark">Why the system matters</Eyebrow>
+          <Eyebrow tone="on-dark"><E>Why the system matters</E></Eyebrow>
           <h2 className="m-0 mt-5 text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-cream">
-            The first visit is expensive.<br />
-            <em className="font-serif italic">The next one should not be.</em>
+            <E>The first visit is expensive.<br />
+            <em className="font-serif italic">The next one should not be.</em></E>
           </h2>
         </div>
 

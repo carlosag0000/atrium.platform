@@ -76,7 +76,7 @@ export default function GrowthEngineDiagram() {
       <div className="mx-auto max-w-[var(--container-max)]">
         <div className="mx-auto mb-14 max-w-3xl text-center md:mb-20">
           <Eyebrow className="mb-6" tone="on-dark">
-            Growth Foundation
+            <E>Growth Foundation</E>
           </Eyebrow>
           <h2 className="text-[clamp(2.6rem,4.5vw,4rem)] leading-[1.08] tracking-[-0.02em] text-cream">
             Positioning, identity, and systems built to{' '}

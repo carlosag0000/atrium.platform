@@ -26,12 +26,12 @@ export default function ServicesPage() {
       <section className="relative flex min-h-screen flex-col justify-center overflow-hidden bg-dark px-[var(--gutter)]">
         <div className="mx-auto w-full max-w-[var(--container-max)]">
           <div className="max-w-3xl">
-            <Eyebrow tone="on-dark" className="mb-6">HOSPITALITY MARKETING</Eyebrow>
+            <Eyebrow tone="on-dark" className="mb-6"><E>HOSPITALITY MARKETING</E></Eyebrow>
             <h1 className="mb-6 text-[clamp(2.6rem,6vw,4.6rem)] font-normal leading-[1.02] tracking-[-0.02em] text-cream">
-              One team. <em className="font-serif italic">Every stage of growth.</em>
+              <E>One team. <em className="font-serif italic">Every stage of growth.</em></E>
             </h1>
             <p className="max-w-xl text-[clamp(1.05rem,1.4vw,1.25rem)] leading-relaxed text-cream/[0.78]">
-              The complete hospitality marketing engine — one team across all 11 disciplines, no handoffs, no briefing from scratch.
+              <E>The complete hospitality marketing engine — one team across all 11 disciplines, no handoffs, no briefing from scratch.</E>
             </p>
           </div>
         </div>
@@ -43,19 +43,19 @@ export default function ServicesPage() {
           <div className="mx-auto max-w-[var(--container-max)]">
             <div className="grid gap-7 lg:grid-cols-12 lg:items-end lg:gap-16">
               <div className="lg:col-span-7">
-                <Eyebrow className="mb-6">The Atrium Growth Engine</Eyebrow>
+                <Eyebrow className="mb-6"><E>The Atrium Growth Engine</E></Eyebrow>
                 <h2 className="max-w-[14ch] text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em]">
-                  Not eleven services. <em className="font-serif italic">One system.</em>
+                  <E>Not eleven services. <em className="font-serif italic">One system.</em></E>
                 </h2>
               </div>
               <p className="max-w-lg border-t border-line pt-6 text-base leading-relaxed text-muted lg:col-span-5">
-                The services are just the components. What you buy is the engine that runs
-                them — on a 28-day cycle, measured end to end.
+                <E>The services are just the components. What you buy is the engine that runs
+                them — on a 28-day cycle, measured end to end.</E>
               </p>
             </div>
 
             <div className="mt-14 flex flex-col gap-1 border-t border-line pt-5 md:mt-20 md:flex-row md:items-baseline md:gap-6">
-              <Eyebrow as="span" className="whitespace-nowrap">Brand Foundation</Eyebrow>
+              <Eyebrow as="span" className="whitespace-nowrap"><E>Brand Foundation</E></Eyebrow>
               <span className="text-[0.875rem] text-muted">
                 Positioning, identity, and creative direction — everything the engine runs on.
               </span>
@@ -125,9 +125,9 @@ export default function ServicesPage() {
       <section className="bg-cream px-6 py-20 md:px-16 md:py-28">
         <div className="mx-auto max-w-[var(--container-max)]">
           <div className="max-w-2xl pb-14 md:pb-20">
-            <Eyebrow>The full picture</Eyebrow>
+            <Eyebrow><E>The full picture</E></Eyebrow>
             <h2 className="m-0 mt-5 text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em]">
-              Eleven disciplines. <em className="font-serif italic">One engine.</em>
+              <E>Eleven disciplines. <em className="font-serif italic">One engine.</em></E>
             </h2>
           </div>
 

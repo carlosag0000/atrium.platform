@@ -1,4 +1,5 @@
 import { Eyebrow } from '@atrium/ui'
+import E from '@/components/cms/Editable'
 
 // ─── Comparison vs alternatives (doc vs.md §2.3 / §9.9) ─────────────────────
 // Answers the decisive objection: "Why hire Atrium instead of keeping my
@@ -24,13 +25,13 @@ export default function ComparisonMatrix() {
     <section className="bg-dark px-[var(--gutter)] py-24 md:py-32">
       <div className="mx-auto max-w-[var(--container-max)]">
         <div className="mb-12 max-w-2xl md:mb-16">
-          <Eyebrow className="mb-4" tone="on-dark">Why Atrium</Eyebrow>
+          <Eyebrow className="mb-4" tone="on-dark"><E>Why Atrium</E></Eyebrow>
           <h2 className="text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-cream">
-            One accountable team, <em className="font-serif italic">not five vendors.</em>
+            <E>One accountable team, <em className="font-serif italic">not five vendors.</em></E>
           </h2>
           <p className="mt-5 max-w-md text-base leading-relaxed text-cream/70">
-            The real question isn&apos;t Atrium versus another agency. It&apos;s Atrium versus the
-            photographer, the social manager, and the ads shop you&apos;re already juggling.
+            <E>The real question isn&apos;t Atrium versus another agency. It&apos;s Atrium versus the
+            photographer, the social manager, and the ads shop you&apos;re already juggling.</E>
           </p>
         </div>
 

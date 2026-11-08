@@ -5,6 +5,7 @@ import { useEffect, useRef } from 'react'
 import VideoMarquee from '@/components/work/VideoMarquee'
 import { cldVideoPoster, cldVideoUrl } from '@/lib/cloudinary'
 import type { CaseStudy } from '@/lib/work'
+import E from '@/components/cms/Editable'
 
 function CinematicHero({ videoId }: { videoId: string }) {
   const videoRef = useRef<HTMLVideoElement>(null)
@@ -49,13 +50,13 @@ export default function VideoShowcaseSection({ study }: { study: CaseStudy }) {
       <div className="mx-auto mt-14 max-w-[var(--container-max)] px-[var(--gutter)] md:mt-20">
         <div className="grid gap-8 border-t border-line pt-8 lg:grid-cols-12 lg:items-end lg:gap-16">
           <div className="lg:col-span-7">
-            <Eyebrow className="mb-6">Reels and short-form video</Eyebrow>
+            <Eyebrow className="mb-6"><E>Reels and short-form video</E></Eyebrow>
             <h2 className="text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-charcoal">
-              Built to move. <em>Made to repeat.</em>
+              <E>Built to move. <em>Made to repeat.</em></E>
             </h2>
           </div>
           <p className="m-0 max-w-md text-base leading-relaxed text-muted lg:col-span-5">
-            A continuous stream of vertical stories designed for attention, consistency, and everyday brand recall.
+            <E>A continuous stream of vertical stories designed for attention, consistency, and everyday brand recall.</E>
           </p>
         </div>
       </div>

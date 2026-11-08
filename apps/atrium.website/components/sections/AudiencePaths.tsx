@@ -65,13 +65,13 @@ export default function AudiencePaths() {
         {/* The same two-column opener every other section on the page uses. */}
         <div className="mb-14 grid gap-8 border-t border-line pt-8 lg:grid-cols-12 lg:items-end lg:gap-16 md:mb-20">
           <div className="lg:col-span-7">
-            <Eyebrow className="mb-6">Where you are now</Eyebrow>
+            <Eyebrow className="mb-6"><E>Where you are now</E></Eyebrow>
             <h2 className="max-w-[13ch] text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em]">
-              Different footprint. <em className="font-serif italic">Different first move.</em>
+              <E>Different footprint. <em className="font-serif italic">Different first move.</em></E>
             </h2>
           </div>
           <p className="m-0 max-w-md text-base leading-relaxed text-muted lg:col-span-5">
-            One dining room, a regional group, and a national rollout do not share a problem — so they should not share a scope. Start with the one that sounds like your week.
+            <E>One dining room, a regional group, and a national rollout do not share a problem — so they should not share a scope. Start with the one that sounds like your week.</E>
           </p>
         </div>
 

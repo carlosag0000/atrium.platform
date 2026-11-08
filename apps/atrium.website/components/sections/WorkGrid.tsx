@@ -5,6 +5,7 @@ import { OutlineCTA } from '@/components/ui/PillCTA'
 import CasePanel from '@/components/work/CasePanel'
 import { gsap } from '@/lib/gsap'
 import type { CaseStudy } from '@/lib/work'
+import E from '@/components/cms/Editable'
 
 export type Project = {
   study: CaseStudy
@@ -37,12 +38,12 @@ export default function WorkGrid({ projects }: { projects: Project[] }) {
   return (
     <section className="bg-cream px-[var(--gutter)] py-20 md:py-28">
       <div className="mx-auto mb-14 max-w-3xl text-center md:mb-20">
-        <Eyebrow className="mb-3">Selected Work</Eyebrow>
+        <Eyebrow className="mb-3"><E>Selected Work</E></Eyebrow>
         <h2 className="text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em]">
-          See what changed. <em className="font-serif italic">Not just what shipped.</em>
+          <E>See what changed. <em className="font-serif italic">Not just what shipped.</em></E>
         </h2>
         <div className="mt-10 flex justify-center">
-          <OutlineCTA href="/work">See all work</OutlineCTA>
+          <E><OutlineCTA href="/work">See all work</OutlineCTA></E>
         </div>
       </div>
 

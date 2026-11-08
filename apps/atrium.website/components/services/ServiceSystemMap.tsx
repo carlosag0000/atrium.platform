@@ -1,5 +1,6 @@
 import { Eyebrow, Tag } from '@atrium/ui'
 import type { Service } from '@/lib/services'
+import E from '@/components/cms/Editable'
 
 const stages = [
   {
@@ -28,9 +29,9 @@ export default function ServiceSystemMap({ svc }: { svc: Service }) {
       <div className="mx-auto max-w-[var(--container-max)]">
         <div className="mb-12 grid gap-7 lg:grid-cols-12 lg:items-end lg:gap-16 md:mb-16">
           <div className="lg:col-span-7">
-            <Eyebrow className="mb-5">Inside the Growth Engine</Eyebrow>
+            <Eyebrow className="mb-5"><E>Inside the Growth Engine</E></Eyebrow>
             <h2 className="max-w-[14ch] text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-charcoal">
-              This service has a job <em className="font-serif italic">before and after launch.</em>
+              <E>This service has a job <em className="font-serif italic">before and after launch.</em></E>
             </h2>
           </div>
           <p className="max-w-lg border-t border-line pt-6 text-base leading-relaxed text-muted lg:col-span-5">
@@ -63,7 +64,7 @@ export default function ServiceSystemMap({ svc }: { svc: Service }) {
           <Eyebrow as="span" className="flex items-center gap-1.5 whitespace-nowrap">
             <span aria-hidden>↺</span> Measure · learn · optimize
           </Eyebrow>
-          <p className="m-0 text-[0.875rem] text-muted">Every stage returns evidence to the next 28-day cycle.</p>
+          <p className="m-0 text-[0.875rem] text-muted"><E>Every stage returns evidence to the next 28-day cycle.</E></p>
         </div>
       </div>
     </section>

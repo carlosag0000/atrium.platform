@@ -78,14 +78,14 @@ function PricingOffers() {
       <div className="mx-auto max-w-[var(--container-max)]">
         <div className="mb-14 grid gap-8 lg:grid-cols-12 lg:items-end lg:gap-16 md:mb-20">
           <div className="lg:col-span-7">
-            <Eyebrow className="mb-6">Pricing</Eyebrow>
+            <Eyebrow className="mb-6"><E>Pricing</E></Eyebrow>
             <h1 className="type-section-title max-w-[13ch]">
-              Three ways to build the <em>right operating system.</em>
+              <E>Three ways to build the <em>right operating system.</em></E>
             </h1>
           </div>
           <div className="border-t pt-7 lg:col-span-5" style={{ borderColor: 'rgba(7,47,52,0.18)' }}>
             <p className="type-body m-0 max-w-md" style={{ color: 'var(--text-muted)' }}>
-              Compare the operating level first. We adapt the final scope to your locations, production volume, active channels, and internal team.
+              <E>Compare the operating level first. We adapt the final scope to your locations, production volume, active channels, and internal team.</E>
             </p>
           </div>
         </div>
@@ -120,14 +120,14 @@ function PricingOffers() {
 
               <div className={`mt-12 ${index === 1 ? 'px-6 lg:px-0' : ''}`}>
                 <p className="type-eyebrow m-0 mb-5" style={{ color: index === 1 ? 'var(--mint-400)' : 'var(--teal-500)' }}>
-                  Included
+                  <E>Included</E>
                 </p>
                 <TierServices services={tier.includes} index={index} highlighted={index === 1} />
               </div>
 
               <div className={`mt-auto pt-10 ${index === 1 ? 'px-6 lg:px-0' : ''}`}>
                 <p className="type-caption m-0 " style={{ color: index === 1 ? 'var(--mint-400)' : 'var(--teal-800)' }}>
-                  Custom pricing after discovery
+                  <E>Custom pricing after discovery</E>
                 </p>
                 <Link
                   href={CTA.primary.href}
@@ -155,12 +155,12 @@ function ScopeSection() {
     <section className="px-[var(--gutter)] py-24 md:py-36" style={{ background: 'var(--teal-900)', color: 'var(--text-on-dark)' }}>
       <div className="mx-auto grid max-w-[var(--container-max)] gap-12 lg:grid-cols-12 lg:gap-16">
         <div className="lg:col-span-5">
-          <Eyebrow tone="onDark" className="mb-6">How scope works</Eyebrow>
+          <Eyebrow tone="onDark" className="mb-6"><E>How scope works</E></Eyebrow>
           <h2 className="type-section-title max-w-[11ch]">
-            The number follows <em>the diagnosis.</em>
+            <E>The number follows <em>the diagnosis.</em></E>
           </h2>
           <p className="type-body mt-7 max-w-md" style={{ opacity: 0.68 }}>
-            We recommend the smallest complete system capable of solving the actual operating problem.
+            <E>We recommend the smallest complete system capable of solving the actual operating problem.</E>
           </p>
         </div>
 

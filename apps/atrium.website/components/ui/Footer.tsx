@@ -45,7 +45,7 @@ export default function Footer() {
           <div className="max-w-md">
             <div className="mb-4 flex items-center gap-2">
               <span aria-hidden="true" className="h-2 w-2 rounded-full bg-lime" />
-              <p className="m-0 text-[1.15rem] leading-none">Atrium</p>
+              <p className="m-0 text-[1.15rem] leading-none"><E global>Atrium</E></p>
             </div>
             <p className="m-0 max-w-none text-cream/70 text-sm leading-relaxed">
               <E global>Smart creative for restaurants, hotels, and food brands. Hospitality is all we do.</E>
@@ -100,7 +100,7 @@ export default function Footer() {
 
           <div>
             <Eyebrow className="mb-5" tone="on-dark">
-              Company
+              <E global>Company</E>
             </Eyebrow>
             <ul className="m-0 flex list-none flex-col gap-3 p-0">
               {companyLinks.map((link) => (
@@ -115,7 +115,7 @@ export default function Footer() {
         </div>
 
         <div className="flex flex-col items-start justify-between gap-3 border-cream/12 border-t pt-8 text-cream/45 text-xs md:flex-row md:items-center">
-          <p className="m-0">© 2026 Atrium. All rights reserved.</p>
+          <p className="m-0"><E global>© 2026 Atrium. All rights reserved.</E></p>
           <p className="m-0"><E global>Built for the people who feed people.</E></p>
         </div>
       </div>

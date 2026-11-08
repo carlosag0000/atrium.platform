@@ -7,6 +7,7 @@ import WorkStoryBlock from '@/components/work/WorkStoryBlock'
 import { CTA } from '@/lib/cta'
 import { type CaseStudy, caseStudies } from '@/lib/work'
 import { workStories } from '@/lib/work-stories'
+import E from '@/components/cms/Editable'
 
 export const metadata: Metadata = {
   title: 'Atrium Case Studies — Hospitality Marketing Results',
@@ -70,9 +71,9 @@ export default function WorkPage() {
           padding is what the fixed header used to sit over. */}
       <section className="bg-cream px-[var(--gutter)] pt-32 pb-20 md:pt-40 md:pb-24">
         <div className="mx-auto max-w-[var(--container-max)]">
-          <Eyebrow className="mb-5">Our work</Eyebrow>
+          <Eyebrow className="mb-5"><E>Our work</E></Eyebrow>
           <h1 className="max-w-[16ch] text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-charcoal">
-            Hospitality only. <em className="font-serif italic">Results first.</em>
+            <E>Hospitality only. <em className="font-serif italic">Results first.</em></E>
           </h1>
           {/* Our own reel, not a client's. The file is shot 9:16, so a wide
               frame crops it to a band — object-cover keeps the centre. */}
@@ -86,23 +87,23 @@ export default function WorkPage() {
           <div className="mt-7 grid gap-6 border-line border-t pt-7 lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-5">
               <p className="m-0 text-[clamp(1.35rem,2vw,1.8rem)] leading-[1.15] text-charcoal">
-                One accountable team
+                <E>One accountable team</E>
               </p>
               <p className="mt-2 text-[0.875rem] text-muted">
-                Hospitality only · Strategy through reporting
+                <E>Hospitality only · Strategy through reporting</E>
               </p>
             </div>
             <div className="lg:col-span-7">
               <p className="m-0 max-w-2xl text-[clamp(1.05rem,1.4vw,1.25rem)] leading-relaxed text-body">
-                Every brand below is a restaurant, a hotel, or a food company. We do not take work
+                <E>Every brand below is a restaurant, a hotel, or a food company. We do not take work
                 outside hospitality, because the playbook only compounds when the room, the menu and
-                the market are the same problem we solved last month.
+                the market are the same problem we solved last month.</E>
               </p>
               <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted">
-                One team runs all of it — strategy, the shoot, the channels, the reporting — so
+                <E>One team runs all of it — strategy, the shoot, the channels, the reporting — so
                 nothing is briefed twice and nobody hands the brand off mid-campaign. What follows
                 is the record: what the business looked like when we arrived, what we built, and
-                what changed, measured against revenue rather than reach.
+                what changed, measured against revenue rather than reach.</E>
               </p>
             </div>
           </div>
@@ -111,13 +112,13 @@ export default function WorkPage() {
 
       <section className="bg-cream px-[var(--gutter)] pt-24 md:pt-32">
         <div className="mx-auto max-w-[var(--container-max)] border-line border-t pt-10">
-          <Eyebrow className="mb-5">How the work runs</Eyebrow>
+          <Eyebrow className="mb-5"><E>How the work runs</E></Eyebrow>
           <h2 className="max-w-[18ch] text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-charcoal">
-            Different challenges. <em className="font-serif italic">Evidence in every story.</em>
+            <E>Different challenges. <em className="font-serif italic">Evidence in every story.</em></E>
           </h2>
           <p className="mt-6 max-w-2xl text-[clamp(1.05rem,1.4vw,1.25rem)] leading-relaxed text-body">
-            Two engagements, told the short way: what the room looked like when we arrived, how the
-            work was actually run, and the pieces that came out of it.
+            <E>Two engagements, told the short way: what the room looked like when we arrived, how the
+            work was actually run, and the pieces that came out of it.</E>
           </p>
         </div>
       </section>
@@ -136,9 +137,9 @@ export default function WorkPage() {
       <section className="bg-cream px-[var(--gutter)] py-24 md:py-32">
         <div className="mx-auto max-w-[var(--container-max)]">
           <div className="mb-12 md:mb-16">
-            <Eyebrow className="mb-5">Full archive</Eyebrow>
+            <Eyebrow className="mb-5"><E>Full archive</E></Eyebrow>
             <h2 className="max-w-[18ch] text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-charcoal">
-              Every case, <em className="font-serif italic">start to finish.</em>
+              <E>Every case, <em className="font-serif italic">start to finish.</em></E>
             </h2>
           </div>
 

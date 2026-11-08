@@ -50,14 +50,14 @@ export default function ServiceTimelineEditorial({ steps }: { steps: TimelineSte
             className="type-section-title m-0 mb-[1.2rem]"
             style={{ color: 'var(--text-strong)' }}
           >
-            Your plug-in brand team, <em>from kickoff to rollout.</em>
+            <E>Your plug-in brand team, <em>from kickoff to rollout.</em></E>
           </h2>
           <p
             className="type-body m-0 max-w-[22rem]"
             style={{ color: 'var(--text-muted)' }}
           >
-            We work side-by-side with your team to shape, evolve, and scale your brand
-            without the slowdowns of traditional agencies.
+            <E>We work side-by-side with your team to shape, evolve, and scale your brand
+            without the slowdowns of traditional agencies.</E>
           </p>
         </div>
 

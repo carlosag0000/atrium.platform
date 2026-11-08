@@ -54,16 +54,16 @@ function AboutHero() {
   return (
     <section className="px-[var(--gutter)] pb-24 pt-36 md:pb-32 md:pt-48" style={{ background: 'var(--surface-page)' }}>
       <div className="mx-auto max-w-[var(--container-max)]">
-        <Eyebrow className="mb-8">About Atrium</Eyebrow>
+        <Eyebrow className="mb-8"><E>About Atrium</E></Eyebrow>
 
         <div className="grid gap-12 lg:grid-cols-12 lg:items-end lg:gap-16">
           <h1 className="type-page-title max-w-[11ch] lg:col-span-8" style={{ color: 'var(--text-strong)' }}>
-            Hospitality is not our vertical. <em>It is the work.</em>
+            <E>Hospitality is not our vertical. <em>It is the work.</em></E>
           </h1>
 
           <div className="border-t pt-7 lg:col-span-4" style={{ borderColor: 'rgba(7,47,52,0.18)' }}>
             <p className="type-lead" style={{ color: 'var(--text-body)' }}>
-              Atrium works inside the industry, connecting strategy, creative production, and performance reporting under one roof.
+              <E>Atrium works inside the industry, connecting strategy, creative production, and performance reporting under one roof.</E>
             </p>
             <Link
               href={CTA.primary.href}
@@ -106,18 +106,18 @@ function StudioStory() {
 
         <div className="flex h-full flex-col justify-between gap-16 border-t pt-8 lg:col-span-5" style={{ borderColor: 'rgba(7,47,52,0.18)' }}>
           <div>
-            <Eyebrow className="mb-6">Inside the industry</Eyebrow>
+            <Eyebrow className="mb-6"><E>Inside the industry</E></Eyebrow>
             <h2 className="type-section-title">
-              Built from the floor, <em>not the sidelines.</em>
+              <E>Built from the floor, <em>not the sidelines.</em></E>
             </h2>
           </div>
 
           <div>
             <p className="type-lead" style={{ color: 'var(--text-body)' }}>
-              We work close enough to service, production, and performance data to understand what hospitality teams actually need.
+              <E>We work close enough to service, production, and performance data to understand what hospitality teams actually need.</E>
             </p>
             <p className="type-body mt-6" style={{ color: 'var(--text-muted)' }}>
-              Atrium connects strategy and production under one roof in Houston, Texas. The same people who shape the campaign stay close to the work after it goes live.
+              <E>Atrium connects strategy and production under one roof in Houston, Texas. The same people who shape the campaign stay close to the work after it goes live.</E>
             </p>
             <ul className="m-0 mt-8 flex list-none flex-wrap gap-x-3 gap-y-1 border-t p-0 pt-6" style={{ borderColor: 'rgba(7,47,52,0.14)' }}>
               {['Houston', 'United States'].map((location, index) => (
@@ -139,9 +139,9 @@ function PrinciplesSection() {
     <section className="px-[var(--gutter)] py-24 md:py-36" style={{ background: 'var(--cloud-100)' }}>
       <div className="mx-auto grid max-w-[var(--container-max)] gap-12 lg:grid-cols-12 lg:gap-16">
         <div className="lg:col-span-4">
-          <Eyebrow className="mb-6">Operating principles</Eyebrow>
+          <Eyebrow className="mb-6"><E>Operating principles</E></Eyebrow>
           <h2 className="type-section-title max-w-[10ch]">
-            Built for the rhythm of <em>restaurants.</em>
+            <E>Built for the rhythm of <em>restaurants.</em></E>
           </h2>
         </div>
 
@@ -180,13 +180,13 @@ function TeamSection() {
       <div className="mx-auto max-w-[var(--container-max)]">
         <div className="mb-16 grid gap-10 border-t pt-8 lg:grid-cols-12 lg:items-end lg:gap-16 md:mb-24" style={{ borderColor: 'rgba(181,242,219,0.22)' }}>
           <div className="lg:col-span-7">
-            <Eyebrow tone="onDark" className="mb-6">The team</Eyebrow>
+            <Eyebrow tone="onDark" className="mb-6"><E>The team</E></Eyebrow>
             <h2 className="type-section-title">
-              Strategy close to execution. <em>Execution close to reporting.</em>
+              <E>Strategy close to execution. <em>Execution close to reporting.</em></E>
             </h2>
           </div>
           <p className="type-body m-0 max-w-md lg:col-span-5" style={{ opacity: 0.72 }}>
-            Fewer handoffs, faster feedback, and creative that improves because the same team sees what happens after publication.
+            <E>Fewer handoffs, faster feedback, and creative that improves because the same team sees what happens after publication.</E>
           </p>
         </div>
 

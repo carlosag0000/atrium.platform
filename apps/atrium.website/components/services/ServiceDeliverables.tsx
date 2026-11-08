@@ -7,12 +7,12 @@ export default function ServiceDeliverables({ svc }: { svc: Service }) {
     <section className="bg-cream px-[var(--gutter)] py-24 md:py-36">
       <div className="mx-auto grid max-w-[var(--container-max)] gap-14 lg:grid-cols-12 lg:gap-20">
         <div className="self-start lg:sticky lg:top-32 lg:col-span-4">
-          <Eyebrow className="mb-6">What you receive</Eyebrow>
+          <Eyebrow className="mb-6"><E>What you receive</E></Eyebrow>
           <h2 className="max-w-[10ch] text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-charcoal">
-            Outputs with an <em className="font-serif italic">operating job.</em>
+            <E>Outputs with an <em className="font-serif italic">operating job.</em></E>
           </h2>
           <p className="mt-7 max-w-sm text-base leading-relaxed text-muted">
-            Every output has an owner, a channel, and a place in the monthly reporting rhythm. Nothing ships as an orphaned asset.
+            <E>Every output has an owner, a channel, and a place in the monthly reporting rhythm. Nothing ships as an orphaned asset.</E>
           </p>
         </div>
 
