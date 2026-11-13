@@ -18,6 +18,8 @@ export type Announcement = {
   label?: string
   tone?: 'mint' | 'dark' | 'amber'
   ends?: string
+  /** 'home' = only on the home page (default), 'all' = every public page */
+  where?: 'home' | 'all'
   id?: string
 }
 
@@ -29,6 +31,7 @@ export const DEFAULT_BAR: Announcement = {
   link: 'https://grader.atriumad.com',
   label: 'Get my free score',
   tone: 'dark',
+  where: 'home',
   id: 'grader-2026',
 }
 
@@ -174,6 +177,7 @@ export default function CmsRuntime() {
   }, [])
 
   if (!bar || PRIVATE.test(pathname ?? '')) return null
+  if ((bar.where ?? 'home') === 'home' && pathname !== '/') return null
   return (
     <BarView
       bar={bar}

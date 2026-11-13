@@ -72,7 +72,14 @@ export function AnnouncementView({ user }: { user: User }) {
             Big title {a.style === 'pill' && <span className="font-normal opacity-60">(banner only)</span>}
             <input value={a.title ?? ''} maxLength={60} onChange={(e) => setA({ ...a, title: e.target.value })} placeholder="Marketing Grader" className={field} style={fieldStyle} disabled={!canEdit} />
           </label>
-          <label className="grid gap-1 text-[0.85rem] font-medium md:col-span-2" style={{ color: C.ink }}>
+          <label className="grid gap-1 text-[0.85rem] font-medium" style={{ color: C.ink }}>
+            Show on
+            <select value={a.where ?? 'home'} onChange={(e) => setA({ ...a, where: e.target.value as 'home' | 'all' })} className={field} style={fieldStyle} disabled={!canEdit}>
+              <option value="home">Home page only</option>
+              <option value="all">Every page</option>
+            </select>
+          </label>
+          <label className="grid gap-1 text-[0.85rem] font-medium" style={{ color: C.ink }}>
             Message
             <input value={a.text ?? ''} maxLength={200} onChange={(e) => setA({ ...a, text: e.target.value })} className={field} style={fieldStyle} disabled={!canEdit} />
           </label>

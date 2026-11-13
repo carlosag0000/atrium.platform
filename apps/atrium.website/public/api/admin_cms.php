@@ -220,6 +220,7 @@ switch ($action) {
         $val = [
             'on' => !empty($a['on']),
             'style' => ($a['style'] ?? '') === 'pill' ? 'pill' : 'banner',
+            'where' => ($a['where'] ?? '') === 'all' ? 'all' : 'home',
             'title' => clean((string) ($a['title'] ?? ''), 60),
             'ends' => $ends !== '' ? gmdate('Y-m-d\TH:i:s\Z', (int) strtotime($ends)) : '',
             'text' => clean((string) ($a['text'] ?? ''), 200),
