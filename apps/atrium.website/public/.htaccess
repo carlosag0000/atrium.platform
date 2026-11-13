@@ -23,6 +23,11 @@ DirectorySlash Off
   RewriteCond %{REQUEST_URI} ^/(.+)/$
   RewriteRule ^ /%1 [L,R=301]
 
+  # Insights (blog): RSS feed, article sitemap, and articles rendered from the dashboard's database.
+  RewriteRule ^insights/feed\.xml$ /api/insights.php?feed=1 [L]
+  RewriteRule ^insights/sitemap\.xml$ /api/insights.php?sitemap=1 [L]
+  RewriteRule ^insights/([a-z0-9-]+)$ /api/render.php?p=insights/post&slug=$1 [L,QSA]
+
   # Pages go through the CMS renderer, which applies edits made in the dashboard
   # (Website → Content) and falls back to the plain built file if anything fails.
   RewriteRule ^$ /api/render.php?p= [L,QSA]

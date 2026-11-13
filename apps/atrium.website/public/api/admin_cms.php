@@ -213,13 +213,20 @@ switch ($action) {
         if ($link !== '' && !preg_match('#^(https?://|/|mailto:|tel:)#i', $link)) {
             json_out(422, ['error' => 'link']);
         }
+        $ends = clean((string) ($a['ends'] ?? ''), 40);
+        if ($ends !== '' && strtotime($ends) === false) {
+            json_out(422, ['error' => 'ends']);
+        }
         $val = [
             'on' => !empty($a['on']),
+            'style' => ($a['style'] ?? '') === 'pill' ? 'pill' : 'banner',
+            'title' => clean((string) ($a['title'] ?? ''), 60),
+            'ends' => $ends !== '' ? gmdate('Y-m-d\TH:i:s\Z', (int) strtotime($ends)) : '',
             'text' => clean((string) ($a['text'] ?? ''), 200),
             'link' => $link,
             'label' => clean((string) ($a['label'] ?? ''), 40),
             'tone' => in_array($a['tone'] ?? '', ['mint', 'dark', 'amber'], true) ? $a['tone'] : 'mint',
-            'id' => substr(md5((string) ($a['text'] ?? '') . $link), 0, 8),
+            'id' => substr(md5((string) ($a['title'] ?? '') . (string) ($a['text'] ?? '') . $link), 0, 8),
         ];
         db()->prepare("INSERT INTO cms_entries (k, path, kind, published, updated_by) VALUES ('g:announcement', 'g', 'global', ?, ?)
             ON DUPLICATE KEY UPDATE published = VALUES(published), updated_at = CURRENT_TIMESTAMP, updated_by = VALUES(updated_by)")
@@ -469,6 +476,90 @@ switch ($action) {
             $out[] = $row;
         }
         csv_out('atrium-form-' . $f['slug'] . '.csv', array_merge(['ID', 'Received (UTC)', 'Status'], array_map(static fn ($x) => $x['label'], $fields), ['Notes']), $out);
+
+    // ── Insights (blog) ─────────────────────────────────────────────────────
+    case 'posts':
+        $views = [];
+        foreach (rows("SELECT path, COUNT(*) n FROM pageviews WHERE path LIKE '/insights/%' GROUP BY path") as $r) {
+            $views[substr($r['path'], 10)] = (int) $r['n'];
+        }
+        $rows = rows('SELECT id, slug, title, category, status, published_at, updated_at, updated_by, cover, focus_keyword, CHAR_LENGTH(content) len FROM posts ORDER BY COALESCE(published_at, updated_at) DESC');
+        json_out(200, [
+            'items' => array_map(static fn ($r) => [
+                'id' => (int) $r['id'], 'slug' => $r['slug'], 'title' => $r['title'], 'category' => $r['category'], 'cover' => $r['cover'],
+                'status' => $r['status'] === 'published' && $r['published_at'] && strtotime($r['published_at'] . ' UTC') > time() ? 'scheduled' : $r['status'],
+                'published_at' => utc_iso($r['published_at']), 'updated_at' => utc_iso($r['updated_at']), 'updated_by' => $r['updated_by'],
+                'views' => $views[$r['slug']] ?? 0, 'keyword' => $r['focus_keyword'],
+            ], $rows),
+            'categories' => array_column(rows("SELECT DISTINCT category FROM posts WHERE category <> '' ORDER BY category"), 'category'),
+        ]);
+
+    case 'post_get':
+        $r = one('SELECT * FROM posts WHERE id = ?', [$id]);
+        if (!$r) {
+            json_out(404, ['error' => 'not_found']);
+        }
+        $r['id'] = (int) $r['id'];
+        $r['published_at'] = utc_iso($r['published_at']);
+        $r['updated_at'] = utc_iso($r['updated_at']);
+        $r['created_at'] = utc_iso($r['created_at']);
+        json_out(200, ['post' => $r]);
+
+    case 'post_save':
+        post_only($isPost);
+        need('editor', $me);
+        $title = clean((string) ($b['title'] ?? ''), 250);
+        if ($title === '') {
+            json_out(422, ['error' => 'title']);
+        }
+        $slug = post_slug((string) ($b['slug'] ?? '') ?: $title);
+        if (one('SELECT id FROM posts WHERE slug = ? AND id <> ?', [$slug, $id])) {
+            json_out(409, ['error' => 'slug']);
+        }
+        $status = in_array($b['status'] ?? '', ['draft', 'published'], true) ? $b['status'] : 'draft';
+        $when = clean((string) ($b['published_at'] ?? ''), 40);
+        $publishedAt = $when !== '' && strtotime($when) !== false ? gmdate('Y-m-d H:i:s', (int) strtotime($when)) : null;
+        if ($status === 'published' && $publishedAt === null) {
+            $prev = one('SELECT published_at FROM posts WHERE id = ?', [$id]);
+            $publishedAt = $prev['published_at'] ?? gmdate('Y-m-d H:i:s');
+        }
+        $cover = clean((string) ($b['cover'] ?? ''), 500);
+        if ($cover !== '' && !preg_match('#^(https?://|/)#', $cover)) {
+            json_out(422, ['error' => 'cover']);
+        }
+        $vals = [
+            $slug, $title, clean((string) ($b['excerpt'] ?? ''), 600), sanitize_post_html((string) ($b['content'] ?? '')),
+            $cover, clean((string) ($b['cover_alt'] ?? ''), 255), clean((string) ($b['category'] ?? ''), 80),
+            implode(', ', array_slice(array_filter(array_map(static fn ($t) => clean($t, 40), explode(',', (string) ($b['tags'] ?? '')))), 0, 12)),
+            clean((string) ($b['author'] ?? ''), 120), clean((string) ($b['seo_title'] ?? ''), 200), clean((string) ($b['seo_description'] ?? ''), 400),
+            clean((string) ($b['focus_keyword'] ?? ''), 120), $status, $publishedAt, $me['email'],
+        ];
+        if ($id) {
+            $was = one('SELECT status, slug FROM posts WHERE id = ?', [$id]);
+            db()->prepare('UPDATE posts SET slug = ?, title = ?, excerpt = ?, content = ?, cover = ?, cover_alt = ?, category = ?, tags = ?, author = ?, seo_title = ?, seo_description = ?, focus_keyword = ?, status = ?, published_at = ?, updated_by = ?, updated_at = UTC_TIMESTAMP() WHERE id = ?')
+                ->execute([...$vals, $id]);
+            // Keep old links working when a published article's address changes.
+            if ($was && $was['status'] === 'published' && $was['slug'] !== $slug) {
+                db()->prepare('INSERT INTO redirects (from_path, to_url, code) VALUES (?, ?, 301) ON DUPLICATE KEY UPDATE to_url = VALUES(to_url)')
+                    ->execute(['/insights/' . $was['slug'], '/insights/' . $slug]);
+            }
+        } else {
+            db()->prepare('INSERT INTO posts (slug, title, excerpt, content, cover, cover_alt, category, tags, author, seo_title, seo_description, focus_keyword, status, published_at, updated_by) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)')
+                ->execute($vals);
+            $id = (int) db()->lastInsertId();
+        }
+        cms_bump();
+        log_activity($me, 'insights.save', "$title ($status)");
+        json_out(200, ['ok' => true, 'id' => $id, 'slug' => $slug]);
+
+    case 'post_delete':
+        post_only($isPost);
+        need('editor', $me);
+        $r = one('SELECT title FROM posts WHERE id = ?', [$id]);
+        db()->prepare('DELETE FROM posts WHERE id = ?')->execute([$id]);
+        cms_bump();
+        log_activity($me, 'insights.delete', (string) ($r['title'] ?? $id));
+        json_out(200, ['ok' => true]);
 
     // ── Activity ────────────────────────────────────────────────────────────
     case 'activity':

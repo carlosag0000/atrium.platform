@@ -2,6 +2,6 @@
 # (No blanket noindex header here: render.php serves the public pages. lib.php marks API responses noindex.)
 Options -Indexes
 
-<FilesMatch "^(config|config\.example|lib|stats|cms|admin_cms)\.php$">
+<FilesMatch "^(config|config\.example|lib|stats|cms|admin_cms|blog|seed_posts)\.php$">
   Require all denied
 </FilesMatch>

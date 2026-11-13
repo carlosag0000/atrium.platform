@@ -5,6 +5,7 @@ import { setIgnored } from '@/lib/analytics'
 import { AuthError, get, post, type Range, type User } from './api'
 import Content from './Content'
 import Forms from './Forms'
+import Insights from './Insights'
 import { VisitorDrawer } from './Journey'
 import Overview from './Overview'
 import Realtime from './Realtime'
@@ -16,7 +17,7 @@ import { C, field, fieldStyle } from './ui'
 // The website dashboard at /admin: traffic, live visitors, pages, conversions, contact messages,
 // job applications, team and settings. Data comes from /api/admin.php (PHP + MySQL on Hostinger).
 
-type Section = 'overview' | 'realtime' | 'pages' | 'events' | 'content' | 'announcement' | 'redirects' | 'media' | 'forms' | 'activity' | 'settings'
+type Section = 'overview' | 'realtime' | 'pages' | 'events' | 'content' | 'insights' | 'announcement' | 'redirects' | 'media' | 'forms' | 'activity' | 'settings'
 type Me = { user: User; badges: { inbox: number; careers: number; forms: number; drafts: number; broken: number }; timezone: string }
 
 const NAV: { id: Section; label: string; icon: string; group: 'Analytics' | 'Website' | 'Admin' }[] = [
@@ -25,6 +26,7 @@ const NAV: { id: Section; label: string; icon: string; group: 'Analytics' | 'Web
   { id: 'pages', label: 'Pages', icon: 'M6 3h9l4 4v14H6zM14 3v5h5', group: 'Analytics' },
   { id: 'events', label: 'Clicks & goals', icon: 'M12 3l2.7 5.6 6.3.9-4.5 4.4 1 6.1-5.5-2.9L6.5 20l1-6.1L3 9.5l6.3-.9z', group: 'Analytics' },
   { id: 'content', label: 'Content', icon: 'M4 20h4L19 9l-4-4L4 16zM13.5 6.5l4 4', group: 'Website' },
+  { id: 'insights', label: 'Insights (blog)', icon: 'M4 4h12a4 4 0 0 1 4 4v12H8a4 4 0 0 1-4-4zM8 9h8M8 13h8M8 17h5', group: 'Website' },
   { id: 'forms', label: 'Forms', icon: 'M5 3h14v18H5zM9 8h6M9 12h6M9 16h4', group: 'Website' },
   { id: 'announcement', label: 'Announcement', icon: 'M3 11v2a1 1 0 0 0 1 1h2l5 4V6L6 10H4a1 1 0 0 0-1 1zM16 8a5 5 0 0 1 0 8', group: 'Website' },
   { id: 'redirects', label: 'Redirects & 404s', icon: 'M4 7h11l-3-3M20 17H9l3 3', group: 'Website' },
@@ -39,6 +41,7 @@ const TITLES: Record<Section, string> = {
   pages: 'Pages',
   events: 'Clicks & goals',
   content: 'Content',
+  insights: 'Insights',
   announcement: 'Announcement',
   redirects: 'Redirects & broken links',
   media: 'Media library',
@@ -279,6 +282,7 @@ export default function Dashboard() {
               onChange={loadMe}
             />
           )}
+          {route.section === 'insights' && <Insights user={me.user} rest={route.rest} tz={tz} />}
           {route.section === 'announcement' && <AnnouncementView user={me.user} />}
           {route.section === 'redirects' && <RedirectsView user={me.user} tz={tz} />}
           {route.section === 'media' && <MediaView user={me.user} />}

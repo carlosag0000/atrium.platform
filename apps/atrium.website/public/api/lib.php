@@ -19,7 +19,7 @@ if (!defined('PUBLIC_PAGE')) {
 }
 header('X-Content-Type-Options: nosniff');
 
-const SCHEMA_VERSION = '4';
+const SCHEMA_VERSION = '5';
 // CVs from the careers form live next to the original careers endpoint, behind "Require all denied".
 define('CV_DIR', dirname(__DIR__) . '/careers-api/uploads');
 const MAX_CV_BYTES = 5 * 1024 * 1024;
@@ -225,6 +225,35 @@ function migrate(PDO $pdo): void
         detail VARCHAR(500) NOT NULL DEFAULT '',
         INDEX (ts)
     ) $t");
+    // Insights / blog (schema 5).
+    $pdo->exec("CREATE TABLE IF NOT EXISTS posts (
+        id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+        slug VARCHAR(120) NOT NULL UNIQUE,
+        title VARCHAR(250) NOT NULL,
+        excerpt TEXT NULL,
+        content MEDIUMTEXT NOT NULL,
+        cover VARCHAR(500) NOT NULL DEFAULT '',
+        cover_alt VARCHAR(255) NOT NULL DEFAULT '',
+        category VARCHAR(80) NOT NULL DEFAULT '',
+        tags VARCHAR(500) NOT NULL DEFAULT '',
+        author VARCHAR(120) NOT NULL DEFAULT '',
+        seo_title VARCHAR(200) NOT NULL DEFAULT '',
+        seo_description VARCHAR(400) NOT NULL DEFAULT '',
+        focus_keyword VARCHAR(120) NOT NULL DEFAULT '',
+        status VARCHAR(12) NOT NULL DEFAULT 'draft',
+        published_at DATETIME NULL,
+        created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        updated_by VARCHAR(200) NOT NULL DEFAULT '',
+        INDEX (status, published_at), INDEX (category)
+    ) $t");
+    // Starter articles, saved as drafts for the team to review before publishing.
+    if ((int) $pdo->query('SELECT COUNT(*) FROM posts')->fetchColumn() === 0 && is_file(__DIR__ . '/seed_posts.php')) {
+        $ins = $pdo->prepare('INSERT INTO posts (slug, title, excerpt, content, category, tags, focus_keyword, seo_title, seo_description, author) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+        foreach (require __DIR__ . '/seed_posts.php' as $sp) {
+            $ins->execute([$sp['slug'], $sp['title'], $sp['excerpt'], $sp['content'], $sp['category'], $sp['tags'], $sp['keyword'], $sp['seo_title'], $sp['seo_description'], 'The Atrium team']);
+        }
+    }
     $cols = $pdo->query("SHOW COLUMNS FROM applications LIKE 'visitor'")->fetchAll();
     if (!$cols) {
         $pdo->exec("ALTER TABLE applications ADD COLUMN visitor CHAR(16) NOT NULL DEFAULT ''");

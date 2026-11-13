@@ -2,106 +2,118 @@
 
 import { type FormEvent, useCallback, useEffect, useRef, useState } from 'react'
 import { API, fmtAgo, fmtWhen, get, post, type User } from './api'
+import { type Announcement, BarView, DEFAULT_BAR } from '@/components/cms/CmsRuntime'
 import { Button, C, Card, Empty, Pill, Spinner, field, fieldStyle } from './ui'
 
 // Website → Announcement, Redirects & broken links, Media library.
 
 // ── Announcement ─────────────────────────────────────────────────────────────
 
-type Announcement = { on?: boolean; text?: string; link?: string; label?: string; tone?: 'mint' | 'dark' | 'amber' }
-const TONES = { mint: ['#b8e89a', '#042f34'], dark: ['#042f34', '#faf9f5'], amber: ['#ffc933', '#042f34'] } as const
+const TONES = { dark: '#042f34', mint: '#b8e89a', amber: '#ffc933' } as const
 
 export function AnnouncementView({ user }: { user: User }) {
   const [a, setA] = useState<Announcement | null>(null)
+  const [saved, setSaved] = useState(false)
   const [msg, setMsg] = useState('')
   useEffect(() => {
-    get<{ announcement: Announcement }>('cms_globals').then((d) => setA({ tone: 'mint', ...d.announcement }))
+    get<{ announcement: Announcement }>('cms_globals').then((d) => {
+      const has = d.announcement && Object.keys(d.announcement).length > 0
+      setSaved(has)
+      setA(has ? { style: 'banner', tone: 'dark', ...d.announcement } : DEFAULT_BAR)
+    })
   }, [])
   if (!a) return <Spinner />
   const canEdit = user.role !== 'viewer'
-  const [bg, fg] = TONES[a.tone ?? 'mint']
+  const toLocal = (iso?: string) => {
+    if (!iso) return ''
+    const d = new Date(iso)
+    const pad = (n: number) => String(n).padStart(2, '0')
+    return Number.isNaN(d.getTime()) ? '' : `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`
+  }
 
   async function save(e: FormEvent) {
     e.preventDefault()
     setMsg('')
     try {
       await post('cms_globals_save', { announcement: a })
+      setSaved(true)
       setMsg(a?.on ? 'Saved. The bar is live on every page.' : 'Saved. The bar is hidden.')
     } catch (err) {
-      setMsg((err as { code?: string }).code === 'link' ? 'The link must start with /, https://, mailto: or tel:' : 'Could not save.')
+      const code = (err as { code?: string }).code
+      setMsg(code === 'link' ? 'The link must start with /, https://, mailto: or tel:' : code === 'ends' ? 'Check the countdown date.' : 'Could not save.')
     }
   }
 
   return (
-    <div className="grid gap-4 xl:grid-cols-2">
-      <Card title="Announcement bar">
-        <form onSubmit={save} className="grid gap-3">
-          <p className="m-0 text-[0.85rem]" style={{ color: C.muted }}>
-            A small bar at the bottom of every page: a launch, a promo, an event, a job opening. Visitors can close it; it comes back when you change the text.
+    <div className="grid gap-4">
+      <Card title="Preview">
+        <div className="rounded-xl px-3 py-6" style={{ background: '#f3efe4', opacity: a.on ? 1 : 0.5 }}>
+          {a.text ? <BarView bar={a} preview onClose={() => {}} /> : <Empty>Write a message to see it here.</Empty>}
+        </div>
+        {!saved && (
+          <p className="m-0 mt-2 text-[0.8rem]" style={{ color: C.muted }}>
+            This is the default bar, promoting the Marketing Grader. It shows on the site until you save your own.
           </p>
-          <label className="flex items-center gap-2 text-[0.9rem] font-semibold" style={{ color: C.ink }}>
-            <input type="checkbox" checked={!!a.on} onChange={(e) => setA({ ...a, on: e.target.checked })} disabled={!canEdit} /> Show the bar on the website
+        )}
+      </Card>
+      <Card title="Bottom bar">
+        <form onSubmit={save} className="grid gap-4 md:grid-cols-2">
+          <label className="flex items-center gap-2 text-[0.9rem] font-semibold md:col-span-2" style={{ color: C.ink }}>
+            <input type="checkbox" checked={!!a.on} onChange={(e) => setA({ ...a, on: e.target.checked })} disabled={!canEdit} /> Show the bar on every page
           </label>
           <label className="grid gap-1 text-[0.85rem] font-medium" style={{ color: C.ink }}>
-            Message
-            <input value={a.text ?? ''} maxLength={200} onChange={(e) => setA({ ...a, text: e.target.value })} className={field} style={fieldStyle} placeholder="We're booking spring shoots — 3 spots left." disabled={!canEdit} />
+            Style
+            <select value={a.style ?? 'banner'} onChange={(e) => setA({ ...a, style: e.target.value as 'banner' | 'pill' })} className={field} style={fieldStyle} disabled={!canEdit}>
+              <option value="banner">Wide banner (big title, message, button)</option>
+              <option value="pill">Small pill (one line)</option>
+            </select>
           </label>
-          <div className="grid gap-3 sm:grid-cols-[2fr_1fr]">
-            <label className="grid gap-1 text-[0.85rem] font-medium" style={{ color: C.ink }}>
-              Button link <span className="font-normal opacity-60">(optional)</span>
-              <input value={a.link ?? ''} onChange={(e) => setA({ ...a, link: e.target.value })} className={field} style={fieldStyle} placeholder="/contact" disabled={!canEdit} />
-            </label>
-            <label className="grid gap-1 text-[0.85rem] font-medium" style={{ color: C.ink }}>
-              Button text
-              <input value={a.label ?? ''} maxLength={40} onChange={(e) => setA({ ...a, label: e.target.value })} className={field} style={fieldStyle} placeholder="Book now" disabled={!canEdit} />
-            </label>
-          </div>
-          <div className="flex flex-wrap items-center gap-2 text-[0.85rem]" style={{ color: C.ink }}>
-            Color:
-            {(Object.keys(TONES) as (keyof typeof TONES)[]).map((t) => (
-              <button
-                key={t}
-                type="button"
-                onClick={() => setA({ ...a, tone: t })}
-                className="h-7 w-7 rounded-full"
-                aria-label={t}
-                aria-pressed={a.tone === t}
-                style={{ background: TONES[t][0], border: a.tone === t ? `3px solid ${C.ink}` : `1px solid ${C.line}` }}
-                disabled={!canEdit}
-              />
-            ))}
+          <label className="grid gap-1 text-[0.85rem] font-medium" style={{ color: C.ink }}>
+            Big title {a.style === 'pill' && <span className="font-normal opacity-60">(banner only)</span>}
+            <input value={a.title ?? ''} maxLength={60} onChange={(e) => setA({ ...a, title: e.target.value })} placeholder="Marketing Grader" className={field} style={fieldStyle} disabled={!canEdit} />
+          </label>
+          <label className="grid gap-1 text-[0.85rem] font-medium md:col-span-2" style={{ color: C.ink }}>
+            Message
+            <input value={a.text ?? ''} maxLength={200} onChange={(e) => setA({ ...a, text: e.target.value })} className={field} style={fieldStyle} disabled={!canEdit} />
+          </label>
+          <label className="grid gap-1 text-[0.85rem] font-medium" style={{ color: C.ink }}>
+            Button link
+            <input value={a.link ?? ''} onChange={(e) => setA({ ...a, link: e.target.value })} placeholder="https://grader.atriumad.com" className={field} style={fieldStyle} disabled={!canEdit} />
+          </label>
+          <label className="grid gap-1 text-[0.85rem] font-medium" style={{ color: C.ink }}>
+            Button text
+            <input value={a.label ?? ''} maxLength={40} onChange={(e) => setA({ ...a, label: e.target.value })} placeholder="Get my free score" className={field} style={fieldStyle} disabled={!canEdit} />
+          </label>
+          <label className="grid gap-1 text-[0.85rem] font-medium" style={{ color: C.ink }}>
+            Countdown to <span className="font-normal opacity-60">(optional — the bar hides itself when it ends)</span>
+            <input type="datetime-local" value={toLocal(a.ends)} onChange={(e) => setA({ ...a, ends: e.target.value ? new Date(e.target.value).toISOString() : '' })} className={field} style={fieldStyle} disabled={!canEdit} />
+          </label>
+          <div className="grid content-start gap-1 text-[0.85rem] font-medium" style={{ color: C.ink }}>
+            Color
+            <div className="flex items-center gap-2">
+              {(Object.keys(TONES) as (keyof typeof TONES)[]).map((t) => (
+                <button
+                  key={t}
+                  type="button"
+                  onClick={() => setA({ ...a, tone: t })}
+                  className="h-8 w-8 rounded-full"
+                  aria-label={t}
+                  aria-pressed={a.tone === t}
+                  style={{ background: TONES[t], border: a.tone === t ? '3px solid #1e8c7c' : `1px solid ${C.line}` }}
+                  disabled={!canEdit}
+                />
+              ))}
+            </div>
           </div>
           {canEdit && (
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 md:col-span-2">
               <Button type="submit">Save</Button>
-              <span className="text-[0.85rem]" style={{ color: C.up }}>
+              <span className="text-[0.85rem]" style={{ color: msg.startsWith('Saved') ? C.up : C.down }}>
                 {msg}
               </span>
             </div>
           )}
         </form>
-      </Card>
-      <Card title="Preview">
-        <div className="grid min-h-48 place-items-end justify-center rounded-xl p-4" style={{ background: '#f3efe4' }}>
-          {a.text ? (
-            <div className="flex max-w-full items-center gap-3 rounded-full py-2 pr-2 pl-5 text-[0.9rem] shadow-lg" style={{ background: bg, color: fg, opacity: a.on ? 1 : 0.45 }}>
-              <span>{a.text}</span>
-              {a.link && (
-                <span className="rounded-full px-3 py-1 font-semibold" style={{ background: fg, color: bg }}>
-                  {a.label || 'Learn more'}
-                </span>
-              )}
-              <span className="px-2 opacity-70">✕</span>
-            </div>
-          ) : (
-            <Empty>Write a message to see it here.</Empty>
-          )}
-        </div>
-        {!a.on && a.text && (
-          <p className="m-0 mt-2 text-[0.8rem]" style={{ color: C.muted }}>
-            Hidden on the website until you tick “Show the bar”.
-          </p>
-        )}
       </Card>
     </div>
   )
@@ -494,6 +506,8 @@ const ACTION_LABELS: Record<string, string> = {
   'team.remove': 'Removed a team member',
   'team.role': 'Changed a role',
   'settings.save': 'Changed settings',
+  'insights.save': 'Saved an article',
+  'insights.delete': 'Deleted an article',
 }
 
 export function ActivityView({ tz }: { tz?: string | undefined }) {

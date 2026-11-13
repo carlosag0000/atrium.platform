@@ -28,6 +28,7 @@ const companyLinks = [
   { label: 'Our Work', href: '/work' },
   { label: 'Pricing', href: '/pricing' },
   { label: 'About', href: '/about' },
+  { label: 'Insights', href: '/insights' },
   { label: 'Resources', href: '/resources' },
   { label: 'Contact', href: '/contact' },
 ]

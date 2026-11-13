@@ -5,6 +5,7 @@ declare(strict_types=1);
 require __DIR__ . '/lib.php';
 require __DIR__ . '/stats.php';
 require __DIR__ . '/cms.php';
+require __DIR__ . '/blog.php';
 
 const INBOX_STATUSES = ['new', 'contacted', 'qualified', 'won', 'lost', 'spam', 'archived'];
 const CAREER_STATUSES = ['nuevo', 'revisar', 'entrevista', 'finalista', 'descartado', 'contratado'];

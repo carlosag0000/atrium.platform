@@ -7,6 +7,7 @@ import { CTA } from '@/lib/cta'
 import MegaMenu from './MegaMenu'
 import { PillCTA } from './PillCTA'
 import TransitionLink from './TransitionLink'
+import ResourcesMenu, { RESOURCE_LINKS } from './ResourcesMenu'
 
 // ─── Icons ────────────────────────────────────────────────────────────────────
 const icons: Record<string, React.ReactNode> = {
@@ -268,7 +269,8 @@ export default function Navbar() {
       <nav className="hidden gap-8 justify-self-center items-center md:flex">
         <MegaMenu label="Services" textColor={navTextColor} />
 
-        {otherLinks.map((link) => (
+        {otherLinks.map((link, i) => [
+          i === 1 ? <ResourcesMenu key="resources" textColor={navTextColor} /> : null,
           <TransitionLink
             key={link.href}
             href={link.href}
@@ -276,8 +278,8 @@ export default function Navbar() {
             style={{ color: navTextColor }}
           >
             {link.label}
-          </TransitionLink>
-        ))}
+          </TransitionLink>,
+        ])}
       </nav>
 
       {/* Right column — CTA on desktop, menu toggle on mobile */}
@@ -349,6 +351,25 @@ export default function Navbar() {
             {leftGroup.services.map((svc) => (
               <ServiceItem key={svc.href} svc={svc} onClose={closeMobile} />
             ))}
+          </div>
+
+          <div className="flex flex-col gap-1">
+            <p className="type-eyebrow mb-3" style={{ color: 'var(--color-accent)', opacity: 0.55 }}>
+              Resources
+            </p>
+            {RESOURCE_LINKS.map((r) =>
+              r.external ? (
+                <a key={r.href} href={r.href} target="_blank" rel="noopener" onClick={closeMobile} className="flex flex-col gap-0.5 rounded-lg px-2 py-2 -mx-2 hover:bg-white/5" style={{ color: 'var(--color-surface)' }}>
+                  <span className="text-sm">{r.label} ↗</span>
+                  <span className="text-xs" style={{ opacity: 0.4 }}>{r.desc}</span>
+                </a>
+              ) : (
+                <TransitionLink key={r.href} href={r.href} onClick={closeMobile} className="flex flex-col gap-0.5 rounded-lg px-2 py-2 -mx-2 hover:bg-white/5" style={{ color: 'var(--color-surface)' }}>
+                  <span className="text-sm">{r.label}</span>
+                  <span className="text-xs" style={{ opacity: 0.4 }}>{r.desc}</span>
+                </TransitionLink>
+              ),
+            )}
           </div>
 
           {rightGroups.map((group) => (

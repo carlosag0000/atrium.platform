@@ -19,6 +19,17 @@ if (!$is404) {
     }
 }
 $path = $file ? ($p === '' ? '/' : '/' . trim($p, '/')) : $uri;
+// Insights articles: /insights/<slug> is served from the /insights/post shell (see /.htaccess).
+$slug = '';
+if ($p === 'insights/post') {
+    $slug = preg_match('/^[a-z0-9-]{1,120}$/', (string) ($_GET['slug'] ?? '')) ? (string) $_GET['slug'] : '';
+    if ($slug === '' || $slug === 'post') {
+        $file = null;
+        $path = $uri;
+    } else {
+        $path = '/insights/' . $slug;
+    }
+}
 $status = $file ? 200 : 404;
 $file ??= $root . '/404.html';
 
@@ -33,6 +44,21 @@ function send_plain(string $file, int $status): void
 try {
     require __DIR__ . '/lib.php';
     require __DIR__ . '/cms.php';
+    require __DIR__ . '/blog.php';
+
+    $draft = ($_GET['cms'] ?? '') === 'draft' && current_user() !== null;
+
+    // Insights pages get their content from the posts table.
+    $insights = null;
+    if ($slug !== '' && $status === 200) {
+        $insights = insight_post($slug, $draft);
+        if ($insights === null) {
+            $status = 404;
+            $file = $root . '/404.html';
+        }
+    } elseif ($path === '/insights' && $status === 200) {
+        $insights = insights_index(preg_replace('/[^a-z0-9-]/', '', (string) ($_GET['category'] ?? '')) ?? '', (int) ($_GET['page'] ?? 1));
+    }
 
     // Redirects managed in the dashboard (Website → Redirects).
     $q = db()->prepare('SELECT id, to_url, code FROM redirects WHERE from_path = ? OR from_path = ? LIMIT 1');
@@ -53,17 +79,18 @@ try {
             ->execute([$path, $ref]);
     }
 
-    $draft = ($_GET['cms'] ?? '') === 'draft' && current_user() !== null;
-
     // Live pages are cached until the next publish or deploy.
     $version = (string) (db()->query("SELECT v FROM settings WHERE k = 'cms_version'")->fetchColumn() ?: '0');
     $cacheDir = __DIR__ . '/cache';
-    $cacheFile = $cacheDir . '/' . md5($file . '|' . filemtime($file) . '|' . $version . '|' . $path) . '.html';
+    $cacheFile = $cacheDir . '/' . md5($file . '|' . filemtime($file) . '|' . $version . '|' . $path . ($insights !== null ? '|' . ($_GET['category'] ?? '') . '|' . ($_GET['page'] ?? '') . '|' . gmdate('YmdH') : '')) . '.html';
     if (!$draft && is_file($cacheFile)) {
         send_plain($cacheFile, $status);
     }
 
     $html = render_page((string) file_get_contents($file), $file === $root . '/404.html' ? '/404' : $path, $draft);
+    if ($insights !== null) {
+        $html = fill_insights_shell($html, $insights, $slug !== '' ? 'post' : 'list');
+    }
     if ($draft) {
         $html = preg_replace('#</head>#', '<meta name="robots" content="noindex, nofollow"/></head>', $html, 1) ?? $html;
         header('Cache-Control: no-store');
