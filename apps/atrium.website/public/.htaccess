@@ -9,7 +9,10 @@ DirectorySlash Off
   RewriteEngine On
 
   # Force HTTPS and the www host (the canonical address, as on Vercel).
-  RewriteCond %{HTTPS} off [OR]
+  # (On the VPS, HTTPS ends at Caddy, which says so in X-Forwarded-Proto.)
+  RewriteCond %{HTTPS} off
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteRule ^ https://www.atriumad.com%{REQUEST_URI} [L,R=301]
   RewriteCond %{HTTP_HOST} ^atriumad\.com$ [NC]
   RewriteRule ^ https://www.atriumad.com%{REQUEST_URI} [L,R=301]
 

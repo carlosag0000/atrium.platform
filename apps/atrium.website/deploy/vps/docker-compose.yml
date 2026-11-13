@@ -1,0 +1,48 @@
+# www.atriumad.com + cdn.atriumad.com on the Atrium VPS. Lives in /opt/atriumsite/deploy.
+# The project name must stay "atriumsite" so it never mixes with the Atrium app's "deploy" project.
+name: atriumsite
+
+services:
+  db:
+    image: mariadb:11.8
+    restart: unless-stopped
+    environment:
+      MARIADB_DATABASE: atriumsite
+      MARIADB_USER: atriumsite
+      MARIADB_PASSWORD: ${DB_PASSWORD}
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  web:
+    build: .
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      SMTP_HOST: ${SMTP_HOST:-}
+      SMTP_PORT: ${SMTP_PORT:-587}
+      SMTP_USER: ${SMTP_USER:-}
+      SMTP_PASS: ${SMTP_PASS:-}
+      SMTP_FROM: ${SMTP_FROM:-no-reply@atriumad.com}
+    volumes:
+      - /opt/atriumsite/public:/var/www/html
+      - /opt/atriumsite/cdn:/var/www/cdn:ro
+    networks:
+      default:
+      proxy:
+        aliases: [atriumsite-web]
+
+volumes:
+  db_data:
+
+networks:
+  proxy:
+    external: true
+    name: deploy_default
