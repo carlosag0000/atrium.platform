@@ -1,7 +1,7 @@
 import { Eyebrow } from '@atrium/ui'
 import E from '@/components/cms/Editable'
 
-type FAQItem = {
+export type FAQItem = {
   question: string
   answer: string
   signal: string
@@ -65,6 +65,8 @@ type Props = {
   intro?: string
   limit?: number
   dark?: boolean
+  /** Questions for this page; defaults to the buying questions. */
+  items?: FAQItem[] | undefined
 }
 
 export default function PurchaseFAQ({
@@ -72,8 +74,10 @@ export default function PurchaseFAQ({
   intro = 'Clear scope, clear ownership, clear measurement. If the answer depends on your operation, we say that before the proposal—not after the invoice.',
   limit,
   dark = false,
+  items: custom,
 }: Props) {
-  const items = limit ? purchaseQuestions.slice(0, limit) : purchaseQuestions
+  const source = custom ?? purchaseQuestions
+  const items = limit ? source.slice(0, limit) : source
 
   return (
     <section className={`px-[var(--gutter)] py-24 md:py-36 ${dark ? 'bg-dark' : 'bg-cream'}`}>

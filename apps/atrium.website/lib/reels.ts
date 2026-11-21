@@ -60,3 +60,12 @@ export function reelDelivery(src: string): ReelDelivery {
 /** How many of the CDN's reels currently have a web variant. Reported by the
  *  encode script and asserted in tests. */
 export const optimizedReelCount = entries.length
+
+/** Find a delivered reel by part of its file name (case and non-breaking spaces ignored).
+ *  Returns the source URL to hand to <LazyVideo>, or undefined when no reel matches. */
+export function findReel(match: string): string | undefined {
+  const norm = (s: string) => s.replace(/ /g, ' ').toLowerCase()
+  const want = norm(match)
+  const entry = entries.find((e) => norm(e.source).includes(want))
+  return entry ? `${BASE}${entry.source}` : undefined
+}

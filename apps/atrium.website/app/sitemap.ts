@@ -9,6 +9,7 @@ const STATIC_ROUTES = [
   '/about',
   '/contact',
   '/insights',
+  '/services/social-media',
   '/pricing',
   '/resources',
   '/services',
@@ -21,7 +22,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: new Date(),
   }))
 
-  const serviceEntries: MetadataRoute.Sitemap = services.map((svc) => ({
+  // social-content and social-management redirect to /services/social-media (listed above).
+  const serviceEntries: MetadataRoute.Sitemap = services.filter((svc) => !['social-content', 'social-management'].includes(svc.slug)).map((svc) => ({
     url: `${SITE_URL}/services/${svc.slug}`,
     lastModified: new Date(),
   }))

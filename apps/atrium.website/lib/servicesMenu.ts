@@ -26,7 +26,7 @@ export const SERVICE_MENU: MenuColumn[] = [
         name: 'Attention',
         services: [
           { name: 'Photo and Video Production', line: 'Shot on location, in your kitchen', href: '/services/film-photo', icon: 'Clapperboard' },
-          { name: 'Social Media and Content', line: 'Posts that make people hungry', href: '/services/social-content', icon: 'Sparkles' },
+          { name: 'Social Media and Content', line: 'Posts that make people hungry', href: '/services/social-media', icon: 'Sparkles' },
           { name: 'Local Creators and UGC', line: 'Food creators who visit and post', href: 'https://forkandfilm.com', icon: 'Users', external: true },
           { name: 'Branding and Creative', line: 'How you look and sound', href: '/services/brand-strategy', icon: 'Compass' },
         ],

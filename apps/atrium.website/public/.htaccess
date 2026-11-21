@@ -19,6 +19,9 @@ DirectorySlash Off
   # /process was a public URL before the page was removed.
   RewriteRule ^process/?$ /services [L,R=301]
 
+  # The two social pages became one: Social Media and Content.
+  RewriteRule ^services/(social-content|social-management)/?$ /services/social-media [L,R=301]
+
   # The careers admin moved into the website dashboard.
   RewriteRule ^careers/admin/?$ /admin#careers [L,R=301,NE]
 
