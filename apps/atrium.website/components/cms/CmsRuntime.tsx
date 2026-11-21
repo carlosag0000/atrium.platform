@@ -69,7 +69,7 @@ export function BarView({ bar, onClose, preview = false }: { bar: Announcement; 
   const accent = tone === 'dark' ? '#b8e89a' : '#042f34'
   const external = /^https?:\/\//.test(bar.link ?? '') && !/atriumad\.com\/(?!$)/.test('')
   const countdown = left(bar.ends)
-  const wrap = preview ? 'relative flex justify-center' : 'fixed inset-x-0 bottom-3 z-[60] flex justify-center px-3 md:bottom-5'
+  const wrap = preview ? 'relative flex justify-center' : 'fixed inset-x-0 bottom-3 z-40 flex justify-center px-3 md:bottom-5'
 
   if ((bar.style ?? 'banner') === 'pill') {
     return (

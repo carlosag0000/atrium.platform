@@ -1,52 +1,66 @@
 'use client'
 
 import {
+  Activity,
   ArrowUpRight,
   Clapperboard,
+  ClipboardCheck,
   Compass,
+  Gauge,
+  Globe,
   HeartHandshake,
+  HeartPulse,
+  LayoutGrid,
   LineChart,
   Mail,
+  Map as MapIcon,
   MapPin,
-  MessageCircle,
+  PartyPopper,
   Sparkles,
   Star,
+  Swords,
   Target,
   Users,
 } from 'lucide-react'
-import { useEffect, useRef, useState } from 'react'
-import { services } from '@/lib/services'
+import { type ReactNode, useEffect, useRef, useState } from 'react'
+import { type MenuIcon, SERVICE_MENU, SERVICE_MENU_FOOTER } from '@/lib/servicesMenu'
 import TransitionLink from './TransitionLink'
 
-const MENU_ICONS: Record<string, typeof Compass> = {
+const MENU_ICONS: Record<MenuIcon, typeof Compass> = {
+  MapPin,
+  Globe,
   Clapperboard,
+  Sparkles,
+  Users,
   Compass,
+  Target,
+  PartyPopper,
+  Star,
+  ClipboardCheck,
+  Mail,
   HeartHandshake,
   LineChart,
-  Mail,
-  MapPin,
-  MessageCircle,
-  Sparkles,
-  Star,
-  Target,
-  Users,
+  Map: MapIcon,
+  Swords,
+  Activity,
+  HeartPulse,
 }
 
-// Each stage heading is a filled pill in its own colour, so the ink is paired
-// per stage rather than assumed — the two light fills carry charcoal, the dark
-// one carries cream. Contrast against the fill is computed, not eyeballed:
-// lime 11.5:1, amber 10.4:1, green 5.3:1. Recheck these if the palette moves.
-const MENU_CATEGORIES = [
-  { category: 'Generate Demand', pillClass: 'bg-lime text-charcoal' },
-  { category: 'Convert Demand', pillClass: 'bg-amber text-charcoal' },
-  { category: 'Retain Demand', pillClass: 'bg-green text-cream' },
-] as const
-
-const menuColumns = MENU_CATEGORIES.map(({ category, pillClass }) => ({
-  category,
-  pillClass,
-  services: services.filter((svc) => svc.category === category),
-}))
+// Internal links use the page transition; external ones (Fork & Film, the Grader) open in a new tab.
+function MenuLink({ href, external, className, onClick, children }: { href: string; external?: boolean | undefined; className: string; onClick: () => void; children: ReactNode }) {
+  if (external) {
+    return (
+      <a className={className} href={href} onClick={onClick} rel="noopener" role="menuitem" target="_blank">
+        {children}
+      </a>
+    )
+  }
+  return (
+    <TransitionLink className={className} href={href} onClick={onClick} role="menuitem">
+      {children}
+    </TransitionLink>
+  )
+}
 
 /** The full-bleed services menu, kept as its own component so it can run beside
  *  the Navbar's existing dropdown while the two are compared. It owns its
@@ -157,55 +171,71 @@ export default function MegaMenu({
         role="menu"
       >
         <div className="border-line border-b bg-cream shadow-float">
-          <div className="mx-auto grid max-w-[var(--container-max)] grid-cols-3 gap-10 px-[var(--gutter)] py-12">
-            {menuColumns.map((column) => (
-              <div className="flex flex-col" key={column.category}>
-                <TransitionLink
-                  className={`group mb-6 inline-flex w-fit items-center gap-2 self-start rounded-full px-4 py-2 no-underline transition-opacity duration-200 hover:opacity-90 ${column.pillClass}`}
-                  href="/services"
-                  onClick={close}
-                  role="menuitem"
-                >
-                  <span className="font-serif text-[1.4rem] leading-none transition-transform duration-200 group-hover:translate-x-0.5">
-                    {column.category}
-                  </span>
-                  <ArrowUpRight aria-hidden="true" className="h-4 w-4 opacity-70" strokeWidth={1.75} />
-                </TransitionLink>
-
-                <div className="flex flex-col divide-y divide-line">
-                  {column.services.map((svc) => {
-                    const Icon = MENU_ICONS[svc.menu.icon]
-                    return (
+          <div className="mx-auto max-w-[var(--container-max)] px-[var(--gutter)] pt-10">
+            <div className="grid grid-cols-3 gap-10">
+              {SERVICE_MENU.map((column) => (
+                <div className="flex flex-col gap-7" key={column.engines[0]?.name}>
+                  {column.engines.map((engine) => (
+                    <div className="flex flex-col" key={engine.name}>
                       <TransitionLink
-                        className="group relative flex items-center gap-4 py-3.5 pl-5 no-underline"
-                        href={`/services/${svc.slug}`}
-                        key={svc.slug}
+                        className={`group mb-3 inline-flex w-fit items-center gap-2 self-start rounded-full px-4 py-2 no-underline transition-opacity duration-200 hover:opacity-90 ${column.pillClass}`}
+                        href="/services"
                         onClick={close}
                         role="menuitem"
                       >
-                        <span
-                          aria-hidden="true"
-                          className="-translate-y-1/2 absolute top-1/2 left-0 h-1.5 w-1.5 rounded-full bg-green opacity-0 transition-opacity duration-200 group-hover:opacity-100"
-                        />
-                        <span className="flex min-w-0 flex-1 flex-col gap-1 transition-transform duration-200 group-hover:translate-x-1">
-                          <span className="text-charcoal text-sm leading-tight">
-                            {svc.name}
-                          </span>
-                          <span className="text-muted text-xs leading-snug">{svc.menu.blurb}</span>
+                        <span className="font-serif text-[1.3rem] leading-none transition-transform duration-200 group-hover:translate-x-0.5">
+                          {engine.name}
                         </span>
-                        {Icon && (
-                          <Icon
-                            aria-hidden="true"
-                            className="h-4 w-4 flex-shrink-0 text-muted"
-                            strokeWidth={1.5}
-                          />
-                        )}
+                        <ArrowUpRight aria-hidden="true" className="h-4 w-4 opacity-70" strokeWidth={1.75} />
                       </TransitionLink>
-                    )
-                  })}
+                      <div className="flex flex-col divide-y divide-line">
+                        {engine.services.map((svc) => {
+                          const Icon = MENU_ICONS[svc.icon]
+                          return (
+                            <MenuLink
+                              className="group relative flex items-center gap-4 py-3 pl-5 no-underline"
+                              external={svc.external}
+                              href={svc.href}
+                              key={svc.name}
+                              onClick={close}
+                            >
+                              <span
+                                aria-hidden="true"
+                                className="-translate-y-1/2 absolute top-1/2 left-0 h-1.5 w-1.5 rounded-full bg-green opacity-0 transition-opacity duration-200 group-hover:opacity-100"
+                              />
+                              <span className="flex min-w-0 flex-1 flex-col gap-1 transition-transform duration-200 group-hover:translate-x-1">
+                                <span className="text-charcoal text-sm leading-tight">{svc.name}</span>
+                                <span className="text-muted text-xs leading-snug">{svc.line}</span>
+                              </span>
+                              {svc.external ? (
+                                <ArrowUpRight aria-hidden="true" className="h-4 w-4 flex-shrink-0 text-muted" strokeWidth={1.5} />
+                              ) : (
+                                <Icon aria-hidden="true" className="h-4 w-4 flex-shrink-0 text-muted" strokeWidth={1.5} />
+                              )}
+                            </MenuLink>
+                          )
+                        })}
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
+            <div className="mt-8 grid grid-cols-2 gap-10 border-line border-t py-5">
+              {SERVICE_MENU_FOOTER.map((f) => {
+                const Icon = f.external ? Gauge : LayoutGrid
+                return (
+                  <MenuLink className="group flex items-center gap-3 no-underline" external={f.external} href={f.href} key={f.name} onClick={close}>
+                    <Icon aria-hidden="true" className="h-5 w-5 flex-shrink-0 text-green" strokeWidth={1.5} />
+                    <span className="flex flex-col gap-0.5">
+                      <span className="text-charcoal text-sm leading-tight transition-opacity group-hover:opacity-70">{f.name}</span>
+                      <span className="text-muted text-xs">{f.line}</span>
+                    </span>
+                    <ArrowUpRight aria-hidden="true" className="ml-auto h-4 w-4 text-muted opacity-0 transition-opacity group-hover:opacity-100" strokeWidth={1.5} />
+                  </MenuLink>
+                )
+              })}
+            </div>
           </div>
         </div>
       </div>

@@ -4,174 +4,19 @@ import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 import { CTA } from '@/lib/cta'
+import { SERVICE_MENU } from '@/lib/servicesMenu'
 import MegaMenu from './MegaMenu'
 import { PillCTA } from './PillCTA'
-import TransitionLink from './TransitionLink'
 import ResourcesMenu, { RESOURCE_LINKS } from './ResourcesMenu'
+import TransitionLink from './TransitionLink'
 
 // ─── Icons ────────────────────────────────────────────────────────────────────
-const icons: Record<string, React.ReactNode> = {
-  gem: (
-    <svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16" fill="none">
-      <path d="M3 6L8 14L13 6L10.5 2H5.5L3 6Z" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round" />
-      <path d="M3 6H13M5.5 2L8 6L10.5 2" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round" />
-    </svg>
-  ),
-  camera: (
-    <svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16" fill="none">
-      <rect x="1" y="5" width="14" height="9" rx="1.5" stroke="currentColor" strokeWidth="1.4" />
-      <circle cx="8" cy="9.5" r="2.5" stroke="currentColor" strokeWidth="1.4" />
-      <path d="M5.5 5V4C5.5 3.4 6 3 6.5 3H9.5C10 3 10.5 3.4 10.5 4V5" stroke="currentColor" strokeWidth="1.4" />
-    </svg>
-  ),
-  grid: (
-    <svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16" fill="none">
-      <rect x="1" y="1" width="6" height="6" rx="1" stroke="currentColor" strokeWidth="1.4" />
-      <rect x="9" y="1" width="6" height="6" rx="1" stroke="currentColor" strokeWidth="1.4" />
-      <rect x="1" y="9" width="6" height="6" rx="1" stroke="currentColor" strokeWidth="1.4" />
-      <rect x="9" y="9" width="6" height="6" rx="1" stroke="currentColor" strokeWidth="1.4" />
-    </svg>
-  ),
-  chat: (
-    <svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16" fill="none">
-      <path d="M2 2H14C14.6 2 15 2.4 15 3V10C15 10.6 14.6 11 14 11H5L1 15V3C1 2.4 1.4 2 2 2Z" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round" />
-    </svg>
-  ),
-  target: (
-    <svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16" fill="none">
-      <circle cx="8" cy="8" r="7" stroke="currentColor" strokeWidth="1.4" />
-      <circle cx="8" cy="8" r="4" stroke="currentColor" strokeWidth="1.4" />
-      <circle cx="8" cy="8" r="1.5" fill="currentColor" />
-    </svg>
-  ),
-  search: (
-    <svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16" fill="none">
-      <circle cx="6.5" cy="6.5" r="5" stroke="currentColor" strokeWidth="1.4" />
-      <path d="M10.5 10.5L14.5 14.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
-    </svg>
-  ),
-  star: (
-    <svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16" fill="none">
-      <path d="M8 1L10 6H15L11 9L12.5 14.5L8 11.5L3.5 14.5L5 9L1 6H6L8 1Z" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round" />
-    </svg>
-  ),
-  sparkle: (
-    <svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16" fill="none">
-      <path d="M8 1V4M8 12V15M1 8H4M12 8H15M3.5 3.5L5.5 5.5M10.5 10.5L12.5 12.5M12.5 3.5L10.5 5.5M5.5 10.5L3.5 12.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
-      <circle cx="8" cy="8" r="2.5" stroke="currentColor" strokeWidth="1.4" />
-    </svg>
-  ),
-  mail: (
-    <svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16" fill="none">
-      <rect x="1" y="3" width="14" height="10" rx="1.5" stroke="currentColor" strokeWidth="1.4" />
-      <path d="M1 4L8 9L15 4" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round" />
-    </svg>
-  ),
-  users: (
-    <svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16" fill="none">
-      <circle cx="5.5" cy="5" r="2.5" stroke="currentColor" strokeWidth="1.4" />
-      <path d="M1 13C1 10.8 3 9 5.5 9S10 10.8 10 13" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
-      <circle cx="11" cy="5" r="2" stroke="currentColor" strokeWidth="1.4" />
-      <path d="M13 13C13 11.3 12 10 11 9.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
-    </svg>
-  ),
-  chart: (
-    <svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16" fill="none">
-      <path d="M1 14H15" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
-      <rect x="2" y="8" width="3" height="6" rx="0.5" stroke="currentColor" strokeWidth="1.4" />
-      <rect x="6.5" y="4" width="3" height="10" rx="0.5" stroke="currentColor" strokeWidth="1.4" />
-      <rect x="11" y="1" width="3" height="13" rx="0.5" stroke="currentColor" strokeWidth="1.4" />
-    </svg>
-  ),
-}
-
-// ─── Service data ──────────────────────────────────────────────────────────────
-const leftGroup = {
-  label: 'Generate Demand',
-  services: [
-    { label: 'Brand Strategy & Creative Direction', href: '/services/brand-strategy', desc: 'Identity, voice, and visual system', icon: 'gem' },
-    { label: 'Film & Photo Production', href: '/services/film-photo', desc: 'Cinematic content for every channel', icon: 'camera' },
-    { label: 'Social Content', href: '/services/social-content', desc: 'Scroll-stopping creative at scale', icon: 'grid' },
-    { label: 'Social Media Management', href: '/services/social-management', desc: 'Always-on channel management', icon: 'chat' },
-    { label: 'Paid Media Strategies', href: '/services/paid-media', desc: 'Campaigns that drive real revenue', icon: 'target' },
-  ],
-}
-
-const rightGroups = [
-  {
-    label: 'Convert Demand',
-    services: [
-      { label: 'Google & Local SEO', href: '/services/google-seo', desc: 'Dominate local search and maps', icon: 'search' },
-      { label: 'Reputation Management & Reviews', href: '/services/reputation', desc: 'Turn reviews into a growth engine', icon: 'star' },
-      { label: 'Experiential & Collabs', href: '/services/experiential', desc: 'Events and partnerships that convert', icon: 'sparkle' },
-    ],
-  },
-  {
-    label: 'Retain Demand',
-    services: [
-      { label: 'Email & SMS Marketing', href: '/services/email-sms', desc: 'Direct channels that retain guests', icon: 'mail' },
-      { label: 'CRM & Loyalty', href: '/services/crm-loyalty', desc: 'Systems that bring guests back', icon: 'users' },
-    ],
-  },
-  {
-    // Transversal layer — measures Generate, Convert and Retain (doc vs.md §2.3 / §6).
-    label: 'Measure & Optimize',
-    services: [
-      { label: 'Analytics & Reporting', href: '/services/analytics', desc: 'One dashboard across every stage', icon: 'chart' },
-    ],
-  },
-]
 
 const otherLinks = [
   { label: 'Our Work', href: '/work' },
   { label: 'Pricing', href: '/pricing' },
   { label: 'About', href: '/about' },
 ]
-
-// ─── Service item ──────────────────────────────────────────────────────────────
-function ServiceItem({
-  svc,
-  onClose,
-  tone = 'dark',
-}: {
-  svc: { label: string; href: string; desc: string; icon: string }
-  onClose: () => void
-  /** The mobile panel stays dark; the desktop menu is light. */
-  tone?: 'dark' | 'light'
-}) {
-  const light = tone === 'light'
-  return (
-    <TransitionLink
-      href={svc.href}
-      onClick={onClose}
-      className={`flex gap-3 items-start px-2 py-2 -mx-2 rounded-lg transition-colors group ${light ? 'hover:bg-black/[0.04]' : 'hover:bg-white/5'}`}
-      style={{ color: light ? 'var(--text-strong)' : 'var(--color-surface)' }}
-    >
-      <span
-        className="mt-0.5 w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors group-hover:bg-[color-mix(in_srgb,var(--mint-400)_18%,transparent)]"
-        style={{
-          background: light
-            ? 'color-mix(in srgb, var(--stage-generate) 14%, transparent)'
-            : 'color-mix(in srgb, var(--mint-400) 9%, transparent)',
-          color: light ? 'var(--stage-retain)' : 'var(--color-accent)',
-        }}
-      >
-        {icons[svc.icon]}
-      </span>
-      <span className="flex flex-col gap-0.5 min-w-0">
-        <span className="text-sm leading-tight transition-opacity group-hover:opacity-70">
-          {svc.label}
-        </span>
-        <span
-          className="text-xs leading-tight"
-          style={light ? { color: 'var(--text-muted)' } : { color: 'var(--color-surface)', opacity: 0.4 }}
-        >
-          {svc.desc}
-        </span>
-      </span>
-    </TransitionLink>
-  )
-}
 
 // ─── Navbar ────────────────────────────────────────────────────────────────────
 export default function Navbar() {
@@ -341,17 +186,26 @@ export default function Navbar() {
             ))}
           </div>
 
-          <div className="flex flex-col gap-1">
-            <p
-              className="type-eyebrow mb-3"
-              style={{ color: 'var(--color-accent)', opacity: 0.55 }}
-            >
-              {leftGroup.label}
-            </p>
-            {leftGroup.services.map((svc) => (
-              <ServiceItem key={svc.href} svc={svc} onClose={closeMobile} />
-            ))}
-          </div>
+          {SERVICE_MENU.flatMap((column) => column.engines).map((engine) => (
+            <div key={engine.name} className="flex flex-col gap-1">
+              <p className="type-eyebrow mb-3" style={{ color: 'var(--color-accent)', opacity: 0.55 }}>
+                {engine.name}
+              </p>
+              {engine.services.map((svc) =>
+                svc.external ? (
+                  <a key={svc.name} href={svc.href} target="_blank" rel="noopener" onClick={closeMobile} className="flex flex-col gap-0.5 rounded-lg px-2 py-2 -mx-2 hover:bg-white/5" style={{ color: 'var(--color-surface)' }}>
+                    <span className="text-sm">{svc.name} ↗</span>
+                    <span className="text-xs" style={{ opacity: 0.4 }}>{svc.line}</span>
+                  </a>
+                ) : (
+                  <TransitionLink key={svc.name} href={svc.href} onClick={closeMobile} className="flex flex-col gap-0.5 rounded-lg px-2 py-2 -mx-2 hover:bg-white/5" style={{ color: 'var(--color-surface)' }}>
+                    <span className="text-sm">{svc.name}</span>
+                    <span className="text-xs" style={{ opacity: 0.4 }}>{svc.line}</span>
+                  </TransitionLink>
+                ),
+              )}
+            </div>
+          ))}
 
           <div className="flex flex-col gap-1">
             <p className="type-eyebrow mb-3" style={{ color: 'var(--color-accent)', opacity: 0.55 }}>
@@ -371,20 +225,6 @@ export default function Navbar() {
               ),
             )}
           </div>
-
-          {rightGroups.map((group) => (
-            <div key={group.label} className="flex flex-col gap-1">
-              <p
-                className="type-eyebrow mb-3"
-                style={{ color: 'var(--color-accent)', opacity: 0.55 }}
-              >
-                {group.label}
-              </p>
-              {group.services.map((svc) => (
-                <ServiceItem key={svc.href} svc={svc} onClose={closeMobile} />
-              ))}
-            </div>
-          ))}
 
           <Button href={CTA.primary.href} {...(CTA.primary.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})} variant="primary" onClick={closeMobile} size="sm" className="w-full justify-center">
             {CTA.primary.label}

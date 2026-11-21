@@ -52,6 +52,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       lang="en"
       className={`${interTight.variable} ${instrumentSerif.variable} ${nothingYouCouldDo.variable} h-full antialiased`}
     >
+      <head>
+        {/* Google tag (Google Tag Manager container GTM-M7QJD7BF), right after <head> on every page */}
+        <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-M7QJD7BF" />
+        {/* biome-ignore lint/security/noDangerouslySetInnerHtml: Google's fixed tag snippet, no user input */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: "window.dataLayer = window.dataLayer || [];\nfunction gtag(){dataLayer.push(arguments);}\ngtag('js', new Date());",
+          }}
+        />
+      </head>
       <body className="min-h-full flex flex-col">
         {/* biome-ignore lint/security/noDangerouslySetInnerHtml: static JSON-LD, no user input */}
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }} />
